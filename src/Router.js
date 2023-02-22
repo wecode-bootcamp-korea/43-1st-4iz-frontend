@@ -1,25 +1,24 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-// 김코드의 컴포넌트
-import LoginTaehoon from './pages/taehoon/Login/Login';
-import MainTaehoon from './pages/taehoon/Main/Main';
+import LoginTaehoon from './pages/taehoon/Login/LoginTaehoon';
+import MainTaehoon from './pages/taehoon/Main/MainTaehoon';
 
-// 김개발의 컴포넌트
-import LoginSomyi from './pages/somyi/Login/Login';
-import MainSomyi from './pages/somyi/Main/Main';
+import LoginSomyi from './pages/somyi/Login/LoginSomyi';
+import MainSomyi from './pages/somyi/Main/MainSomyi';
 
-import LoginKitae from './pages/kitae/Login/Login';
-import MainKitae from './pages/kitae/Main/Main';
+import LoginKitae from './pages/kitae/Login/LoginKitae';
+import MainKitae from './pages/kitae/Main/MainKitae';
 
-import LoginYoojeong from './pages/yoojeong/Login/Login';
-import MainYoojeong from './pages/yoojeong/Main/Main';
+import LoginYoojeong from './pages/yoojeong/Login/LoginYoojeong';
+import MainYoojeong from './pages/yoojeong/Main/MainYoojeong';
+import Nav from './components/Nav/Nav';
 
-// import 한 컴포넌트에 대한 경로를 각각 설정해줍니다.
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Nav />} />
         <Route path="/login-taehoon" element={<LoginTaehoon />} />
         <Route path="/main-taehoon" element={<MainTaehoon />} />
         <Route path="/login-yoojeong" element={<LoginYoojeong />} />
