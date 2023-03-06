@@ -2,4 +2,44 @@
   box-sizing: border-box;
 }
 
-// font-family: 'Noto Sans KR', sans-serif;
+html {
+  font-size: 10px;
+
+  body {
+    font: normal 300 1.5rem/1.5 'Noto Sans KR', sans-serif;
+    color: #333;
+
+    i,
+    a,
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    input {
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    h1 {
+      font-size: 5.8;
+      font-weight: 500;
+    }
+
+    h2 {
+      font-size: 4.8rem;
+      font-weight: 500;
+    }
+
+    h3 {
+      font-size: 2.4rem;
+      font-weight: 500;
+    }
+  }
+}
