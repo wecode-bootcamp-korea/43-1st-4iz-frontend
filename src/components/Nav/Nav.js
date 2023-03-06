@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nav.scss';
 const Nav = () => {
-  return <h1>Hello</h1>;
+  return <div>nav</div>;
 };
 
 export default Nav;
