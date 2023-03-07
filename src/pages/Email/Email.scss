@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+
+.email {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+
+  form {
+    width: 25%;
+    margin: 5rem auto 0;
+
+    img {
+      width: 6rem;
+    }
+
+    legend {
+      margin-top: 3rem;
+      font-size: 2.5rem;
+    }
+
+    .emailContainer {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin: 3.5rem 0;
+      padding: 1.5rem 1rem;
+      border: 1px solid #333;
+      border-radius: 1.2rem;
+
+      input {
+        width: 30%;
+        background-color: rgba($color: #fff, $alpha: 0);
+        text-align: center;
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      select {
+        border: none;
+        font-size: 1.5rem;
+        color: #333;
+      }
+    }
+
+    button {
+      float: right;
+      margin: 10rem auto 0;
+      padding: 1.2rem 3.5rem;
+      background-color: #333;
+      border: none;
+      border-radius: 5rem;
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.2rem;
+    }
+  }
+}
