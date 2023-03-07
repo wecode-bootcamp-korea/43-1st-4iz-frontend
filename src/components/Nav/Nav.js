@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { NAV_DATA } from './navData';
+
 import './Nav.scss';
 
 const Nav = () => {
-  const [navData, setNavData] = useState([]);
-
-  useEffect(() => {
-    fetch('/data/navData.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(setNavData);
-  });
-
   return (
     <div className="nav">
       <div className="navContainer">
@@ -20,7 +12,7 @@ const Nav = () => {
           <img alt="nikeLogo" src="/images/nike.png" />
         </Link>
         <div className="navText">
-          {navData.map(({ id, url, menu }) => {
+          {NAV_DATA.map(({ id, url, menu }) => {
             return (
               <div className="navTextList" key={id}>
                 <Link to={url}>{menu}</Link>
