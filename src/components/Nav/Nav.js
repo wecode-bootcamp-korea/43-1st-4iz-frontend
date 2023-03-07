@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.scss';
 
-import nikeLogo from '../../assets/Nav/nike.png';
-
 const Nav = () => {
   const [navData, setNavData] = useState([]);
 
@@ -12,22 +10,20 @@ const Nav = () => {
       method: 'GET',
     })
       .then(res => res.json())
-      .then(data => {
-        setNavData(data);
-      });
+      .then(setNavData);
   });
 
   return (
     <div className="nav">
       <div className="navContainer">
         <Link className="nikeLogo" to="/">
-          <img alt="nikeLogo" src={nikeLogo} />
+          <img alt="nikeLogo" src="/images/nike.png" />
         </Link>
         <div className="navText">
-          {navData.map(info => {
+          {navData.map(({ id, url, menu }) => {
             return (
-              <div className="navTextList" key={info.id}>
-                <Link to={info.url}>{info.menu}</Link>
+              <div className="navTextList" key={id}>
+                <Link to={url}>{menu}</Link>
               </div>
             );
           })}
