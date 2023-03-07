@@ -1,7 +1,1 @@
 $gray: #f5f5f5;
-
-@mixin displayFlex($justify, $align) {
-  display: flex;
-  justify-content: $justify;
-  align-items: $align;
-}
