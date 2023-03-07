@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #fff;
+  background-color: white;
   z-index: 1;
 
   .loginForm {
@@ -38,7 +38,7 @@
       width: 100%;
       margin: 3.5rem 0;
       padding: 1.5rem 2rem;
-      border: 1px solid #333;
+      border: 1px solid $black;
       border-radius: 1.2rem;
 
       .password {
