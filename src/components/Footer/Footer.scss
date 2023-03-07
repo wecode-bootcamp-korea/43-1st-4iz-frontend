@@ -1,17 +1,17 @@
 .footer {
-  padding: 20px;
+  padding: 40px;
   background-color: black;
   color: white;
 
   .footerMenu {
     display: flex;
     align-items: flex-start;
-    margin: 20px 0;
+    margin-bottom: 40px;
 
     .footerMenuList {
       display: flex;
       width: 100%;
-      padding: 0 40px;
+      padding-right: 40px;
       gap: 180px;
 
       a {
@@ -20,7 +20,7 @@
 
       li,
       dt {
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 200;
         margin-bottom: 10px;
       }
@@ -34,6 +34,8 @@
     }
 
     .footerIcon {
+      display: flex;
+      justify-content: flex-end;
       width: 200px;
 
       i {
