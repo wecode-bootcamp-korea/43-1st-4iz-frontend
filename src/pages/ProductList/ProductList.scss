@@ -1,29 +1,58 @@
 .productList {
   overflow: hidden;
 
-  .filterContainer {
+  .productListContainer {
     display: flex;
-    padding: 150px 0 100px 0;
+    padding-top: 80px;
 
     .filter {
-      width: 200px;
       margin: 0 80px;
 
-      dt {
-        font-size: 1.2rem;
+      .menu {
+        width: 150px;
         font-weight: 400;
-        margin-bottom: 20px;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
       }
 
-      dd {
-        font-size: 1rem;
+      .category,
+      .gender,
+      .color {
+        padding-bottom: 20px;
+        border-bottom: 1px solid lightgray;
+      }
+
+      .category {
+        width: 150px;
+        font-size: 1.6rem;
+        font-weight: 400;
         margin-bottom: 10px;
+
+        .categoryMenu {
+          margin-bottom: 10px;
+        }
+      }
+
+      .filterContainer {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+
+        .filterTitle {
+          margin-bottom: 10px;
+          font-weight: 400;
+        }
+
+        .checkbox {
+          margin-bottom: 10px;
+        }
       }
     }
 
     .productListBoard {
-      margin: 50px 50px 0 0;
-      width: 100%;
+      max-width: 1900px;
+      margin: 70px 50px 100px 0;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
@@ -41,6 +70,7 @@
 
           .productName {
             margin-bottom: 10px;
+            font-weight: 400;
           }
 
           .productPrice {
