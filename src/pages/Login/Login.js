@@ -7,9 +7,12 @@ const Login = () => {
       <form className="loginForm">
         <img src="images/nike.png" alt="logo" className="logoImage" />
         <legend className="formTitle">비밀번호를 입력하세요.</legend>
-        <input type="password" placeholder="비밀번호" />
+        <div className="passwordContainter">
+          <input type="password" placeholder="비밀번호" />
+          <i class="fa-regular fa-eye" />
+        </div>
         <p className="searchPassword">비밀번호 찾기</p>
-        {/* button component 자리 */}
+        {/* TODO : button component merge 후 추가하도록 하겠습니다 */}
       </form>
     </div>
   );

@@ -7,6 +7,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #fff;
+  z-index: 1;
 
   .loginForm {
     display: grid;
@@ -16,7 +17,7 @@
       'logo .  '
       'header header '
       'main main '
-      'search search'
+      'search .'
       '.  btn';
     width: 20%;
     margin: 5rem auto 0;
@@ -31,14 +32,18 @@
       font-size: 2.5rem;
     }
 
-    input {
+    .passwordContainter {
       grid-area: main;
+      @include displayFlex(space-between, null, null);
       width: 100%;
       margin: 3.5rem 0;
       padding: 1.5rem 2rem;
       border: 1px solid #333;
       border-radius: 1.2rem;
-      font-size: 1.5rem;
+
+      .password {
+        font-size: 1.5rem;
+      }
     }
 
     .searchPassword {
