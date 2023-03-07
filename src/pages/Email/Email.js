@@ -1,5 +1,6 @@
 import React from 'react';
 import './Email.scss';
+import Button from '../../components/Button/Button';
 
 const Email = () => {
   return (
@@ -10,9 +11,9 @@ const Email = () => {
           가입 또는 로그인을 위해 이메일을 입력하세요.
         </legend>
         <div className="emailContainer">
-          <input type="email" placeholder="이메일" />
-          <p>@</p>
-          <select>
+          <input type="email" placeholder="이메일" className="emailId" />
+          <span>@</span>
+          <select className="emailAdress">
             {MAIL_OPTION.map(option => (
               <option key={option.id} value={option.domain}>
                 {option.domain}
@@ -20,13 +21,11 @@ const Email = () => {
             ))}
           </select>
         </div>
-        <p className="emailTerms">
+        <p className="terms">
           계속 진행하면 나이키의 개인 정보 처리 방침 및 이용약관에 동의하게
           됩니다.
         </p>
-        <button type="button" className="emailSubmitBtn">
-          계속
-        </button>
+        <Button text="계속" />
       </form>
     </div>
   );
