@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -7,7 +9,7 @@ html {
 
   body {
     font: normal 300 1.5rem/1.5 'Noto Sans KR', sans-serif;
-    color: #333;
+    color: $black;
 
     i,
     a,
@@ -17,6 +19,7 @@ html {
 
     a {
       text-decoration: none;
+      color: $black;
     }
 
     input {
@@ -28,7 +31,7 @@ html {
     }
 
     h1 {
-      font-size: 5.8;
+      font-size: 5.8rem;
       font-weight: 500;
     }
 

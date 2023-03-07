@@ -1,1 +1,17 @@
 $gray: #f5f5f5;
+$black: #333;
+
+@mixin displayFlex($justify, $align, $direction) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin position($position, $top, $right, $bottom, $left) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
