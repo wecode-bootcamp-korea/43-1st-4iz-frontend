@@ -8,24 +8,24 @@ const Footer = () => {
       <div className="footerMenu">
         <div className="footerMenuList">
           <ul className="info">
-            <li>새로운 소식</li>
-            <li>멤버가입</li>
-            <li>매장안내</li>
+            <li className="title">새로운 소식</li>
+            <li className="title">멤버가입</li>
+            <li className="title">매장안내</li>
           </ul>
           <dl className="help">
-            <dt>도움말</dt>
-            <dd>주문배송조회</dd>
-            <dd>반품 정책</dd>
-            <dd>결제 방법</dd>
-            <dd>공지사항</dd>
-            <dd>문의하기</dd>
+            <dt className="title">도움말</dt>
+            <dd className="subtitle">주문배송조회</dd>
+            <dd className="subtitle">반품 정책</dd>
+            <dd className="subtitle">결제 방법</dd>
+            <dd className="subtitle">공지사항</dd>
+            <dd className="subtitle">문의하기</dd>
           </dl>
           <dl className="about">
-            <dt>ABOUT NIKE</dt>
-            <dd>소식</dd>
-            <dd>채용</dd>
-            <dd>투자자</dd>
-            <dd>지속가능성</dd>
+            <dt className="title">ABOUT NIKE</dt>
+            <dd className="subtitle">소식</dd>
+            <dd className="subtitle">채용</dd>
+            <dd className="subtitle">투자자</dd>
+            <dd className="subtitle">지속가능성</dd>
           </dl>
         </div>
         <div className="footerIcon">
