@@ -18,15 +18,14 @@
         color: white;
       }
 
-      li,
-      dt {
-        font-size: 0.9rem;
+      .title {
+        font-size: 1.5rem;
         font-weight: 200;
         margin-bottom: 10px;
       }
 
-      dd {
-        font-size: 0.8rem;
+      .subtitle {
+        font-size: 1.2rem;
         font-weight: 200;
         margin-bottom: 10px;
         color: gray;
@@ -39,8 +38,9 @@
       width: 200px;
 
       i {
-        color: gray;
         margin-left: 10px;
+        color: gray;
+        font-size: 2rem;
 
         &:hover {
           color: white;
@@ -50,7 +50,7 @@
   }
 
   .footerInfo {
-    font-size: 0.7rem;
+    font-size: 1.2rem;
     color: gray;
 
     u {
@@ -86,8 +86,12 @@
       padding-top: 20px;
       border-top: 1px solid gray;
 
+      .address {
+        width: 48%;
+      }
+
       .legal {
-        width: 45%;
+        width: 48%;
       }
     }
   }
