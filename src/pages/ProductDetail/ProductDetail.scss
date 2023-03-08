@@ -1,69 +1,77 @@
 @import '../../styles/variables.scss';
 
 .productDetail {
-  @include displayFlex(space-between, null, null);
+  @include displayFlex(center, null, null);
   width: 80%;
+  height: max-content;
   margin: 13rem auto 0;
 
   .productImageContainer {
-    width: 50%;
-
     .productMainImg {
-      img {
-        width: 100%;
-      }
-    }
-
-    .productImageGallery {
-      @include displayFlex(space-between, center, null);
       width: 100%;
-      height: 20rem;
-      overflow: scroll;
+      height: auto;
+    }
+  }
 
-      .imageBox {
-        @include displayFlex(center, center, null);
-        width: 100rem;
-        height: 100%;
-        background-image: url('');
-        background-position: 0 0;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin-top: 0.7rem;
-        overflow: hidden;
+  .productImageGallery {
+    width: fit-content;
+    height: 39rem;
+    margin-left: 1rem;
+    overflow-x: scroll;
+
+    .imageBox {
+      width: 10rem;
+      height: 10rem;
+      margin-bottom: 0.7rem;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
 
   .productInfo {
-    margin-left: 8rem;
+    width: 30%;
+    margin: 0 0 7rem 7rem;
+    border-bottom: 1px solid $black;
 
     .productInfoTitle {
-      margin: 1rem 0 5rem 0;
+      .subCategory {
+        margin-top: 0.8rem;
+        font-size: 2rem;
+      }
+
+      .productPrice {
+        margin-top: 2rem;
+        font-size: 2.4rem;
+        font-weight: 400;
+      }
     }
   }
 
   .selectSize {
-    max-width: 90%;
+    max-width: 100%;
+    margin-top: 3rem;
 
     .selectSizeTitle {
       @include displayFlex(space-between, null, null);
-      width: 100%;
+      width: 99%;
     }
 
     .selectSizeOption {
-      @include displayFlex(space-between, null, null);
+      @include displayFlex(flex-start, null, null);
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1.1rem auto 0;
+      margin-top: 1rem;
 
       .button {
-        margin-top: 0;
-        margin-bottom: 1rem;
+        margin: 0 0.5rem 0.5rem 0;
         padding: 0.8rem 0;
-        width: 16.6%;
-        border: 2px solid $black;
+        width: 15.5%;
+        border: 1px solid $black;
         border-radius: 7px;
-        background-color: #fff;
+        background-color: white;
         color: $black;
         font-weight: 500;
         font-size: 1.5rem;
@@ -71,8 +79,33 @@
     }
 
     .button {
-      margin-top: 2rem;
       width: 100%;
+      margin: 2rem 0 3rem;
+      padding: 2rem 0 1.5rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  .detailInfo {
+    border-top: 1px solid $black;
+    padding: 2rem 0.8rem;
+
+    .detailInfoTitle {
+      @include displayFlex(space-between, center, null);
+      margin-bottom: 2rem;
+
+      h4 {
+        font-size: 1.7rem;
+      }
+
+      i {
+        font-size: 1.7rem;
+      }
+    }
+
+    .detailInfoList {
+      list-style: disc;
+      margin: 1rem 0 0 2rem;
     }
   }
 }
