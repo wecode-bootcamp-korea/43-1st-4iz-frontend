@@ -6,7 +6,9 @@ const ProductDetail = () => {
   return (
     <main className="productDetail">
       <aside className="productImageContainer">
-        <img src="/images/airforce_1.jpg" alt="상품 메인 이미지" />
+        <div className="productMainImg">
+          <img src="/images/airforce_1.jpg" alt="상품 메인 이미지" />
+        </div>
         <div className="productImageGallery">
           {PRODUCT_IMAGE_LIST.map(list => (
             <div className="imageBox" key={list.id}>
@@ -14,6 +16,11 @@ const ProductDetail = () => {
             </div>
           ))}
         </div>
+        <h1>ddddddd</h1>
+        <h1>ddddddd</h1>
+        <h1>ddddddd</h1>
+        <h1>ddddddd</h1>
+        <h1>ddddddd</h1>
       </aside>
       <section className="productInfo">
         <header className="productInfoTitle">
@@ -58,4 +65,9 @@ const SELECT_SIZE_OPTION = [
   { id: '8', size: '275' },
   { id: '9', size: '280' },
   { id: '10', size: '290' },
+  { id: '11', size: '295' },
+  { id: '12', size: '300' },
+  { id: '13', size: '305' },
+  { id: '14', size: '310' },
+  { id: '15', size: '315' },
 ];
