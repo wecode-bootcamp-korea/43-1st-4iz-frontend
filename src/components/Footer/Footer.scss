@@ -1,0 +1,98 @@
+.footer {
+  padding: 40px;
+  background-color: black;
+  color: white;
+
+  .footerMenu {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+
+    .footerMenuList {
+      display: flex;
+      width: 100%;
+      padding-right: 40px;
+      gap: 180px;
+
+      a {
+        color: white;
+      }
+
+      .title {
+        font-size: 1.5rem;
+        font-weight: 200;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        font-weight: 200;
+        margin-bottom: 10px;
+        color: gray;
+      }
+    }
+
+    .footerIcon {
+      display: flex;
+      justify-content: flex-end;
+      width: 200px;
+
+      i {
+        margin-left: 10px;
+        color: gray;
+        font-size: 2rem;
+
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .footerInfo {
+    font-size: 1.2rem;
+    color: gray;
+
+    u {
+      color: white;
+      font-weight: white;
+    }
+
+    .footerInfoTitle {
+      display: flex;
+      justify-content: space-between;
+
+      .footerInfoLocation {
+        width: 45%;
+
+        .fa-location-dot,
+        .location {
+          color: white;
+          margin-right: 10px;
+        }
+      }
+
+      strong {
+        margin-left: 20px;
+        font-weight: 300;
+        color: white;
+      }
+    }
+
+    .footerInfoDetail {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid gray;
+
+      .address {
+        width: 48%;
+      }
+
+      .legal {
+        width: 48%;
+      }
+    }
+  }
+}

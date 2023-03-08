@@ -1,0 +1,82 @@
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 20px;
+  align-items: center;
+  z-index: 1;
+
+  .navContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+    background-color: white;
+    border-bottom: 2px solid #f5f5f5;
+    z-index: 1;
+
+    .nikeLogo {
+      position: fixed;
+      left: 20px;
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .navText {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: 400;
+
+      .navTextList {
+        margin: 0 15px;
+      }
+    }
+
+    .iconContainer {
+      position: fixed;
+      right: 20px;
+      display: flex;
+      align-items: center;
+
+      i {
+        display: flex;
+        align-items: center;
+        margin-left: 25px;
+        font-size: 1.5rem;
+      }
+
+      .searchContainer {
+        position: relative;
+
+        .searchInput {
+          width: 150px;
+          height: 40px;
+          padding-left: 20px;
+          background-color: #f5f5f5;
+          border: none;
+          border-radius: 50px;
+
+          &::placeholder {
+            color: lightgray;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .fa-magnifying-glass {
+          position: absolute;
+          top: 13px;
+          right: 10px;
+          border: none;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
