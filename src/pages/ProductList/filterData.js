@@ -152,3 +152,22 @@ export const SIZE_LIST = [
     size: '310',
   },
 ];
+
+export const PRODUCT_DROPDOWN = [
+  {
+    id: 1,
+    option: '정렬 기준',
+  },
+  {
+    id: 2,
+    option: '최신순',
+  },
+  {
+    id: 3,
+    option: '낮은 가격순',
+  },
+  {
+    id: 4,
+    option: '높은 가격순',
+  },
+];

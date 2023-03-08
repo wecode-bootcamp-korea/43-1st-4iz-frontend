@@ -119,32 +119,9 @@
 
       .productListGrid {
         max-width: 1900px;
-
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-
-        .productBox {
-          height: 480px;
-
-          .productImg {
-            height: 80%;
-            background-color: #f5f5f5;
-          }
-
-          .productBoxText {
-            margin-top: 20px;
-
-            .productName {
-              margin-bottom: 10px;
-              font-weight: 400;
-            }
-
-            .productPrice {
-              font-size: 16px;
-            }
-          }
-        }
       }
     }
   }
