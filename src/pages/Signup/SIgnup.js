@@ -25,7 +25,7 @@ const Signup = () => {
           </div>
           <input type="date" className="birth" />
           <p className="birthRules">생일에 나이키 멤버 리워드를 받으세요.</p>
-          <label className="TermsAgree">
+          <label className="termsAgree">
             <input type="checkbox" />
             나이키의 개인정보 처리 방침 및 이용약관에 동의합니다.
           </label>
