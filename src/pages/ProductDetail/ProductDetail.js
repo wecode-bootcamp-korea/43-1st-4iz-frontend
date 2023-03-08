@@ -11,16 +11,14 @@ const ProductDetail = () => {
         </div>
         <div className="productImageGallery">
           {PRODUCT_IMAGE_LIST.map(list => (
-            <div className="imageBox" key={list.id}>
-              <img src={`${list.img}`} alt={`${list.value}`} />
-            </div>
+            <ul className="productImageGallery" key={list.id}>
+              <li
+                className="imageBox"
+                style={{ backgroundImage: `${list.img}` }}
+              />
+            </ul>
           ))}
         </div>
-        <h1>ddddddd</h1>
-        <h1>ddddddd</h1>
-        <h1>ddddddd</h1>
-        <h1>ddddddd</h1>
-        <h1>ddddddd</h1>
       </aside>
       <section className="productInfo">
         <header className="productInfoTitle">
@@ -52,6 +50,9 @@ const PRODUCT_IMAGE_LIST = [
   { id: '1', img: '/images/airforce_2.jpg', value: '이미지2' },
   { id: '2', img: '/images/airforce_3.jpg', value: '이미지3' },
   { id: '3', img: '/images/airforce_4.jpg', value: '이미지4' },
+  { id: '4', img: '/images/airforce_4.jpg', value: '이미지4' },
+  { id: '5', img: '/images/airforce_4.jpg', value: '이미지4' },
+  { id: '6', img: '/images/airforce_4.jpg', value: '이미지4' },
 ];
 
 const SELECT_SIZE_OPTION = [

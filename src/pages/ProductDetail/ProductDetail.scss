@@ -15,16 +15,19 @@
     }
 
     .productImageGallery {
-      @include displayFlex(left, center, null);
+      @include displayFlex(space-between, center, null);
       width: 100%;
-      height: 15rem;
-      // margin: 1rem 0 0;
+      height: 20rem;
+      overflow: scroll;
 
       .imageBox {
         @include displayFlex(center, center, null);
-        width: 14rem;
-        height: 15rem;
-        margin: 1rem 1rem 0 0;
+        width: 100rem;
+        height: 100%;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-top: 0.7rem;
         overflow: hidden;
       }
     }
