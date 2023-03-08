@@ -1,3 +1,41 @@
+export const SUBMENU_LIST = [
+  {
+    id: 1,
+    title: '라이프스타일',
+  },
+  {
+    id: 2,
+    title: '조던',
+  },
+  {
+    id: 3,
+    title: '러닝',
+  },
+  {
+    id: 4,
+    title: '농구',
+  },
+  {
+    id: 5,
+    title: '축구',
+  },
+];
+
+export const GENDER_LIST = [
+  {
+    id: 1,
+    gender: '남성',
+  },
+  {
+    id: 2,
+    gender: '여성',
+  },
+  {
+    id: 3,
+    gender: '유니섹스',
+  },
+];
+
 export const COLOR_LIST = [
   {
     id: 1,
@@ -59,23 +97,58 @@ export const COLOR_LIST = [
 export const SIZE_LIST = [
   {
     id: 1,
-    name: '블랙',
-    color: '#',
+    size: '235',
   },
   {
     id: 2,
-    name: '블랙',
-    color: '#',
+    size: '240',
   },
   {
     id: 3,
-    name: '블랙',
-
-    color: '#',
+    size: '245',
   },
   {
     id: 4,
-    name: '블랙',
-    color: '#',
+    size: '250',
+  },
+  {
+    id: 5,
+    size: '255',
+  },
+  {
+    id: 6,
+    size: '260',
+  },
+  {
+    id: 7,
+    size: '275',
+  },
+  {
+    id: 8,
+    size: '280',
+  },
+  {
+    id: 9,
+    size: '285',
+  },
+  {
+    id: 10,
+    size: '290',
+  },
+  {
+    id: 11,
+    size: '295',
+  },
+  {
+    id: 12,
+    size: '300',
+  },
+  {
+    id: 13,
+    size: '305',
+  },
+  {
+    id: 14,
+    size: '310',
   },
 ];

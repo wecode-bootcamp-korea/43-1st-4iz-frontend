@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { COLOR_LIST } from './filterData';
+import { SUBMENU_LIST, GENDER_LIST, COLOR_LIST, SIZE_LIST } from './filterData';
 
 import './ProductList.scss';
 
@@ -23,36 +23,24 @@ const ProductList = () => {
         <div className="filter">
           <h3 className="menu">남성 신발</h3>
           <ul className="category">
-            <Link to="/productList">
-              <li className="categoryMenu">라이프스타일</li>
-            </Link>
-            <Link to="/productList">
-              <li className="categoryMenu">조던</li>
-            </Link>
-            <Link to="/productList">
-              <li className="categoryMenu">러닝</li>
-            </Link>
-            <Link to="/productList">
-              <li className="categoryMenu">농구</li>
-            </Link>
-            <Link to="/productList">
-              <li className="categoryMenu">축구</li>
-            </Link>
+            {SUBMENU_LIST.map(({ id, title }) => {
+              return (
+                <Link to="/productList" key={id}>
+                  <li className="categoryMenu">{title}</li>
+                </Link>
+              );
+            })}
           </ul>
           <dl className="filterContainer gender">
             <dt className="filterTitle">성별</dt>
-            <dd className="man">
-              <input className="checkbox" type="checkbox" />
-              <span>남성</span>
-            </dd>
-            <dd className="woman">
-              <input className="checkbox" type="checkbox" />
-              <span>여성</span>
-            </dd>
-            <dd className="unisex">
-              <input className="checkbox" type="checkbox" />
-              <span>유니섹스</span>
-            </dd>
+            {GENDER_LIST.map(({ id, gender }) => {
+              return (
+                <dd className={`checkboxContainer ${gender}`} key={id}>
+                  <input className="checkbox" type="checkbox" />
+                  <span className="checkboxText">{gender}</span>
+                </dd>
+              );
+            })}
           </dl>
           <dl className="filterContainer color">
             <dt className="filterTitle">색상</dt>
@@ -72,26 +60,38 @@ const ProductList = () => {
           </dl>
           <dl className="filterContainer size">
             <dt className="filterTitle">사이즈</dt>
-            <dd>225</dd>
-            <dd>230</dd>
-            <dd>235</dd>
-            <dd>240</dd>
-            <dd>245</dd>
+            <dd className="sizeButtonContainer">
+              {SIZE_LIST.map(({ id, size }) => {
+                return (
+                  <div key={id}>
+                    <button className="sizeButton">{size}</button>
+                  </div>
+                );
+              })}
+            </dd>
           </dl>
         </div>
         <div className="productListBoard">
-          {productData.map(({ id, img_url, name, price }) => {
-            return (
-              <div className="productBox" key={id}>
-                <div className="productBoxImg" />
-                <img className="productImg" alt="productImg" src={img_url} />
-                <div className="productBoxText">
-                  <div className="productName">{name}</div>
-                  <div className="productPrice">{price} 원</div>
+          <select className="productDropdown">
+            <option value="">정렬 기준</option>
+            <option value="최신순">최신순</option>
+            <option value="낮은 가격순">낮은 가격순</option>
+            <option value="높은 가격순">높은 가격순</option>
+          </select>
+          <div className="productListGrid">
+            {productData.map(({ id, img_url, name, price }) => {
+              return (
+                <div className="productBox" key={id}>
+                  <div className="productBoxImg" />
+                  <img className="productImg" alt="productImg" src={img_url} />
+                  <div className="productBoxText">
+                    <div className="productName">{name}</div>
+                    <div className="productPrice">{price} 원</div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
