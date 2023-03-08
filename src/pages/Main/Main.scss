@@ -1,41 +1,45 @@
+@import '../../styles/variables.scss';
+
 .main {
   overflow: hidden;
 
   .mainBox {
-    position: relative;
-    margin: 80px 0 100px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include position(relative, null, null, null, null);
+    @include displayFlex(null, center, column);
+    margin: 60px 0 100px 0;
+
+    video {
+      width: 95%;
+      filter: brightness(50%);
+    }
 
     .mainImg1 {
       margin: 50px 0;
     }
 
     .mainVid1Description {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 80px 0;
+      @include displayFlex(null, center, column);
+      margin: 60px 0;
 
-      h6 {
-        font-size: 1.2rem;
+      .descriptionSubtitle {
+        font-size: 1.8rem;
       }
 
-      h3 {
+      .descriptionTitle {
         margin-bottom: 20px;
-        font-weight: 800;
+        font-weight: 600;
       }
 
-      p {
-        font-size: 1rem;
+      .descriptionText {
+        font-size: 1.6rem;
         font-weight: 300;
       }
-    }
 
-    video {
-      width: 95%;
-      filter: brightness(50%);
+      .button {
+        margin: 30px 4px;
+        padding: 10px 20px;
+        font-size: 1.5rem;
+      }
     }
   }
 }
