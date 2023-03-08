@@ -13,11 +13,7 @@
       filter: brightness(50%);
     }
 
-    .mainImg1 {
-      margin: 50px 0;
-    }
-
-    .mainVid1Description {
+    .mainVidDescription {
       @include displayFlex(null, center, column);
       margin: 60px 0;
 

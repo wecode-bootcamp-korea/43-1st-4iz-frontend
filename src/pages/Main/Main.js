@@ -16,7 +16,7 @@ const Main = () => {
     <div className="main">
       <div className="mainBox">
         <video
-          src="/videos/mainVid1.mp4"
+          src="/videos/mainVid.mp4"
           ref={video}
           onPlay={handleVideoFaster}
           autoPlay
@@ -24,7 +24,7 @@ const Main = () => {
           loop
           playsinline
         />
-        <div className="mainVid1Description">
+        <div className="mainVidDescription">
           <h6 className="descriptionSubtitle">에어맥스 with 지올팍</h6>
           <h2 className="descriptionTitle">시대를 초월한 에어맥스</h2>
           <p className="descriptionText">
@@ -37,8 +37,8 @@ const Main = () => {
             <Button className="button" text="구매하기" />
           </Link>
         </div>
-        <img className="mainImg2" alt="mainImg" src="/images/main1.png" />
-        <div className="mainVid1Description">
+        <img className="mainImg" alt="mainImg" src="/images/main.png" />
+        <div className="mainVidDescription">
           <h2 className="descriptionTitle">A FEEL FOR EVERY YOU</h2>
           <p className="descriptionText">
             몸과 마음이 좋아하는 나만의 다양한 움직임을 시작해보세요.
