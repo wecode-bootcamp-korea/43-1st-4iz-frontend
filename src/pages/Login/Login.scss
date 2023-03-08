@@ -51,5 +51,13 @@
     .searchPassword {
       grid-area: search;
     }
+
+    .button {
+      grid-area: btn;
+      margin-top: 20px;
+      justify-self: end;
+      width: 80%;
+      font-size: 1.5rem;
+    }
   }
 }

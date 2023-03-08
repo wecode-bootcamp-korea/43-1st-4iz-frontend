@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '../../components/Button/Button';
+
 import './Login.scss';
 
 const Login = () => {
@@ -12,7 +14,7 @@ const Login = () => {
           <i class="fa-regular fa-eye" />
         </div>
         <p className="searchPassword">비밀번호 찾기</p>
-        {/* TODO : button component merge 후 추가하도록 하겠습니다 */}
+        <Button text="로그인" />
       </form>
     </div>
   );
