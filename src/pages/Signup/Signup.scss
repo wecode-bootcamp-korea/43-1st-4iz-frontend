@@ -1,0 +1,95 @@
+@import '../../styles/variables.scss';
+
+.signup {
+  @include position(fixed, 0, null, null, 0);
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1;
+
+  .signupForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      'logo .  '
+      'header header '
+      'main main '
+      'search .'
+      '.  btn';
+    width: 20%;
+    margin: 4rem auto 0;
+
+    .logoImage {
+      grid-area: logo;
+      width: 35%;
+      margin-left: 1rem;
+    }
+
+    .formTitle {
+      grid-area: header;
+      margin: 2rem 0 3rem;
+      font-size: 2.5rem;
+    }
+
+    .signupContainter {
+      grid-area: main;
+
+      .name {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+      }
+
+      .pwContainer {
+        @include displayFlex(space-between, null, null);
+        width: 100%;
+        padding: 1.5rem 2rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+
+        .pw {
+          font-size: 1.5rem;
+        }
+      }
+
+      .pwRules,
+      .birthRules {
+        margin: 0.5rem 0 2.5rem 0.5rem;
+        font-size: 1.2rem;
+        color: #999;
+
+        i {
+          margin-right: 1rem;
+        }
+      }
+
+      .birth {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+      }
+
+      .termsAgree {
+        @include displayFlex(null, top, null);
+
+        input {
+          width: 2rem;
+          height: 2rem;
+          margin: 0.25rem 1rem 0 0;
+        }
+      }
+    }
+
+    .button {
+      grid-area: btn;
+      justify-self: end;
+      width: 80%;
+    }
+  }
+}
