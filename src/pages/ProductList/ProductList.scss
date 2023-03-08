@@ -47,6 +47,28 @@
         .checkbox {
           margin-bottom: 10px;
         }
+
+        .colorListContainer {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          font-size: 1.2rem;
+          font-weight: 400;
+
+          .colorList {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 5px;
+
+            .colorButton {
+              width: 30px;
+              height: 30px;
+              border: 1px solid lightgray;
+              border-radius: 50%;
+              background-color: transparent;
+            }
+          }
+        }
       }
     }
 

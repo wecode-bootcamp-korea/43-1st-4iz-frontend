@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { COLOR_LIST } from './filterData';
 
 import './ProductList.scss';
 
@@ -21,11 +23,21 @@ const ProductList = () => {
         <div className="filter">
           <h3 className="menu">남성 신발</h3>
           <ul className="category">
-            <li className="categoryMenu">라이프스타일</li>
-            <li className="categoryMenu">조던</li>
-            <li className="categoryMenu">러닝</li>
-            <li className="categoryMenu">농구</li>
-            <li className="categoryMenu">축구</li>
+            <Link to="/productList">
+              <li className="categoryMenu">라이프스타일</li>
+            </Link>
+            <Link to="/productList">
+              <li className="categoryMenu">조던</li>
+            </Link>
+            <Link to="/productList">
+              <li className="categoryMenu">러닝</li>
+            </Link>
+            <Link to="/productList">
+              <li className="categoryMenu">농구</li>
+            </Link>
+            <Link to="/productList">
+              <li className="categoryMenu">축구</li>
+            </Link>
           </ul>
           <dl className="filterContainer gender">
             <dt className="filterTitle">성별</dt>
@@ -44,14 +56,19 @@ const ProductList = () => {
           </dl>
           <dl className="filterContainer color">
             <dt className="filterTitle">색상</dt>
-            <dd>블랙</dd>
-            <dd>블루</dd>
-            <dd>브라운</dd>
-            <dd>그린</dd>
-            <dd>그레이</dd>
-            <dd>오렌지</dd>
-            <dd>핑크</dd>
-            <dd>퍼플</dd>
+            <div className="colorListContainer">
+              {COLOR_LIST.map(({ id, name, color }) => {
+                return (
+                  <dd className="colorList" key={id}>
+                    <button
+                      className="colorButton"
+                      style={{ backgroundColor: `${color}` }}
+                    />
+                    <p className="colorName">{name}</p>
+                  </dd>
+                );
+              })}
+            </div>
           </dl>
           <dl className="filterContainer size">
             <dt className="filterTitle">사이즈</dt>
