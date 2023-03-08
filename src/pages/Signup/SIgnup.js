@@ -1,6 +1,6 @@
 import React from 'react';
 import './Signup.scss';
-import Buotton from '../../components/Button/Button';
+import Button from '../../components/Button/Button';
 
 const Signup = () => {
   return (
@@ -31,7 +31,7 @@ const Signup = () => {
             나이키의 개인정보 처리 방침 및 이용약관에 동의합니다.
           </label>
         </div>
-        <Buotton text="계정 만들기" />
+        <Button text="계정 만들기" />
       </form>
     </div>
   );
