@@ -9,7 +9,7 @@ const Signup = () => {
         <img src="images/nike.png" alt="logo" className="logoImage" />
         <legend className="formTitle">이제 나이키 멤버가 되어볼까요?</legend>
         <div className="signupContainter">
-          <input type="text" />
+          <input type="text" placeholder="이름" className="name" />
           <div className="pwContainer">
             <input type="password" className="pw" placeholder="비밀번호" />
             <i class="fa-regular fa-eye" />

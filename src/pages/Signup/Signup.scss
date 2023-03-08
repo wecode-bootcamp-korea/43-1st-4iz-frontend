@@ -28,12 +28,21 @@
 
     .formTitle {
       grid-area: header;
-      margin-top: 2rem;
+      margin: 2rem 0 3rem;
       font-size: 2.5rem;
     }
 
     .signupContainter {
       grid-area: main;
+
+      .name {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+      }
 
       .pwContainer {
         @include displayFlex(space-between, null, null);
@@ -66,7 +75,7 @@
         font-size: 1.5rem;
       }
 
-      .TermsAgree {
+      .termsAgree {
         @include displayFlex(null, top, null);
 
         input {
@@ -81,7 +90,6 @@
       grid-area: btn;
       justify-self: end;
       width: 80%;
-      margin-top: 10rem;
     }
   }
 }
