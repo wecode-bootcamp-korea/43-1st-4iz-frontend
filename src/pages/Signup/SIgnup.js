@@ -1,5 +1,6 @@
 import React from 'react';
 import './Signup.scss';
+import Buotton from '../../components/Button/Button';
 
 const Signup = () => {
   return (
@@ -30,7 +31,7 @@ const Signup = () => {
             나이키의 개인정보 처리 방침 및 이용약관에 동의합니다.
           </label>
         </div>
-        {/* TODO : button component merge 후 추가하도록 하겠습니다 */}
+        <Buotton text="계정 만들기" />
       </form>
     </div>
   );
