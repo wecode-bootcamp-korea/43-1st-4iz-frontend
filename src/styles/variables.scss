@@ -15,3 +15,25 @@ $black: #333;
   bottom: $bottom;
   left: $left;
 }
+
+@mixin checkbox {
+  position: relative;
+  margin-right: 10px;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+
+  &:checked {
+    border: none;
+    background-color: $black;
+  }
+}
+
+@mixin checkboxIcon {
+  position: absolute;
+  margin: 6px;
+  color: white;
+  font-size: 1.1rem;
+}
