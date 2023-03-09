@@ -53,11 +53,25 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
         }
 
         .checkboxContainer {
+          @include displayFlex(flex-start, flex-start, null);
+
           .checkbox {
+            @include displayFlex(center, center, null);
             margin: 0 8px 10px 0;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+
+            &:checked {
+              border: none;
+              background-color: $black;
+            }
           }
 
           .checkboxText {
+            @include displayFlex(center, center, null);
             font-weight: 400;
           }
 
