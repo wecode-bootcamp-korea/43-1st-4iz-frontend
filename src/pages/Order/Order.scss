@@ -73,6 +73,29 @@
         .paymentTitle {
           margin: 30px 0;
         }
+
+        .label {
+          margin-left: 10px;
+          font-size: 1.7rem;
+          font-weight: 300;
+        }
+
+        .radioContainer {
+          @include displayFlex(null, center, null);
+          margin-bottom: 8px;
+
+          .radioInput {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid lightgray;
+            border-radius: 50%;
+
+            &:checked {
+              border: 5px solid black;
+            }
+          }
+        }
       }
 
       .complete {

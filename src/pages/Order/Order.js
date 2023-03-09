@@ -73,24 +73,59 @@ const Order = () => {
             <h3 className="paymentTitle">결제</h3>
             <fieldset className="paymentContainer">
               <div className="radioContainer">
-                <input type="radio" id="kakaopay" />
-                <label for="kakaopay">카카오페이</label>
+                <input
+                  type="radio"
+                  id="kakaopay"
+                  name="payment"
+                  className="radioInput"
+                />
+                <label for="kakaopay" className="label">
+                  카카오페이
+                </label>
               </div>
               <div className="radioContainer">
-                <input type="radio" id="card" />
-                <label for="card">신용카드</label>
+                <input
+                  type="radio"
+                  id="card"
+                  name="payment"
+                  className="radioInput"
+                />
+                <label for="card" className="label">
+                  신용카드
+                </label>
               </div>
               <div className="radioContainer">
-                <input type="radio" id="naverpay" />
-                <label for="naverpay">네이버페이</label>
+                <input
+                  type="radio"
+                  id="naverpay"
+                  name="payment"
+                  className="radioInput"
+                />
+                <label for="naverpay" className="label">
+                  네이버페이
+                </label>
               </div>
               <div className="radioContainer">
-                <input type="radio" id="payco" />
-                <label for="payco">페이코</label>
+                <input
+                  type="radio"
+                  id="payco"
+                  name="payment"
+                  className="radioInput"
+                />
+                <label for="payco" className="label">
+                  페이코
+                </label>
               </div>
               <div className="radioContainer">
-                <input type="radio" id="banking" />
-                <label for="banking">계좌이체</label>
+                <input
+                  type="radio"
+                  id="banking"
+                  name="payment"
+                  className="radioInput"
+                />
+                <label for="banking" className="label">
+                  계좌이체
+                </label>
               </div>
             </fieldset>
             <div className="buttonBox">
