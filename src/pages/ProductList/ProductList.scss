@@ -5,7 +5,7 @@
 
   .productListContainer {
     @include displayFlex(null, null, null);
-    padding-top: 80px;
+    padding-top: 90px;
 
     .filter {
       margin: 0 60px;
@@ -31,6 +31,11 @@
 
         .categoryMenu {
           margin-bottom: 10px;
+
+          &:hover {
+            cursor: pointer;
+            color: gray;
+          }
         }
       }
 
@@ -40,7 +45,7 @@
         font-size: 1.6rem;
 
         .filterTitle {
-          margin-bottom: 10px;
+          margin-bottom: 12px;
           font-weight: 400;
         }
 
@@ -61,26 +66,62 @@
 
         .colorListContainer {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           font-size: 1.2rem;
           font-weight: 400;
 
-          .colorList {
-            @include displayFlex(null, center, column);
-            margin: 10px 10px;
-
+          .colorButtonContainer {
+            @include displayFlex(center, null, null);
             .colorButton {
               width: 28px;
               height: 28px;
+              margin-bottom: 8px;
               border: 1px solid lightgray;
               border-radius: 50%;
               background-color: transparent;
-            }
 
-            .colorName {
-              &:hover {
-                cursor: pointer;
-                color: gray;
+              &.black {
+                background-color: black;
+              }
+
+              &.blue {
+                background-color: #438ec3;
+              }
+
+              &.brown {
+                background-color: #7c5f45;
+              }
+
+              &.green {
+                background-color: #89b850;
+              }
+
+              &.gray {
+                background-color: #808080;
+              }
+
+              &.orange {
+                background-color: #e2733b;
+              }
+
+              &.pink {
+                background-color: #e07990;
+              }
+
+              &.purple {
+                background-color: #83469a;
+              }
+
+              &.red {
+                background-color: #d54637;
+              }
+
+              &.white {
+                background-color: white;
+              }
+
+              &.yellow {
+                background-color: #f7d757;
               }
             }
           }

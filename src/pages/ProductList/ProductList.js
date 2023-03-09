@@ -8,7 +8,6 @@ import {
   PRODUCT_DROPDOWN,
 } from './filterData';
 import ProductCard from '../../components/ProductCard/ProductCard';
-
 import './ProductList.scss';
 
 const ProductList = () => {
@@ -41,23 +40,19 @@ const ProductList = () => {
     );
   });
 
-  const COLOR = COLOR_LIST.map(({ id, name, color }) => {
+  const COLOR = COLOR_LIST.map(({ id, name }) => {
     return (
-      <dd className="colorList" key={id}>
-        <button
-          className="colorButton"
-          style={{ backgroundColor: `${color}` }}
-        />
-        <p className="colorName">{name}</p>
-      </dd>
+      <div key={id} className="colorButtonContainer">
+        <button className={`colorButton ${name}`} />
+      </div>
     );
   });
 
   const SIZE = SIZE_LIST.map(({ id, size }) => {
     return (
-      <div key={id}>
-        <button className="sizeButton">{size}</button>
-      </div>
+      <button key={id} className="sizeButton">
+        {size}
+      </button>
     );
   });
 
