@@ -20,7 +20,8 @@ const Authentication = () => {
             <input
               type="tel"
               className="phone"
-              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              // 전화번호 정규식  ex) 010-1234-5678의 형식
+              pattern="/^(?([0-9]{3}))?[-]?([0-9]{4})[-]?([0-9]{4})$/"
               placeholder="+82"
             />
             <i class="fa-solid fa-arrow-right" />
@@ -42,5 +43,3 @@ const Authentication = () => {
 };
 
 export default Authentication;
-
-// signup 파일명, authentication scss 파일 어디?, asset 폴더 어디?
