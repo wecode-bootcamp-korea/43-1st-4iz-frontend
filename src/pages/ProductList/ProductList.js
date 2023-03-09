@@ -34,8 +34,11 @@ const ProductList = () => {
   const GENDER = GENDER_LIST.map(({ id, gender }) => {
     return (
       <dd className={`checkboxContainer ${gender}`} key={id}>
-        <input className="checkbox" type="checkbox" />
-        <span className="checkboxText">{gender}</span>
+        <input id={id} className="checkbox" type="checkbox" />
+        <i className="fa-solid fa-check" />
+        <label for={id} className="checkboxText">
+          {gender}
+        </label>
       </dd>
     );
   });
