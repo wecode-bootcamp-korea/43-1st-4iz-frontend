@@ -1,5 +1,8 @@
 @import '../../styles/variables.scss';
 
+$bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
+  white #f7d757;
+
 .productList {
   overflow: hidden;
 
@@ -72,6 +75,13 @@
 
           .colorButtonContainer {
             @include displayFlex(center, null, null);
+
+            @for $i from 1 through length($bgColor) {
+              &:nth-child(#{$i}) .colorButton {
+                background-color: nth($bgColor, $i);
+              }
+            }
+
             .colorButton {
               width: 28px;
               height: 28px;
@@ -79,50 +89,6 @@
               border: 1px solid lightgray;
               border-radius: 50%;
               background-color: transparent;
-
-              &.black {
-                background-color: black;
-              }
-
-              &.blue {
-                background-color: #438ec3;
-              }
-
-              &.brown {
-                background-color: #7c5f45;
-              }
-
-              &.green {
-                background-color: #89b850;
-              }
-
-              &.gray {
-                background-color: #808080;
-              }
-
-              &.orange {
-                background-color: #e2733b;
-              }
-
-              &.pink {
-                background-color: #e07990;
-              }
-
-              &.purple {
-                background-color: #83469a;
-              }
-
-              &.red {
-                background-color: #d54637;
-              }
-
-              &.white {
-                background-color: white;
-              }
-
-              &.yellow {
-                background-color: #f7d757;
-              }
             }
           }
         }
