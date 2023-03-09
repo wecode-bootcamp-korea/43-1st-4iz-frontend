@@ -32,7 +32,7 @@
   }
 
   .orderInfo {
-    @include displayFlex(null, null, null);
+    @include displayFlex(space-between, null, null);
 
     .orderInfoList {
       @include displayFlex(null, null, column);
@@ -120,7 +120,7 @@
     }
 
     .cart {
-      width: 40%;
+      width: 30%;
 
       .cartTitle {
         @include displayFlex(space-between, null, null);
@@ -138,29 +138,51 @@
         }
       }
 
-      .cartDetail {
-        @include displayFlex(space-between, null, null);
-        margin-bottom: 40px;
+      .orderList {
+        width: 100%;
 
-        .table {
-          @include displayFlex(null, null, column);
+        h3 {
+          margin-bottom: 2.9rem;
+          padding-right: 0.5rem;
         }
 
-        .cartDetailText {
-          font-size: 1.6rem;
-          font-weight: 300;
-        }
-
-        .cartDetailPrice {
-          text-align: right;
-        }
-
+        .originPrice,
         .discountPrice {
-          margin: 5px 0 10px 0;
+          @include displayFlex(space-between, center, null);
+          margin-bottom: 1.3rem;
+          padding: 0 0.5rem;
+
+          dt {
+            font-size: 1.6rem;
+            font-weight: 400;
+          }
+
+          dd {
+            font-size: 1.6rem;
+          }
         }
 
         .totalPrice {
-          font-weight: 400;
+          @include displayFlex(space-between, center, null);
+          margin-top: 2rem;
+          padding: 2rem 0.5rem;
+          border-top: 1px solid $black;
+          border-bottom: 1px solid $black;
+
+          dt {
+            font-size: 1.8rem;
+            font-weight: 400;
+          }
+
+          dd {
+            font-size: 1.8rem;
+          }
+        }
+
+        .button {
+          width: 100%;
+          margin-top: 3rem;
+          font-size: 1.8rem;
         }
       }
     }

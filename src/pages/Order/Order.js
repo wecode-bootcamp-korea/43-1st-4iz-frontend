@@ -141,7 +141,7 @@ const Order = () => {
               <button className="editCartButton">편집</button>
             </Link>
           </div>
-          <div className="cartDetail">
+          {/* <div className="cartDetail">
             <div className="cartDetailTitle table">
               <span className="cartDetailText productPrice">상품 금액</span>
               <span className="cartDetailText discountPrice">할인된 금액</span>
@@ -152,8 +152,23 @@ const Order = () => {
               <span className="cartDetailText discountPrice">- 2000 원</span>
               <span className="cartDetailText totalPrice">470,600 원</span>
             </div>
-          </div>
-          {/* TODO: 장바구니 컴포넌트가 들어갈 자리입니다. */}
+          </div> */}
+          <section className="orderList">
+            <dl className="originPrice">
+              <dt>상품 금액</dt>
+              <dd>472,600 원</dd>
+            </dl>
+            <dl className="discountPrice">
+              <dt>할인 금액</dt>
+              <dd>- 2000 원</dd>
+            </dl>
+            <dl className="totalPrice">
+              <dt>총 결제 금액</dt>
+              <dd>470,600 원</dd>
+            </dl>
+            <Button text="결제하기" />
+            {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
+          </section>
         </div>
       </div>
     </div>
