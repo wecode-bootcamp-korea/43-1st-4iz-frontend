@@ -38,6 +38,6 @@ const MAIL_OPTION = [
   { id: 2, domain: 'naver.com' },
   { id: 3, domain: 'nate.com' },
   { id: 4, domain: 'daum.net' },
-  { id: 5, domain: 'googole.com' },
+  { id: 5, domain: 'gmail.com' },
   { id: 6, domain: 'hamail.net' },
 ];

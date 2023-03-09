@@ -36,12 +36,13 @@
       grid-area: main;
       @include displayFlex(space-between, null, null);
       margin: 2.5rem 0 3.5rem;
-      padding: 1.5rem 3rem 1.5rem 0;
+      padding: 1.5rem 2rem 1.5rem 2rem;
       border: 1px solid $black;
       border-radius: 1.2rem;
 
       .emailId {
-        width: 30%;
+        width: 60%;
+        padding: 0 5px;
         text-align: center;
         font-size: 1.5rem;
       }
@@ -59,7 +60,7 @@
     .button {
       grid-area: btn;
       justify-self: end;
-      width: 40%;
+      width: 60%;
       margin-top: 10rem;
     }
   }
