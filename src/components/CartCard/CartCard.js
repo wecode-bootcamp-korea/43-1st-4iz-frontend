@@ -12,12 +12,12 @@ const CartCard = ({ name, size, color, price }) => {
       </div>
       <div className="addCart">
         <div className="count">
-          <button type="button">+</button>
-          <div className="countInputText">1</div>
           <button type="button">-</button>
+          <div className="countInputText">1</div>
+          <button type="button">+</button>
         </div>
         <p className="selectedPrice">{price}원</p>
-        <i class="fa-solid fa-xmark" />
+        <i className="fa-solid fa-xmark" />
       </div>
     </div>
   );

@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import CartCard from '../../components/CartCard/CartCard';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
+  const [dataList, setDataList] = useState([]);
+
+  useEffect(() => {
+    fetch('./data/productData.json', {
+      method: 'GET', //GET으로 요청할때 생략 가능
+    })
+      .then(res => res.json())
+      .then(data => {
+        setDataList(data);
+      });
+  }, []);
+
   return (
     <main className="productDetail">
       <aside className="productImageContainer">
@@ -28,6 +40,13 @@ const ProductDetail = () => {
           <p className="subCategory">남성 신발</p>
           <p className="productPrice">139,000원</p>
         </header>
+        <div className="selectColor">
+          <button type="button" className="colorButton" />
+          <button type="button" className="colorButton" />
+          <button type="button" className="colorButton" />
+          <button type="button" className="colorButton" />
+          <button type="button" className="colorButton" />
+        </div>
         <div class="selectSize">
           <div className="selectSizeTitle">
             <h4>사이즈 선택 </h4>
