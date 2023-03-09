@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import './Order.scss';
 
@@ -6,65 +7,61 @@ const Order = () => {
   return (
     <div className="order">
       <h3 className="orderTitle">결제하기</h3>
+
       <div className="orderInfo">
         <div className="orderInfoList">
           <div className="delivery">
             <h3 className="deliveryTitle title">배송 옵션</h3>
             <fieldset className="deliveryContainer">
               <div className="deliveryInputContainer">
-                <label for="name">이름</label>
+                <label>이름*</label>
                 <input
                   type="text"
-                  id="name"
                   placeholder="이름"
-                  required
                   className="deliveryInput"
+                  required
                 />
               </div>
               <div className="deliveryInputContainer">
-                <label for="name">도로명주소</label>
+                <label>도로명주소*</label>
                 <input
                   type="text"
-                  id="address"
                   placeholder="도로명주소"
-                  required
                   className="deliveryInput"
+                  required
                 />
               </div>
               <div className="deliveryInputContainer">
-                <label for="name">상세주소</label>
+                <label>상세주소*</label>
                 <input
                   type="text"
-                  id="addressDetail"
                   placeholder="상세주소"
-                  required
                   className="deliveryInput"
+                  required
                 />
               </div>
               <div className="deliveryContact">
                 <div className="deliveryInputContainer phoneContainer">
-                  <label for="name">휴대폰번호</label>
+                  <label>휴대폰번호*</label>
                   <input
                     type="tel"
-                    id="phone"
                     placeholder="휴대폰번호"
-                    required
                     className="deliveryInput"
+                    required
                   />
                 </div>
                 <div className="deliveryInputContainer emailContainer">
-                  <label for="name">이메일</label>
+                  <label>이메일*</label>
                   <input
                     type="email"
-                    id="email"
                     placeholder="이메일"
-                    required
                     className="deliveryInput"
+                    required
                   />
                 </div>
               </div>
             </fieldset>
-            <div className="buttonBox">
+            <div className="buttonContainer">
               <Button text="계속" />
               <Button text="취소" className="cancel" />
             </div>
@@ -128,7 +125,7 @@ const Order = () => {
                 </label>
               </div>
             </fieldset>
-            <div className="buttonBox">
+            <div className="buttonContainer">
               <Button text="주문하기" />
             </div>
           </div>
@@ -138,13 +135,25 @@ const Order = () => {
         </div>
 
         <div className="cart">
-          <h3 className="cartTitle title">장바구니</h3>
-          <div>상품 금액</div>
-          <div>배송비</div>
-          <div>총 결제 금액</div>
-          <h3>장바구니 컴포넌트 자리입니다입니다</h3>
-          <h3>장바구니 컴포넌트 자리입니다입니다</h3>
-          <h3>장바구니 컴포넌트 자리입니다입니다</h3>
+          <div className="cartTitle title">
+            <h3 className="cartTitleText">장바구니</h3>
+            <Link to="/cart" className="editCartLink">
+              <button className="editCartButton">편집</button>
+            </Link>
+          </div>
+          <div className="cartDetail">
+            <div className="cartDetailTitle table">
+              <span className="cartDetailText productPrice">상품 금액</span>
+              <span className="cartDetailText discountPrice">할인된 금액</span>
+              <span className="cartDetailText totalPrice">총 결제 금액</span>
+            </div>
+            <div className="cartDetailPrice table">
+              <span className="cartDetailText productPrice">472,600 원</span>
+              <span className="cartDetailText discountPrice">- 2000 원</span>
+              <span className="cartDetailText totalPrice">470,600 원</span>
+            </div>
+          </div>
+          {/* TODO: 장바구니 컴포넌트가 들어갈 자리입니다. */}
         </div>
       </div>
     </div>
