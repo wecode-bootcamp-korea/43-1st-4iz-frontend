@@ -1,0 +1,63 @@
+@import '../../styles/variables.scss';
+
+.login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1;
+
+  .loginForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      'logo .  '
+      'header header '
+      'main main '
+      'search .'
+      '.  btn';
+    width: 20%;
+    margin: 4rem auto 0;
+
+    .logoImage {
+      grid-area: logo;
+      width: 35%;
+      margin-left: 1rem;
+    }
+
+    .formTitle {
+      grid-area: header;
+      margin-top: 2.5rem;
+      font-size: 2.5rem;
+    }
+
+    .passwordContainter {
+      grid-area: main;
+      @include displayFlex(space-between, null, null);
+      width: 100%;
+      margin: 2.5rem 0;
+      padding: 1.5rem 2rem;
+      border: 1px solid $black;
+      border-radius: 1.2rem;
+
+      .password {
+        font-size: 1.5rem;
+      }
+    }
+
+    .searchPassword {
+      grid-area: search;
+    }
+
+    .button {
+      grid-area: btn;
+      margin-top: 20px;
+      justify-self: end;
+      width: 80%;
+      font-size: 1.5rem;
+    }
+  }
+}
