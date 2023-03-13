@@ -25,7 +25,6 @@ const ProductCard = ({
             {Number(price).toLocaleString()} 원
           </del>
         </div>
-
         <div className="discountRate">{discount_rate}% 할인</div>
       </div>
     </div>
