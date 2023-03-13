@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .productDetail {
-  @include displayFlex(center, null, null);
+  @include displayFlex(center);
   width: 80%;
   height: max-content;
   margin: 13rem auto 0;
@@ -40,7 +40,7 @@
     .productInfoTitle {
       .subCategory {
         margin-top: 0.8rem;
-        font-size: 2rem;
+        // font-size: 1.5rem;
       }
 
       .productPrice {
@@ -52,7 +52,7 @@
   }
 
   .selectColor {
-    @include displayFlex(flex-start, center, null);
+    @include displayFlex(flex-start, center);
     margin-top: 2rem;
 
     .colorButton {
@@ -81,12 +81,12 @@
     margin-top: 3rem;
 
     .selectSizeTitle {
-      @include displayFlex(space-between, null, null);
+      @include displayFlex(space-between);
       width: 99%;
     }
 
     .selectSizeOption {
-      @include displayFlex(flex-start, null, null);
+      @include displayFlex(flex-start);
       flex-wrap: wrap;
       margin-top: 1rem;
 
@@ -116,7 +116,7 @@
     padding: 2rem 0.8rem;
 
     .detailInfoTitle {
-      @include displayFlex(space-between, center, null);
+      @include displayFlex(space-between, center);
       margin-bottom: 2rem;
 
       h4 {

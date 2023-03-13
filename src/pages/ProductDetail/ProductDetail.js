@@ -4,124 +4,127 @@ import CartCard from '../../components/CartCard/CartCard';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
-  const [dataList, setDataList] = useState([]);
+  const [dataList, setDataList] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('./data/productData.json', { method: 'GET' })
+    fetch('./data/productData.json')
       .then(res => res.json())
       .then(data => {
         setDataList(data);
+        setLoading(false);
       });
   }, []);
 
+  if (loading) return <>Loading.... </>;
+
   return (
-    <>
-      {dataList.map(info => {
-        return (
-          <main className="productDetail" key={info.id}>
-            <aside className="productImageContainer">
-              <div className="productMainImg">
-                <img src={`${info.image[0].src}`} alt="선택된 이미지" />
-              </div>
-            </aside>
-            <div className="productImageGallery">
-              <ul>
-                {info.image.map(list => (
-                  <li
-                    key={list.id}
-                    className="imageBox"
-                    style={{ backgroundImage: `url(${list.src})` }}
-                  />
-                ))}
-              </ul>
-            </div>
-            <section className="productInfo">
-              <header className="productInfoTitle" key={info.id}>
-                <h3>{info.name}</h3>
-                <p className="subCategory">{info.categoty}</p>
-                <p className="productPrice">{info.price}원</p>
-              </header>
-              <div className="selectColor">
-                {info.colorChart.map(list => {
-                  return (
-                    <button
-                      key={list.id}
-                      type="button"
-                      className={`colorButton ${list.color}`}
-                    >
-                      {list.color}
-                    </button>
-                  );
-                })}
-              </div>
-              <div class="selectSize">
-                <div className="selectSizeTitle">
-                  <h4>사이즈 선택 </h4>
-                  <span>사이즈 가이즈</span>
-                </div>
-                <div className="selectSizeOption">
-                  {info.sizeChart.map(info => (
-                    <Button key={info.id} text={info.size} />
-                  ))}
-                </div>
-                <Button text="장바구니" />
-              </div>
-              <CartCard
-                name={info.name}
-                size={info.sizeChart[0].size}
-                color={info.colorChart[1].color}
-                price={info.price}
+    <main className="productDetail">
+      <aside className="productImageContainer">
+        <div className="productMainImg">
+          <img src={`${dataList.images[0]}`} alt="선택된 이미지" />
+        </div>
+      </aside>
+      <div className="productImageGallery">
+        <ul>
+          {dataList.images.map((src, i) => (
+            <li
+              key={`${src}${i}`}
+              className="imageBox"
+              style={{ backgroundImage: `url(${src})` }}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <section className="productInfo">
+        <header className="productInfoTitle">
+          <h3>{dataList.name}</h3>
+          <p className="subCategory">
+            {dataList.categories.map((info, i) => {
+              return <span key={`${info}${i}`}>{info}/</span>;
+            })}
+          </p>
+          <p className="productPrice">
+            {Number(dataList.price).toLocaleString()}원
+          </p>
+        </header>
+        <div className="selectColor">
+          {dataList.color.map((info, i) => {
+            return (
+              <button
+                key={`${info}${i}`}
+                type="button"
+                className={`colorButton ${info}`}
               />
-              <div className="detailInfo">
-                <div className="detailInfoTitle">
-                  <h4>상품 상세 정보 보기</h4>
-                  <i class="fa-solid fa-caret-up" />
-                </div>
-                <div className="detailInfoContent">
-                  <p>{info.detailInfo}</p>
-                  <ul className="detailInfoList">
-                    <li>현재 컬러: {info.colorChart[0].color}</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="detailInfo">
-                <div className="detailInfoTitle">
-                  <h4>무료 배송 및 반품</h4>
-                  <i className="fa-solid fa-caret-up" />
-                </div>
-                <div className="detailInfoContent">
-                  <p>일반 배송</p>
-                  <ul className="detailInfoList">
-                    <li>배송지역: 전국 (일부 지역 제외)</li>
-                    <li>배송비: 무료배송</li>
-                    <li>
-                      제품 수령일로부터 14일 이내 제품에 대해서만 무료 반품
-                      서비스가 가능합니다.
-                    </li>
-                  </ul>
-                  <p>일반 배송 자세히 알아보기</p>
-                  <p>반품 자세히 알아보기</p>
-                </div>
-              </div>
-              <div className="detailInfo">
-                <div className="detailInfoTitle">
-                  <h4>추가 정보</h4>
-                  <i className="fa-solid fa-caret-up" />
-                </div>
-                <div className="detailInfoContent">
-                  <p>상품정보제공고시</p>
-                  <ul className="detailInfoList">
-                    {PRODUCT_INFORMATION_INFO.map(info => {
-                      return <li key={info.id}>{info.content}</li>;
-                    })}
-                  </ul>
-                </div>
-              </div>
-            </section>
-          </main>
-        );
-      })}
-    </>
+            );
+          })}
+        </div>
+        <div class="selectSize">
+          <div className="selectSizeTitle">
+            <h4>사이즈 선택 </h4>
+            <span>사이즈 가이즈</span>
+          </div>
+          <div className="selectSizeOption">
+            {dataList.size.map((info, i) => (
+              <Button key={`${info}${i}`} text={info} />
+            ))}
+          </div>
+          <Button text="장바구니" />
+        </div>
+        <CartCard
+          name={dataList.name}
+          size={dataList.size[0]}
+          color={dataList.color[0]}
+          price={Number(dataList.price).toLocaleString()}
+        />
+        <div className="detailInfo">
+          <div className="detailInfoTitle">
+            <h4>상품 상세 정보 보기</h4>
+            <i class="fa-solid fa-caret-up" />
+          </div>
+          <div className="detailInfoContent">
+            <p>{dataList.description}</p>
+            <ul className="detailInfoList">
+              <li>현재 컬러: {dataList.color[0]}</li>
+            </ul>
+          </div>
+        </div>
+        <div className="detailInfo">
+          <div className="detailInfoTitle">
+            <h4>무료 배송 및 반품</h4>
+            <i className="fa-solid fa-caret-up" />
+          </div>
+          <div className="detailInfoContent">
+            <p>일반 배송</p>
+            <ul className="detailInfoList">
+              <li>배송지역: 전국 (일부 지역 제외)</li>
+              <li>배송비: 무료배송</li>
+              <li>
+                제품 수령일로부터 14일 이내 제품에 대해서만 무료 반품 서비스가
+                가능합니다.
+              </li>
+            </ul>
+            <p>일반 배송 자세히 알아보기</p>
+            <p>반품 자세히 알아보기</p>
+          </div>
+        </div>
+        <div className="detailInfo">
+          <div className="detailInfoTitle">
+            <h4>추가 정보</h4>
+            <i className="fa-solid fa-caret-up" />
+          </div>
+          <div className="detailInfoContent">
+            <p>상품정보제공고시</p>
+            <ul className="detailInfoList">
+              {PRODUCT_INFORMATION_INFO.map(info => {
+                return <li key={info.id}>{info.content}</li>;
+              })}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 };
 
