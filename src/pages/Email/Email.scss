@@ -1,0 +1,67 @@
+@import '../../styles/variables.scss';
+
+.email {
+  @include position(fixed, 0, null, null, 0);
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1;
+
+  .emailForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      'logo .'
+      'header header'
+      'main main'
+      'footer footer'
+      '. btn';
+    width: 20%;
+    margin: 4rem auto 0;
+
+    .logoImage {
+      grid-area: logo;
+      width: 35%;
+      margin-left: 1rem;
+    }
+
+    .formTitle {
+      grid-area: header;
+      margin-top: 3rem;
+      font-size: 2.5rem;
+    }
+
+    .emailContainer {
+      grid-area: main;
+      @include displayFlex(space-between, null, null);
+      margin: 2.5rem 0 3.5rem;
+      padding: 1.5rem 2rem 1.5rem 2rem;
+      border: 1px solid $black;
+      border-radius: 1.2rem;
+
+      .emailId {
+        width: 60%;
+        padding: 0 5px;
+        text-align: center;
+        font-size: 1.5rem;
+      }
+
+      .emailAdress {
+        border: none;
+        font-size: 1.5rem;
+      }
+    }
+
+    .terms {
+      grid-area: footer;
+    }
+
+    .button {
+      grid-area: btn;
+      justify-self: end;
+      width: 60%;
+      margin-top: 10rem;
+    }
+  }
+}

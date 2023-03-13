@@ -1,0 +1,95 @@
+@import '../../styles/variables.scss';
+
+.authentication {
+  @include position(fixed, 0, null, null, 0);
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1;
+
+  .authenticationForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      'logo .  '
+      'header header '
+      'main main '
+      'search .'
+      'btn btn';
+    width: 20%;
+    margin: 4rem auto 0;
+
+    .logoImage {
+      grid-area: logo;
+      width: 35%;
+      margin-left: 1rem;
+    }
+
+    .authenticationHeader {
+      grid-area: header;
+      margin: 2rem 0 4rem;
+
+      .formTitle {
+        margin-bottom: 1rem;
+        font-size: 2.5rem;
+      }
+    }
+
+    .authenticationContainter {
+      grid-area: main;
+
+      .phoneContainer {
+        position: relative;
+        @include displayFlex(space-between, null, null);
+        width: 100%;
+        padding: 1.7rem 2rem 1.5rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+
+        .phoneTitle {
+          @include position(absolute, -1.1rem, null, null, 1.2rem);
+          background-color: white;
+        }
+
+        .phone {
+          font-size: 1.5rem;
+        }
+      }
+
+      .checkCode {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+      }
+
+      .termsAgree {
+        @include displayFlex(null, top, null);
+
+        input {
+          width: 2rem;
+          height: 2rem;
+          margin: 0.25rem 1rem 0 0;
+        }
+      }
+    }
+
+    .buttonContainer {
+      @include displayFlex(flex-end, center, null);
+      grid-area: btn;
+      justify-self: end;
+      width: 100%;
+      margin-top: 7rem;
+
+      .button {
+        margin: 0 0 0 2rem;
+        width: 25%;
+      }
+    }
+  }
+}
