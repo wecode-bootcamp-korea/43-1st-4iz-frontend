@@ -6,36 +6,25 @@ import './Account.scss';
 
 const Account = () => {
   const [accountDataName, setAccountDataName] = useState(EMAIL);
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
-  const [name, setName] = useState('');
-  const [tel, setTel] = useState('');
-  const [check, setCheck] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [select, setSelect] = useState('');
+  const [userInfo, setUserInfo] = useState({
+    id: '',
+    pw: '',
+    name: '',
+    tel: '',
+    check: '',
+    birthday: '',
+    select: '',
+  });
+
+  const { id, pw, name, tel, check, birthday, select } = userInfo;
 
   const navigate = useNavigate();
 
-  const saveUserId = e => {
-    setId(e.target.value);
-  };
-  const saveUserPw = e => {
-    setPw(e.target.value);
-  };
-  const saveUserName = e => {
-    setName(e.target.value);
-  };
-  const saveUserTel = e => {
-    setTel(e.target.value);
-  };
-  const saveChecked = e => {
-    setCheck(e.target.checked);
-  };
-  const saveBirthday = e => {
-    setBirthday(e.target.value);
-  };
-  const saveSelect = e => {
-    setSelect(e.target.value);
+  const onChangeUserInfo = e => {
+    console.log(userInfo);
+
+    const { name, value } = e.target;
+    setUserInfo({ ...userInfo, [name]: value });
   };
 
   const duplicateTest = e => {
@@ -51,14 +40,14 @@ const Account = () => {
     })
       .then(response => response.json())
       .then(data => {
-        if (accountDataName === EMAIL) {
-          if (data.message === 'NEW_USER') {
-            setAccountDataName(SIGNUP);
-          } else if (data.message === 'EXISTING_USER') {
-            localStorage.setItem('token', data.accessToken);
-            setAccountDataName(LOGIN);
-          } else alert('fail');
-        }
+        if (!accountDataName === EMAIL) return;
+
+        if (data.message === 'NEW_USER') {
+          setAccountDataName(SIGNUP);
+        } else if (data.message === 'EXISTING_USER') {
+          localStorage.setItem('token', data.accessToken);
+          setAccountDataName(LOGIN);
+        } else alert('fail');
       });
   };
 
@@ -134,12 +123,13 @@ const Account = () => {
               placeholder="이메일"
               className="emailId"
               value={id}
-              onChange={saveUserId}
+              onChange={onChangeUserInfo}
+              name="id"
             />
             <span>@</span>
-            <select className="emailAdress" onChange={saveSelect}>
+            <select className="emailAdress" onChange={onChangeUserInfo}>
               {MAIL_OPTION.map(({ id, domain }) => (
-                <option key={id} value={domain}>
+                <option key={id} value={userInfo[select]}>
                   {domain}
                 </option>
               ))}
@@ -153,7 +143,7 @@ const Account = () => {
               className="password"
               placeholder="비밀번호"
               value={pw}
-              onChange={saveUserPw}
+              onChange={onChangeUserInfo}
             />
             <i className="fa-regular fa-eye" />
           </div>
@@ -165,7 +155,7 @@ const Account = () => {
               placeholder="이름"
               className="name"
               value={name}
-              onChange={saveUserName}
+              onChange={onChangeUserInfo}
             />
             <input
               type="tel"
@@ -173,7 +163,7 @@ const Account = () => {
               pattern="/^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/"
               placeholder="전화번호"
               value={tel}
-              onChange={saveUserTel}
+              onChange={onChangeUserInfo}
             />
             <div className="pwContainer">
               <input
@@ -181,7 +171,7 @@ const Account = () => {
                 className="pw"
                 placeholder="비밀번호"
                 value={pw}
-                onChange={saveUserPw}
+                onChange={onChangeUserInfo}
               />
               <i className="fa-regular fa-eye" />
             </div>
@@ -199,12 +189,12 @@ const Account = () => {
               type="date"
               className="birth"
               value={birthday}
-              onChange={saveBirthday}
+              onChange={onChangeUserInfo}
             />
             <p className="birthRules">생일에 나이키 멤버 리워드를 받으세요.</p>
 
             <label className="termsAgree">
-              <input type="checkbox" onClick={saveChecked} />
+              <input type="checkbox" onClick={onChangeUserInfo} />
               {accountDataName[0].contents}
             </label>
           </div>
@@ -221,3 +211,37 @@ const Account = () => {
 };
 
 export default Account;
+
+// const [id, setId] = useState('');
+// const [pw, setPw] = useState('');
+// const [name, setName] = useState('');
+// const [tel, setTel] = useState('');
+// const [check, setCheck] = useState('');
+// const [birthday, setBirthday] = useState('');
+// const [select, setSelect] = useState('');
+
+// const [accountDataName, setAccountDataName] = useState(EMAIL);
+
+// const navigate = useNavigate();
+
+// const saveUserId = e => {
+//   setId(e.target.value);
+// };
+// const saveUserPw = e => {
+//   setPw(e.target.value);
+// };
+// const saveUserName = e => {
+//   setName(e.target.value);
+// };
+// const saveUserTel = e => {
+//   setTel(e.target.value);
+// };
+// const saveChecked = e => {
+//   setCheck(e.target.checked);
+// };
+// const saveBirthday = e => {
+//   setBirthday(e.target.value);
+// };
+// const saveSelect = e => {
+//   setSelect(e.target.value);
+// };
