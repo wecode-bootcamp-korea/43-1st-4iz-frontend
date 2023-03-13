@@ -38,9 +38,8 @@ const Account = () => {
     setSelect(e.target.value);
   };
 
-  const loginTest = e => {
+  const duplicateTest = e => {
     // e.preventDefault();
-
     fetch('http://10.58.52.181:3000/users/duplicate', {
       method: 'POST',
       headers: {
@@ -48,7 +47,6 @@ const Account = () => {
       },
       body: JSON.stringify({
         email: `${id}@${select}`,
-        password: pw,
       }),
     })
       .then(response => response.json())
@@ -64,20 +62,26 @@ const Account = () => {
       });
   };
 
-  const handleAccountTest = () => {
-    console.log(accountDataName[0].name);
-    if (accountDataName[0].name === 'email') {
-      loginTest();
-    } else {
-      signUpTest();
-    }
+  const signInTest = e => {
+    // e.preventDefault();
+    fetch('http://10.58.52.181:3000/users/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: `${id}@${select}`,
+        password: pw,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        data.accessToken ? navigate('/') : alert('check pw');
+      });
   };
 
   const signUpTest = e => {
     // e.preventDefault();
-
-    console.log(`${id}@${select}`);
-
     fetch('http://10.58.52.181:3000/users/signup', {
       method: 'POST',
       headers: {
@@ -106,6 +110,16 @@ const Account = () => {
             : alert('입력한 내용을 다시 확인해주세요');
         }
       });
+  };
+
+  const handleAccountTest = () => {
+    if (accountDataName[0].name === 'email') {
+      duplicateTest();
+    } else if (accountDataName[0].name === 'login') {
+      signInTest();
+    } else {
+      signUpTest();
+    }
   };
 
   return (
