@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   SUBMENU_LIST,
   GENDER_LIST,
@@ -12,6 +12,24 @@ import './ProductList.scss';
 
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const setGender = (value, e) => {
+    if (e.target.checked) {
+      searchParams.append('gender', value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('gender');
+      searchParams.delete('gender');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('gender', value);
+        });
+      setSearchParams(searchParams);
+    }
+  };
 
   useEffect(() => {
     fetch('/data/productListData.json', {
@@ -34,7 +52,12 @@ const ProductList = () => {
   const GENDER = GENDER_LIST.map(({ id, gender }) => {
     return (
       <dd className={`checkboxContainer ${gender}`} key={id}>
-        <input id={id} className="checkbox" type="checkbox" />
+        <input
+          id={id}
+          className="checkbox"
+          type="checkbox"
+          onChange={e => setGender(gender, e)}
+        />
         <i className="fa-solid fa-check" />
         <label for={id} className="checkboxText">
           {gender}
@@ -86,6 +109,8 @@ const ProductList = () => {
       );
     }
   );
+
+  // FIXME: filter test
 
   return (
     <div className="productList">
