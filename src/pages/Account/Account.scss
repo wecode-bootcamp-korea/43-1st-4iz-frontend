@@ -1,0 +1,146 @@
+@import '../../styles/variables.scss';
+
+.account {
+  @include position(fixed, 0, null, null, 0);
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1;
+
+  .accountForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      'logo .'
+      'header header'
+      'main main'
+      'footer footer'
+      '. btn';
+    width: 25%;
+    margin: 4rem auto 0;
+
+    .logoImage {
+      grid-area: logo;
+      width: 30%;
+      margin-left: 1rem;
+    }
+
+    .formTitle {
+      grid-area: header;
+      margin: 3rem 0 3rem;
+      font-size: 2.5rem;
+    }
+
+    .emailContainer {
+      grid-area: main;
+      @include displayFlex(space-between, null, null);
+      margin-bottom: 3.5rem;
+      padding: 1.5rem 2rem 1.5rem 2rem;
+      border: 1px solid $black;
+      border-radius: 1.2rem;
+
+      .emailId {
+        width: 60%;
+        padding: 0 5px;
+        font-size: 1.5rem;
+      }
+
+      .emailAdress {
+        border: none;
+        font-size: 1.5rem;
+      }
+    }
+
+    .passwordContainter {
+      grid-area: main;
+      @include displayFlex(space-between, null, null);
+      width: 100%;
+      margin-bottom: 2.5rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid $black;
+      border-radius: 1.2rem;
+
+      .password {
+        font-size: 1.5rem;
+      }
+    }
+
+    .signupContainter {
+      grid-area: main;
+
+      .name,
+      .phone {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2.5rem;
+        border: 1px solid $black;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+      }
+
+      .alert {
+        border: 1px solid red;
+      }
+
+      .noAlert {
+        border: 1px solid $black;
+      }
+
+      .pwContainer {
+        @include displayFlex(space-between, null, null);
+        width: 100%;
+        padding: 1.5rem 2rem;
+        border-radius: 1.2rem;
+
+        .pw {
+          font-size: 1.5rem;
+        }
+      }
+
+      .pwRules,
+      .birthRules {
+        margin: 0.5rem 0 2.5rem 0.5rem;
+        font-size: 1.2rem;
+        color: #999;
+
+        i {
+          margin-right: 1rem;
+        }
+      }
+
+      .birth {
+        width: 100%;
+        padding: 1.5rem 2rem;
+        border-radius: 1.2rem;
+        border: 1px solid $black;
+        font-size: 1.5rem;
+      }
+
+      .termsAgree {
+        @include displayFlex(null, top, null);
+
+        input {
+          width: 2rem;
+          height: 2rem;
+          margin: 0.25rem 1rem 0 0;
+        }
+      }
+    }
+
+    .terms {
+      grid-area: footer;
+    }
+
+    .btnContainer {
+      grid-area: btn;
+      justify-self: end;
+      width: 60%;
+
+      .button {
+        margin-top: 8rem;
+        width: 100%;
+      }
+    }
+  }
+}
