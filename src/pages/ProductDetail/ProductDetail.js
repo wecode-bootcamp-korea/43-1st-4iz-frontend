@@ -8,36 +8,11 @@ const ProductDetail = () => {
   const [dataList, setDataList] = useState({});
   const [loading, setLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState('');
-  const [size, setSize] = useState('');
-  const [color, setColor] = useState('');
-  const [addOption, setAddOption] = useState([]);
+  const optionList2 = [];
+  const [optionList, setOptionList] = useState(optionList2);
+  const [selectedOption, setSelectedOption] = useState(INIT_OPTION);
 
-  // 사용자가 선택한 option
-  const selectedOption = { size, color };
-  console.log('📍 addOption: ', addOption);
-  console.log('productOption: ', selectedOption);
-
-  const isAllSeleted = Object.entries(selectedOption).every(
-    ([key, value]) => value
-  );
-
-  const addSelectedOption = e => {
-    if (isAllSeleted) {
-      setAddOption([...addOption, { text: e.target.value, num: 1 }]);
-    }
-  };
-
-  const handleImageSrc = e => {
-    setImageSrc(e.target.value);
-  };
-
-  const handleSelectColor = e => {
-    setColor(e.target.value);
-  };
-
-  const handleSelectSize = e => {
-    setSize(e.target.value);
-  };
+  const clearSelectedOption = () => setSelectedOption({ size: '', color: '' });
 
   useEffect(() => {
     fetch('./data/productData.json')
@@ -50,6 +25,43 @@ const ProductDetail = () => {
   }, []);
 
   if (loading) return <>Loading.... </>;
+
+  const option = Object.values(dataList.options);
+
+  for (const value of option) {
+    if (!COLOR_CHART.includes(value.color)) {
+      COLOR_CHART.push(value.color);
+    }
+
+    if (!SIZE_CHART.includes(value.size)) {
+      SIZE_CHART.push(value.size);
+    }
+  }
+
+  const onClickColorPicker = color => {
+    if (selectedOption.size) {
+      setOptionList([...optionList, { ...selectedOption, color }]);
+      console.log(selectedOption);
+
+      clearSelectedOption();
+    } else {
+      setSelectedOption({ ...selectedOption, color });
+      console.log(optionList);
+    }
+  };
+
+  const onClickSizeButton = size => {
+    if (selectedOption.color) {
+      setOptionList([...optionList, { ...selectedOption, size }]);
+      clearSelectedOption();
+    } else {
+      setSelectedOption({ ...selectedOption, size });
+    }
+  };
+
+  const handleImageSrc = e => {
+    setImageSrc(e.target.value);
+  };
 
   return (
     <main className="productDetail">
@@ -85,57 +97,45 @@ const ProductDetail = () => {
           </p>
         </header>
         <div className="selectColor">
-          {dataList.color.map((info, i) => {
+          {COLOR_CHART.map((color, i) => {
             return (
               <button
-                onClick={e => {
-                  handleSelectColor(e);
+                key={i}
+                onClick={color => {
+                  onClickColorPicker(color);
                 }}
-                key={`${info}${i}`}
                 type="button"
-                value={info}
-                className={`colorButton ${info}`}
+                className={`colorButton ${color}`}
               />
             );
           })}
         </div>
         <div class="selectSize">
           <div className="selectSizeTitle">
-            <h4>사이즈 선택 </h4>
+            <h4>사이즈 선택 : {selectedOption.size}</h4>
             <span>사이즈 가이즈</span>
           </div>
           <div className="selectSizeOption">
-            {dataList.size.map((info, i) => (
+            {SIZE_CHART.map((size, i) => (
               <button
-                onClick={e => {
-                  handleSelectSize(e);
-                  addSelectedOption(e);
+                key={`${size}${i}`}
+                onClick={size => {
+                  onClickSizeButton(size);
                 }}
-                key={`${info}${i}`}
-                text={info}
-                value={info}
               >
-                {info}
+                {size}
               </button>
             ))}
           </div>
           <Button text="장바구니" />
         </div>
-        {/* {isAllSeleted && (
-          <CartCard
-            name={dataList.name}
-            size={size}
-            color={color}
-            price={Number(dataList.price).toLocaleString()}
-          />
-        )} */}
-        {addOption.map(value => (
+        {optionList.map(option => (
           <CartCard
             key={dataList.name}
             name={dataList.name}
-            size={size}
-            color={color}
-            price={Number(dataList.price).toLocaleString()}
+            color={selectedOption.color}
+            size={selectedOption.size}
+            price={dataList.price}
           />
         ))}
         {PRODUCT_INFORMATION_INFO.map(info => {
@@ -147,6 +147,11 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
+const INIT_OPTION = { size: '', color: '' };
+
+const COLOR_CHART = [];
+const SIZE_CHART = [];
 
 const PRODUCT_INFORMATION_INFO = [
   {

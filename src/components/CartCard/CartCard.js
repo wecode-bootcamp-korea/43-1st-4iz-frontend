@@ -1,23 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CartCard.scss';
 
-const CartCard = ({ name, size, color, price }) => {
+const CartCard = ({ name, color, size, price }) => {
+  const [count, setCount] = useState(1);
+  const totalPrice = Number(price * count);
+
   return (
     <div className="cartCard">
       <div className="cartInfo">
         <h4>{name}</h4>
-        <p className="selectedOption">
+        {/* FIXME : The above error occurred in the p component 에러 수정 시 추가 될 부분 */}
+        {/* <p className="selectedOption">
           {size} / {color}
-        </p>
+        </p> */}
       </div>
       <div className="addCart">
         <div className="count">
-          <button type="button">-</button>
-          <div className="countInputText">1</div>
-          <button type="button">+</button>
+          <button
+            type="button"
+            onClick={() => {
+              count > 1 && setCount(count - 1);
+            }}
+          >
+            -
+          </button>
+          <div className="countInputText">{count}</div>
+          <button
+            type="button"
+            onClick={() => {
+              count < 5 && setCount(count + 1);
+            }}
+          >
+            +
+          </button>
         </div>
-        <p className="selectedPrice">{price}원</p>
-        <i className="fa-solid fa-xmark" />
+        <p className="selectedPrice">{totalPrice.toLocaleString()}원</p>
+        <i
+          className="fa-solid fa-xmark"
+          onClick={e => {
+            e.terget.remove();
+          }}
+        />
       </div>
     </div>
   );
