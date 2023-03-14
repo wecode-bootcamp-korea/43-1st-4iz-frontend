@@ -14,6 +14,7 @@ const ProductList = () => {
   const [productData, setProductData] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
+  // const [sort, setSort] = useState(searchParams.get('sort'));
 
   const setGender = (value, e) => {
     if (e.target.checked) {
@@ -31,6 +32,40 @@ const ProductList = () => {
     }
   };
 
+  const setSize = (value, e) => {
+    if (e.target.value) {
+      searchParams.append('size', value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('size');
+      searchParams.delete('size');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('size', value);
+        });
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setColor = (value, e) => {
+    console.log(e.target.value);
+
+    if (e.target.value) {
+      searchParams.append('color', value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('color');
+      searchParams.delete('color');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('color', value);
+        });
+      setSearchParams(searchParams);
+    }
+  };
+
   useEffect(() => {
     fetch('/data/productListData.json', {
       method: 'GET',
@@ -40,6 +75,15 @@ const ProductList = () => {
         setProductData(data);
       });
   });
+
+  // const handleChangeSort = e => {
+  //   setSort(e.target.value);
+  // };
+
+  // useEffect(() => {
+  //   searchParams.set('sort', sort);
+  //   setSearchParams(searchParams);
+  // }, [searchParams, setSearchParams, sort]);
 
   const SUBMENU = SUBMENU_LIST.map(({ id, title }) => {
     return (
@@ -69,14 +113,23 @@ const ProductList = () => {
   const COLOR = COLOR_LIST.map(({ id, name }) => {
     return (
       <div key={id} className="colorButtonContainer">
-        <button className={`colorButton ${name}`} />
+        <button
+          className={`colorButton ${name}`}
+          onClick={e => setColor(name, e)}
+          value={name}
+        />
       </div>
     );
   });
 
   const SIZE = SIZE_LIST.map(({ id, size }) => {
     return (
-      <button key={id} className="sizeButton">
+      <button
+        key={id}
+        className="sizeButton"
+        onClick={e => setSize(size, e)}
+        value={size}
+      >
         {size}
       </button>
     );
