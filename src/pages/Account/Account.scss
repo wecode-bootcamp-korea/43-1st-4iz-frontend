@@ -43,7 +43,6 @@
       .emailId {
         width: 60%;
         padding: 0 5px;
-        // text-align: center;
         font-size: 1.5rem;
       }
 
@@ -80,11 +79,18 @@
         font-size: 1.5rem;
       }
 
+      .alert {
+        border: 1px solid red;
+      }
+
+      .noAlert {
+        border: 1px solid $black;
+      }
+
       .pwContainer {
         @include displayFlex(space-between, null, null);
         width: 100%;
         padding: 1.5rem 2rem;
-        border: 1px solid $black;
         border-radius: 1.2rem;
 
         .pw {
@@ -106,8 +112,8 @@
       .birth {
         width: 100%;
         padding: 1.5rem 2rem;
-        border: 1px solid $black;
         border-radius: 1.2rem;
+        border: 1px solid $black;
         font-size: 1.5rem;
       }
 

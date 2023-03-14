@@ -5,7 +5,9 @@ import { EMAIL, LOGIN, SIGNUP, SUCCESS, MAIL_OPTION } from './AccountList';
 import './Account.scss';
 
 const Account = () => {
+  const navigate = useNavigate();
   const [accountDataName, setAccountDataName] = useState(EMAIL);
+  const [isPwVisible, setIsPwVisible] = useState(false);
   const [userInfo, setUserInfo] = useState({
     id: '',
     pw: '',
@@ -18,7 +20,12 @@ const Account = () => {
 
   const { id, pw, name, tel, check, birthday, domain } = userInfo;
 
-  const navigate = useNavigate();
+  const pwRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,15})/;
+  const telRegExp = /^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/; // 하이픈 포함
+
+  const isNameActive = name.length > 0 || !name;
+  const isTelActive = telRegExp.test(tel) || !tel;
+  const isPwActive = pwRegExp.test(pw) || !pw;
 
   const onChangeUserInfo = e => {
     const { name, value } = e.target;
@@ -40,7 +47,9 @@ const Account = () => {
       .then(data => {
         if (!accountDataName === EMAIL) return;
         if (data.message === 'NEW_USER') {
-          setAccountDataName(SIGNUP);
+          !id || !domain
+            ? alert('이메일을 확인해주세요')
+            : setAccountDataName(SIGNUP);
         } else {
           localStorage.setItem('token', data.accessToken);
           setAccountDataName(LOGIN);
@@ -62,8 +71,14 @@ const Account = () => {
     })
       .then(response => response.json())
       .then(data => {
-        data.accessToken ? navigate('/') : alert('check pw');
+        isPwActive && data.accessToken
+          ? navigate('/')
+          : alert('비밀번호를 확인해주세요');
       });
+  };
+
+  const handlePwVisible = () => {
+    !isPwVisible ? setIsPwVisible(true) : setIsPwVisible(false);
   };
 
   const checkSignUp = e => {
@@ -83,18 +98,20 @@ const Account = () => {
     })
       .then(response => response.json())
       .then(() => {
-        const pwRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,15})/;
-        const telRegExp = /^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/; // 하이픈 포함
-
         if (accountDataName === SIGNUP) {
-          (name || tel || pw) &&
-          telRegExp.test(tel) &&
-          pwRegExp.test(pw) &&
-          check &&
-          birthday
-            ? setAccountDataName(SUCCESS)
-            : alert('입력한 내용을 다시 확인해주세요');
-        }
+          if (
+            isNameActive &&
+            isTelActive &&
+            isPwActive &&
+            name &&
+            tel &&
+            pw &&
+            telRegExp.test(tel) &&
+            pwRegExp.test(pw)
+          ) {
+            setAccountDataName(SUCCESS);
+          }
+        } else if (accountDataName === SUCCESS) navigate('/');
       });
   };
 
@@ -137,16 +154,23 @@ const Account = () => {
           </div>
         )}
         {accountDataName[0].name === 'login' && (
-          <div className="passwordContainter">
+          <div
+            className={`passwordContainter ${isPwActive ? 'noAlert' : 'alert'}`}
+          >
             <input
-              type="password"
+              type={isPwVisible ? 'text' : 'password'}
               className="password"
               placeholder="비밀번호"
               value={pw}
               name="pw"
               onChange={onChangeUserInfo}
             />
-            <i className="fa-regular fa-eye" />
+            <i
+              className={`fa-regular ${
+                isPwVisible ? 'fa-eye-slash' : 'fa-eye'
+              }`}
+              onClick={handlePwVisible}
+            />
           </div>
         )}
         {accountDataName[0].name === 'signup' && (
@@ -154,30 +178,35 @@ const Account = () => {
             <input
               type="text"
               placeholder="이름"
-              className="name"
+              className={`name ${isNameActive ? 'noAlert' : 'alert'}`}
               name="name"
               value={name}
               onChange={onChangeUserInfo}
             />
             <input
               type="tel"
-              className="phone"
+              className={`phone ${isTelActive ? 'noAlert' : 'alert'}`}
               pattern="/^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/"
               placeholder="전화번호"
               name="tel"
               value={tel}
               onChange={onChangeUserInfo}
             />
-            <div className="pwContainer">
+            <div className={`pwContainer ${isPwActive ? 'noAlert' : 'alert'}`}>
               <input
-                type="password"
+                type={isPwVisible ? 'text' : 'password'}
                 className="pw"
                 placeholder="비밀번호"
                 name="pw"
                 value={pw}
                 onChange={onChangeUserInfo}
               />
-              <i className="fa-regular fa-eye" />
+              <i
+                className={`fa-regular ${
+                  isPwVisible ? 'fa-eye-slash' : 'fa-eye'
+                }`}
+                onClick={handlePwVisible}
+              />
             </div>
             <div className="pwRules">
               <div className="pwLength">
@@ -216,37 +245,3 @@ const Account = () => {
 };
 
 export default Account;
-
-// const [id, setId] = useState('');
-// const [pw, setPw] = useState('');
-// const [name, setName] = useState('');
-// const [tel, setTel] = useState('');
-// const [check, setCheck] = useState('');
-// const [birthday, setBirthday] = useState('');
-// const [select, setSelect] = useState('');
-
-// const [accountDataName, setAccountDataName] = useState(EMAIL);
-
-// const navigate = useNavigate();
-
-// const saveUserId = e => {
-//   setId(e.target.value);
-// };
-// const saveUserPw = e => {
-//   setPw(e.target.value);
-// };
-// const saveUserName = e => {
-//   setName(e.target.value);
-// };
-// const saveUserTel = e => {
-//   setTel(e.target.value);
-// };
-// const saveChecked = e => {
-//   setCheck(e.target.checked);
-// };
-// const saveBirthday = e => {
-//   setBirthday(e.target.value);
-// };
-// const saveSelect = e => {
-//   setSelect(e.target.value);
-// };
