@@ -1,11 +1,11 @@
 @import '../../styles/variables.scss';
 
 .order {
-  @include displayFlex(null, null, column);
+  @include displayFlex(space-between, null, column);
   padding: 80px 180px 100px 200px;
 
   .buttonContainer {
-    @include displayFlex(flex-end, null, null);
+    @include displayFlex(flex-end);
     gap: 10px;
 
     .button {
@@ -32,7 +32,7 @@
   }
 
   .orderInfo {
-    @include displayFlex(space-between, null, null);
+    @include displayFlex(space-between);
 
     .orderInfoList {
       @include displayFlex(null, null, column);
@@ -60,10 +60,18 @@
               color: lightgray;
             }
           }
+
+          .alert {
+            border: 1px solid red;
+          }
+
+          .noAlert {
+            border: 1px solid $black;
+          }
         }
 
         .deliveryContact {
-          @include displayFlex(null, null, null);
+          @include displayFlex(space-between);
           gap: 10px;
 
           .phoneContainer,
@@ -93,7 +101,7 @@
         }
 
         .radioContainer {
-          @include displayFlex(null, center, null);
+          @include displayFlex(null, center);
           margin-bottom: 8px;
 
           .radioInput {
@@ -121,12 +129,13 @@
 
     .cart {
       width: 30%;
+      margin: 0;
 
       .cartTitle {
-        @include displayFlex(space-between, null, null);
+        @include displayFlex(space-between);
 
         .editCartLink {
-          @include displayFlex(null, center, null);
+          @include displayFlex(null, center);
 
           .editCartButton {
             padding: 0;
@@ -148,7 +157,7 @@
 
         .originPrice,
         .discountPrice {
-          @include displayFlex(space-between, center, null);
+          @include displayFlex(space-between, center);
           margin-bottom: 1.3rem;
           padding: 0 0.5rem;
 
@@ -163,7 +172,7 @@
         }
 
         .totalPrice {
-          @include displayFlex(space-between, center, null);
+          @include displayFlex(space-between, center);
           margin-top: 2rem;
           padding: 2rem 0.5rem;
           border-top: 1px solid $black;
