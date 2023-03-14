@@ -63,9 +63,29 @@ const ProductList = () => {
     return <option key={id}>{option}</option>;
   });
 
-  const productGrid = productData.map(({ id, img_url, name, price }) => {
-    return <ProductCard key={id} img_url={img_url} name={name} price={price} />;
-  });
+  const productGrid = productData.map(
+    ({
+      id,
+      name,
+      images,
+      price,
+      gender,
+      color_count: colorCount,
+      discount_rate: discountRate,
+    }) => {
+      return (
+        <ProductCard
+          key={id}
+          name={name}
+          images={images}
+          price={price}
+          gender={gender}
+          color_count={colorCount}
+          discount_rate={discountRate}
+        />
+      );
+    }
+  );
 
   return (
     <div className="productList">
