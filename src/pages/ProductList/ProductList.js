@@ -64,7 +64,15 @@ const ProductList = () => {
   });
 
   const productGrid = productData.map(
-    ({ id, name, images, price, gender, color_count, discount_rate }) => {
+    ({
+      id,
+      name,
+      images,
+      price,
+      gender,
+      color_count: colorCount,
+      discount_rate: discountRate,
+    }) => {
       return (
         <ProductCard
           key={id}
@@ -72,8 +80,8 @@ const ProductList = () => {
           images={images}
           price={price}
           gender={gender}
-          color_count={color_count}
-          discount_rate={discount_rate}
+          color_count={colorCount}
+          discount_rate={discountRate}
         />
       );
     }
