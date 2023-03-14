@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+
+.cartCard {
+  @include displayFlex(space-between, center, null);
+  padding: 0 1rem;
+  border-top: 1px solid $black;
+
+  .cartInfo {
+    margin: 1.3rem 0;
+
+    .selectedOption {
+      font-size: 1.3rem;
+    }
+  }
+  .addCart {
+    @include displayFlex(flex-start, center, null);
+
+    .count {
+      @include displayFlex(flex-start, center, null);
+      border: 1px solid $black;
+      border-radius: 5px;
+
+      button {
+        display: inline-block;
+        background-color: white;
+        border: none;
+        padding: 0 1.2rem;
+      }
+
+      .countInputText {
+        padding: 0.25rem 1.2rem;
+        border-left: 1px solid $black;
+        border-right: 1px solid $black;
+      }
+    }
+
+    .selectedPrice {
+      margin: 0 2rem;
+    }
+  }
+}
