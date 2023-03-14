@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.detailInfo {
+  border-top: 1px solid $black;
+  padding: 2rem 0.8rem;
+
+  .detailInfoTitle {
+    @include displayFlex(space-between, center);
+    margin-bottom: 2rem;
+
+    h4 {
+      font-size: 1.7rem;
+    }
+
+    i {
+      font-size: 1.7rem;
+    }
+  }
+
+  .detailInfoList {
+    list-style: disc;
+    margin: 1rem 0 0 2rem;
+  }
+}
