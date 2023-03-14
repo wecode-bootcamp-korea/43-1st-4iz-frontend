@@ -13,53 +13,50 @@ const Account = () => {
     tel: '',
     check: '',
     birthday: '',
-    select: '',
+    domain: '',
   });
 
-  const { id, pw, name, tel, check, birthday, select } = userInfo;
+  const { id, pw, name, tel, check, birthday, domain } = userInfo;
 
   const navigate = useNavigate();
 
   const onChangeUserInfo = e => {
-    console.log(userInfo);
-
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
 
-  const duplicateTest = e => {
+  const checkDuplicate = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.181:3000/users/duplicate', {
+    fetch('http://10.58.52.223:3000/users/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: `${id}@${select}`,
+        email: `${id}@${domain}`,
       }),
     })
       .then(response => response.json())
       .then(data => {
         if (!accountDataName === EMAIL) return;
-
         if (data.message === 'NEW_USER') {
           setAccountDataName(SIGNUP);
-        } else if (data.message === 'EXISTING_USER') {
+        } else {
           localStorage.setItem('token', data.accessToken);
           setAccountDataName(LOGIN);
-        } else alert('fail');
+        }
       });
   };
 
-  const signInTest = e => {
+  const checkSignIn = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.181:3000/users/signin', {
+    fetch('http://10.58.52.223:3000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: `${id}@${select}`,
+        email: `${id}@${domain}`,
         password: pw,
       }),
     })
@@ -69,15 +66,15 @@ const Account = () => {
       });
   };
 
-  const signUpTest = e => {
+  const checkSignUp = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.181:3000/users/signup', {
+    fetch('http://10.58.52.223:3000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: `${id}@${select}`,
+        email: `${id}@${domain}`,
         password: pw,
         name: name,
         phoneNumber: tel,
@@ -103,11 +100,11 @@ const Account = () => {
 
   const handleAccountTest = () => {
     if (accountDataName[0].name === 'email') {
-      duplicateTest();
+      checkDuplicate();
     } else if (accountDataName[0].name === 'login') {
-      signInTest();
+      checkSignIn();
     } else {
-      signUpTest();
+      checkSignUp();
     }
   };
 
@@ -127,11 +124,14 @@ const Account = () => {
               name="id"
             />
             <span>@</span>
-            <select className="emailAdress" onChange={onChangeUserInfo}>
+            <select
+              className="emailAdress"
+              value={domain}
+              onChange={onChangeUserInfo}
+              name="domain"
+            >
               {MAIL_OPTION.map(({ id, domain }) => (
-                <option key={id} value={userInfo[select]}>
-                  {domain}
-                </option>
+                <option key={id}>{domain}</option>
               ))}
             </select>
           </div>
@@ -143,6 +143,7 @@ const Account = () => {
               className="password"
               placeholder="비밀번호"
               value={pw}
+              name="pw"
               onChange={onChangeUserInfo}
             />
             <i className="fa-regular fa-eye" />
@@ -154,6 +155,7 @@ const Account = () => {
               type="text"
               placeholder="이름"
               className="name"
+              name="name"
               value={name}
               onChange={onChangeUserInfo}
             />
@@ -162,6 +164,7 @@ const Account = () => {
               className="phone"
               pattern="/^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/"
               placeholder="전화번호"
+              name="tel"
               value={tel}
               onChange={onChangeUserInfo}
             />
@@ -170,6 +173,7 @@ const Account = () => {
                 type="password"
                 className="pw"
                 placeholder="비밀번호"
+                name="pw"
                 value={pw}
                 onChange={onChangeUserInfo}
               />
@@ -188,6 +192,7 @@ const Account = () => {
             <input
               type="date"
               className="birth"
+              name="birthday"
               value={birthday}
               onChange={onChangeUserInfo}
             />

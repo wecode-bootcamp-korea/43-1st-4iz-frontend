@@ -11,7 +11,7 @@ import Cart from '../src/pages/Cart/Cart';
 import Order from '../src/pages/Order/Order';
 import Email from '../src/pages/Email/Email';
 import Login from '../src/pages/Login/Login';
-import Signup from '../src/pages/Signup/Signup';
+import Signup from './pages/Signup/Signup';
 import Account from '../src/pages/Account/Account';
 import Authentication from '../src/pages/Authentication/Authentication';
 
