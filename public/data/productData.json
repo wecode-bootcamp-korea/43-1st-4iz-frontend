@@ -1,23 +1,70 @@
 {
-  "id": 1,
+  "id": 2,
   "name": "나이키 에어 포스 107",
   "price": "169000.000",
   "description": "빛이 그대로 살아 있는 나이키 에어 포스 1 ’07은 OG 농구화로서 많은 사랑을 받아온 디자인에 새로운 멋을 더했습니다. 튼튼하게 스티치 처리된 오버레이와 깔끔한 마감 처리, 과하지 않은 딱 절제된 화려함으로 빛나는 존재감을 발휘해 보세요.",
   "discounted_price": "30000.0000000",
-  "gender": "남성",
+  "gender": "여성",
   "new": "신상품",
-  "color_count": "1",
-  "color": ["gray", "black", "green"],
-  "size": ["220", "230", "240"],
-  "discount_rate": 50,
-  "release_date": "2023-03-05",
+  "discount_rate": 10,
+  "release_date": "2019-03-02",
   "images": [
-    "/images/airforce_1.jpg",
-    "/images/airforce_2.jpg",
-    "/images/airforce_3.jpg",
-    "/images/airforce_4.jpg",
-    "/images/airforce_1.jpg",
-    "/images/airforce_2.jpg"
+    "images/airforce_1.jpg",
+    "images/airforce_2.jpg",
+    "images/airforce_3.jpg",
+    "images/airforce_4.jpg",
+    "images/airforce_1.jpg",
+    "images/airforce_2.jpg"
   ],
-  "categories": ["카테고리8", "카테고리9", "카테고리10"]
+  "categories": ["카테고리3"],
+  "options": [
+    {
+      "size": "220",
+      "color": "gray"
+    },
+    {
+      "size": "220",
+      "color": "black"
+    },
+    {
+      "size": "220",
+      "color": "green"
+    },
+    {
+      "size": "225",
+      "color": "gray"
+    },
+    {
+      "size": "225",
+      "color": "black"
+    },
+    {
+      "size": "225",
+      "color": "green"
+    },
+    {
+      "size": "230",
+      "color": "gray"
+    },
+    {
+      "size": "230",
+      "color": "black"
+    },
+    {
+      "size": "230",
+      "color": "green"
+    },
+    {
+      "size": "235",
+      "color": "gray"
+    },
+    {
+      "size": "235",
+      "color": "black"
+    },
+    {
+      "size": "235",
+      "color": "green"
+    }
+  ]
 }
