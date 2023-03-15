@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import {
   SUBMENU_LIST,
   GENDER_LIST,
@@ -13,7 +13,15 @@ import './ProductList.scss';
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [sort, setSort] = useState(searchParams.get('sort'));
+  const location = useLocation();
+  const url = location.search;
+
+  // TODO: filter 백엔드 통신 코드입니다.
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.223:3000/products/list${url}`)
+  //     .then(response => response.json())
+  //     .then(data => setProductData(data));
+  // }, [url]);
 
   const setCategory = value => e => {
     if (e.target.value) {
@@ -88,15 +96,6 @@ const ProductList = () => {
         setProductData(data);
       });
   }, []);
-
-  // const handleChangeSort = e => {
-  //   setSort(e.target.value);
-  // };
-
-  // useEffect(() => {
-  //   searchParams.set('sort', sort);
-  //   setSearchParams(searchParams);
-  // }, [searchParams, setSearchParams, sort]);
 
   const SUBMENU = SUBMENU_LIST.map(({ id, title }) => {
     return (
