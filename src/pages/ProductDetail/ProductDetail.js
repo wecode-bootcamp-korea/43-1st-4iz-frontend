@@ -8,7 +8,7 @@ import './ProductDetail.scss';
 const ProductDetail = () => {
   const navigate = useNavigate();
 
-  const [dataList, setDataList] = useState({});
+  const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState('');
   const [optionList, setOptionList] = useState([]);
@@ -17,12 +17,12 @@ const ProductDetail = () => {
   const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
-    fetch('./data/productData.json')
+    fetch('http://10.58.52.223:3000/products/3')
       .then(res => res.json())
-      .then(data => {
-        setDataList(data);
+      .then(datas => {
+        setDataList(datas.data[0]);
         setLoading(false);
-        setImageSrc(`${data.images[0]}`);
+        setImageSrc(`${datas.data[0].images[0]}`);
       });
   }, []);
 
@@ -97,15 +97,14 @@ const ProductDetail = () => {
   };
 
   const goToCart = e => {
-    fetch('./data/cartList.json', {
+    fetch('http://10.58.52.223:3000/carts/3', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        size: selectedOption.size,
-        color: selectedOption.color,
-        id: dataList.id,
+        size: optionList.size,
+        color: optionList.color,
       }),
     })
       .then(response => response.json())
