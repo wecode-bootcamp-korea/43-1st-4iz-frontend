@@ -14,8 +14,9 @@ const Main = () => {
 
   return (
     <div className="main">
+      <img src="/images/mainbg1.png" className="mainBg" />
       <div className="mainBox">
-        <video
+        {/* <video
           src="/videos/mainVid.mp4"
           ref={video}
           onPlay={handleVideoFaster}
@@ -23,7 +24,7 @@ const Main = () => {
           muted
           loop
           playsinline
-        />
+        /> */}
         <div className="mainVidDescription">
           <h6 className="descriptionSubtitle">에어맥스 with 지올팍</h6>
           <h2 className="descriptionTitle">시대를 초월한 에어맥스</h2>
@@ -37,8 +38,8 @@ const Main = () => {
             <Button className="button" text="구매하기" />
           </Link>
         </div>
-        <img className="mainImg" alt="mainImg" src="/images/main.png" />
-        <div className="mainVidDescription">
+        {/* <img className="mainImg" alt="mainImg" src="/images/main.png" /> */}
+        {/* <div className="mainVidDescription">
           <h2 className="descriptionTitle">A FEEL FOR EVERY YOU</h2>
           <p className="descriptionText">
             몸과 마음이 좋아하는 나만의 다양한 움직임을 시작해보세요.
@@ -58,7 +59,7 @@ const Main = () => {
               <Button className="button" text="구매하기" />
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
