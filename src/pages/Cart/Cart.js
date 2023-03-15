@@ -4,15 +4,15 @@ import CartCard from '../../components/CartCard/CartCard';
 import './Cart.scss';
 
 const Cart = () => {
-  const [dataList, setDataList] = useState({});
+  const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [optionList, setOptionList] = useState([]);
 
   useEffect(() => {
     fetch('./data/productData.json')
       .then(res => res.json())
-      .then(data => {
-        setDataList(data);
+      .then(datas => {
+        setDataList(datas.data);
         setLoading(false);
       });
   }, []);
@@ -20,16 +20,18 @@ const Cart = () => {
   if (loading) return <>Loading.... </>;
 
   // TODO : Delete 이벤트 통신 시 연결 시킬 함수
-  // const deleteCartList = e => {
-  //   fetch('http://10.58.52.223:3000/users/signin', {
+  // const deleteCartList = id => {
+  //   setItemId(prevcartList => prevcartList.filter(dataList.id !== id));
+  //   console.log(itemId);
+  //   fetch('', {
   //     method: 'DELETE',
   //     headers: {
   //       'Content-Type': 'application/json;charset=utf-8',
   //     },
-  //     body: JSON.stringify({}),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {});
+  //     body: JSON.stringify({
+  //       id: itemId,
+  //     }),
+  //   });
   // };
 
   const increaseQuantity = id => e => {
@@ -105,7 +107,11 @@ const Cart = () => {
                     color={cart.color}
                     size={cart.size}
                     quantity={cart.quantity}
-                    actions={{ increaseQuantity, decreaseQuantity }}
+                    itemId={cart.id}
+                    actions={{
+                      increaseQuantity,
+                      decreaseQuantity,
+                    }}
                   />
                 </div>
               );
