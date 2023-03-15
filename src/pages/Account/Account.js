@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { EMAIL, LOGIN, SIGNUP, SUCCESS, MAIL_OPTION } from './AccountList';
 import './Account.scss';
+import pwRegExp from '../../Util/regex';
+import telRegExp from '../../Util/regex';
 
 const Account = () => {
   const navigate = useNavigate();
@@ -19,9 +21,6 @@ const Account = () => {
   });
 
   const { id, pw, name, tel, check, birthday, domain } = userInfo;
-
-  const pwRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,15})/;
-  const telRegExp = /^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/; // 하이픈 포함
 
   const isNameActive = name.length > 0 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;
