@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { EMAIL, LOGIN, SIGNUP, SUCCESS, MAIL_OPTION } from './AccountList';
+import { pwRegExp, telRegExp } from '../../Util/regex';
 import './Account.scss';
-import pwRegExp from '../../Util/regex';
-import telRegExp from '../../Util/regex';
 
 const Account = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const Account = () => {
     domain: '',
   });
 
-  const { id, pw, name, tel, check, birthday, domain } = userInfo;
+  const { id, pw, name, tel, birthday, domain } = userInfo;
 
   const isNameActive = name.length > 0 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;

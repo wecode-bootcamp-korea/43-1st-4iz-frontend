@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { emailRegExp, telRegExp } from '../../Util/regex';
 import Button from '../../components/Button/Button';
 import './Order.scss';
 
@@ -12,9 +13,6 @@ const USER_INFO = {
 };
 
 const Order = () => {
-  const telRegExp = /^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/; // 하이픈 포함
-  const emailRegExp = /^0-9a-zA-Z*/; // 이메일 정규식
-
   const [userInfo, setUserInfo] = useState(USER_INFO);
 
   const { name, tel, address, detailAddress, email } = userInfo;
@@ -187,18 +185,7 @@ const Order = () => {
               <button className="editCartButton">편집</button>
             </Link>
           </div>
-          {/* <div className="cartDetail">
-            <div className="cartDetailTitle table">
-              <span className="cartDetailText productPrice">상품 금액</span>
-              <span className="cartDetailText discountPrice">할인된 금액</span>
-              <span className="cartDetailText totalPrice">총 결제 금액</span>
-            </div>
-            <div className="cartDetailPrice table">
-              <span className="cartDetailText productPrice">472,600 원</span>
-              <span className="cartDetailText discountPrice">- 2000 원</span>
-              <span className="cartDetailText totalPrice">470,600 원</span>
-            </div>
-          </div> */}
+
           <section className="orderList">
             <dl className="originPrice">
               <dt>상품 금액</dt>
