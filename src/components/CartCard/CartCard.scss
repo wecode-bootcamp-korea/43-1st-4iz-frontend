@@ -7,6 +7,7 @@
 
   .cartInfo {
     margin: 1.3rem 0;
+    width: 50%;
 
     .selectedOption {
       font-size: 1.3rem;
@@ -14,6 +15,7 @@
   }
   .addCart {
     @include displayFlex(flex-start, center, null);
+    margin: 1.3rem 0;
 
     .count {
       @include displayFlex(flex-start, center, null);
@@ -28,14 +30,18 @@
       }
 
       .countInputText {
-        padding: 0.25rem 1.2rem;
+        width: 4rem;
+        padding: 0.25rem 0;
         border-left: 1px solid $black;
         border-right: 1px solid $black;
+        text-align: center;
       }
     }
 
     .selectedPrice {
+      width: 10rem;
       margin: 0 2rem;
+      text-align: right;
     }
   }
 }

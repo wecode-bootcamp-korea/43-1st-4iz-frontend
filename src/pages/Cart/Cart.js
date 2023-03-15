@@ -1,9 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import CartCard from '../../components/CartCard/CartCard';
 import './Cart.scss';
 
 const Cart = () => {
+  const [dataList, setDataList] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [optionList, setOptionList] = useState([]);
+
+  useEffect(() => {
+    fetch('./data/productData.json')
+      .then(res => res.json())
+      .then(data => {
+        setDataList(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <>Loading.... </>;
+
+  // TODO : Delete 이벤트 통신 시 연결 시킬 함수
+  // const deleteCartList = e => {
+  //   fetch('http://10.58.52.223:3000/users/signin', {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //     },
+  //     body: JSON.stringify({}),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {});
+  // };
+
+  const increaseQuantity = id => e => {
+    const next = optionList.map(optionDataList => {
+      if (optionDataList.id === id) {
+        return { ...optionDataList, quantity: optionDataList.quantity + 1 };
+      } else {
+        return optionDataList;
+      }
+    });
+    setOptionList(next);
+  };
+
+  const decreaseQuantity = id => e => {
+    const next = optionList.map(option => {
+      if (option.id === id) {
+        return { ...option, quantity: option.quantity - 1 };
+      } else {
+        return option;
+      }
+    });
+
+    setOptionList(next);
+  };
+
+  const totalPrice = dataList.reduce(
+    (acc, { price_sum, discounted_price_sum, quantity }) =>
+      acc + (price_sum - discounted_price_sum) * quantity,
+    0
+  );
+
+  const originPrice = dataList.reduce(
+    (acc, { price_sum, quantity }) => acc + price_sum * quantity,
+    0
+  );
+
+  const discountPrice = dataList.reduce(
+    (acc, { discounted_price_sum, quantity }) =>
+      acc + discounted_price_sum * quantity,
+    0
+  );
+
   return (
     <div className="cart">
       <main className="cartContainter">
@@ -25,24 +93,40 @@ const Cart = () => {
           <section className="cartContainer">
             <h3>장바구니</h3>
             {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
+            {dataList.map(cart => {
+              return (
+                <div className="imgCartCard" key={cart.id}>
+                  <div className="imgContainer">
+                    <img src={`${cart.images[0]}`} alt={`${cart.id}`} />
+                  </div>
+                  <CartCard
+                    name={cart.name}
+                    price={cart.price_sum}
+                    color={cart.color}
+                    size={cart.size}
+                    quantity={cart.quantity}
+                    actions={{ increaseQuantity, decreaseQuantity }}
+                  />
+                </div>
+              );
+            })}
           </section>
         </div>
         <section className="orderList">
           <h3>주문 내역</h3>
           <dl className="originPrice">
             <dt>상품 금액</dt>
-            <dd>472,600 원</dd>
+            <dd>{originPrice.toLocaleString()} 원</dd>
           </dl>
           <dl className="discountPrice">
             <dt>할인 금액</dt>
-            <dd>- 2000 원</dd>
+            <dd>-{discountPrice.toLocaleString()} 원</dd>
           </dl>
           <dl className="totalPrice">
             <dt>총 결제 금액</dt>
-            <dd>470,600 원</dd>
+            <dd>{totalPrice.toLocaleString()} 원</dd>
           </dl>
           <Button text="결제하기" />
-          {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
         </section>
       </main>
     </div>
