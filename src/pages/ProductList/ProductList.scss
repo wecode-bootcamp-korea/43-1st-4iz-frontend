@@ -154,14 +154,6 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
             margin-top: 6px;
             margin-left: 16px;
             z-index: -1;
-
-            & {
-              -ms-user-select: none;
-              -moz-user-select: -moz-none;
-              -khtml-user-select: none;
-              -webkit-user-select: none;
-              user-select: none;
-            }
           }
         }
       }

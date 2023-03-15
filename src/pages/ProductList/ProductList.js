@@ -178,8 +178,6 @@ const ProductList = () => {
     }
   );
 
-  // FIXME: filter test
-
   return (
     <div className="productList">
       <div className="productListContainer">
