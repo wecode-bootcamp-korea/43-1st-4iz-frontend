@@ -96,6 +96,31 @@ const ProductDetail = () => {
     setImageSrc(e.target.value);
   };
 
+  const goToCart = e => {
+    fetch('./data/cartList.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        size: selectedOption.size,
+        color: selectedOption.color,
+        id: dataList.id,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        navigate('/cart');
+      });
+
+    // TODO : then에 추가 될 이벤트
+    // if ((selectedOption.size && selectedOption.color) == null) {
+    //   alert('옵션을 선택해주세요');
+    // } else {
+    //   navigate('/cart');
+    // }
+  };
+
   return (
     <main className="productDetail">
       <aside className="productImageContainer">
@@ -160,11 +185,7 @@ const ProductDetail = () => {
               </button>
             ))}
           </div>
-          <div
-            onClick={() => {
-              navigate('/cart');
-            }}
-          >
+          <div onClick={goToCart}>
             <Button text="장바구니" />
           </div>
         </div>
