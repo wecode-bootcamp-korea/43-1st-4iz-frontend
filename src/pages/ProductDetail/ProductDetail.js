@@ -17,7 +17,7 @@ const ProductDetail = () => {
   const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
-    fetch('http://10.58.52.223:3000/products/3')
+    fetch('/data/productData.json')
       .then(res => res.json())
       .then(datas => {
         setDataList(datas.data[0]);
@@ -73,7 +73,6 @@ const ProductDetail = () => {
           id: optionList.length + 1,
         },
       ]);
-
       clearSelectedOption();
     } else {
       setSelectedOption({ ...selectedOption, color });
@@ -97,27 +96,28 @@ const ProductDetail = () => {
   };
 
   const goToCart = e => {
+    let token = localStorage.getItem('token');
+
     fetch('http://10.58.52.223:3000/carts/3', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
       },
       body: JSON.stringify({
-        size: optionList.size,
-        color: optionList.color,
+        id: dataList.id,
+        color: optionList.forEach(e => e.color),
+        size: optionList.forEach(e => e.size),
       }),
     })
       .then(response => response.json())
       .then(data => {
-        navigate('/cart');
+        if ('message' === 'KEY_ERROR') {
+          alert('옵션을 선택해주세요');
+        } else {
+          navigate('/cart');
+        }
       });
-
-    // TODO : then에 추가 될 이벤트
-    // if ((selectedOption.size && selectedOption.color) == null) {
-    //   alert('옵션을 선택해주세요');
-    // } else {
-    //   navigate('/cart');
-    // }
   };
 
   return (
@@ -193,6 +193,7 @@ const ProductDetail = () => {
             <CartCard
               key={option.id}
               {...option}
+              person
               name={dataList.name}
               price={dataList.price}
               actions={{ increaseQuantity, decreaseQuantity }}
@@ -209,7 +210,7 @@ const ProductDetail = () => {
 
 export default ProductDetail;
 
-const INIT_OPTION = { size: '', color: '', quantity: 1 };
+const INIT_OPTION = { quantity: 1, color: '', size: '' };
 
 const COLOR_CHART = [];
 const SIZE_CHART = [];

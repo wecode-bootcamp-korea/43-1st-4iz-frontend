@@ -49,7 +49,6 @@ const Account = () => {
             ? alert('이메일을 확인해주세요')
             : setAccountDataName(SIGNUP);
         } else {
-          localStorage.setItem('token', data.accessToken);
           setAccountDataName(LOGIN);
         }
       });
@@ -69,9 +68,12 @@ const Account = () => {
     })
       .then(response => response.json())
       .then(data => {
-        isPwActive && data.accessToken
-          ? navigate('/')
-          : alert('비밀번호를 확인해주세요');
+        if (data.accessToken) {
+          localStorage.setItem('token', data.accessToken);
+          navigate('/');
+        } else {
+          alert('다시 한번 확인해주세요');
+        }
       });
   };
 
