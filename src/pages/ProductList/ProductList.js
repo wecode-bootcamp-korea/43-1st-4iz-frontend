@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import {
   SUBMENU_LIST,
   GENDER_LIST,
@@ -12,11 +12,26 @@ import './ProductList.scss';
 
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
-
   const [searchParams, setSearchParams] = useSearchParams();
   // const [sort, setSort] = useState(searchParams.get('sort'));
 
-  const setGender = (value, e) => {
+  const setCategory = value => e => {
+    if (e.target.value) {
+      searchParams.append('category', value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('category');
+      searchParams.delete('category');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('category', value);
+        });
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setGender = value => e => {
     if (e.target.checked) {
       searchParams.append('gender', value);
       setSearchParams(searchParams);
@@ -32,26 +47,8 @@ const ProductList = () => {
     }
   };
 
-  const setSize = (value, e) => {
-    if (e.target.value) {
-      searchParams.append('size', value);
-      setSearchParams(searchParams);
-    } else {
-      const search = searchParams.getAll('size');
-      searchParams.delete('size');
-      search
-        .filter(list => list !== value)
-        .forEach(value => {
-          searchParams.append('size', value);
-        });
-      setSearchParams(searchParams);
-    }
-  };
-
-  const setColor = (value, e) => {
-    console.log(e.target.value);
-
-    if (e.target.value) {
+  const setColor = value => e => {
+    if (e.target.checked) {
       searchParams.append('color', value);
       setSearchParams(searchParams);
     } else {
@@ -61,6 +58,22 @@ const ProductList = () => {
         .filter(list => list !== value)
         .forEach(value => {
           searchParams.append('color', value);
+        });
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setSize = value => e => {
+    if (e.target.checked) {
+      searchParams.append('size', value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('size');
+      searchParams.delete('size');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('size', value);
         });
       setSearchParams(searchParams);
     }
@@ -87,9 +100,14 @@ const ProductList = () => {
 
   const SUBMENU = SUBMENU_LIST.map(({ id, title }) => {
     return (
-      <Link to="/productList" key={id}>
-        <li className="categoryMenu">{title}</li>
-      </Link>
+      <button
+        key={id}
+        className="categoryMenu"
+        value={title}
+        onClick={setCategory(title)}
+      >
+        {title}
+      </button>
     );
   });
 
@@ -100,10 +118,10 @@ const ProductList = () => {
           id={id}
           className="checkbox"
           type="checkbox"
-          onChange={e => setGender(gender, e)}
+          onChange={setGender(gender)}
         />
         <i className="fa-solid fa-check" />
-        <label for={id} className="checkboxText">
+        <label htmlFor={id} className="checkboxText">
           {gender}
         </label>
       </dd>
@@ -113,10 +131,11 @@ const ProductList = () => {
   const COLOR = COLOR_LIST.map(({ id, name }) => {
     return (
       <div key={id} className="colorButtonContainer">
-        <button
-          className={`colorButton ${name}`}
-          onClick={e => setColor(name, e)}
+        <input
+          type="checkbox"
+          className="colorButton"
           value={name}
+          onClick={setColor(name)}
         />
       </div>
     );
@@ -124,14 +143,10 @@ const ProductList = () => {
 
   const SIZE = SIZE_LIST.map(({ id, size }) => {
     return (
-      <button
-        key={id}
-        className="sizeButton"
-        onClick={e => setSize(size, e)}
-        value={size}
-      >
-        {size}
-      </button>
+      <div key={id} className="sizeButtonContainer" onClick={setSize(size)}>
+        <input className="sizeButton" type="checkbox" value={size} />
+        <span className="sizeButtonText">{size}</span>
+      </div>
     );
   });
 
