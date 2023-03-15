@@ -16,12 +16,18 @@ const ProductList = () => {
   // const [sort, setSort] = useState(searchParams.get('sort'));
 
   const setCategory = value => e => {
-    if (!searchParams.has('category')) {
-      searchParams.append('category', value);
+    if (e.target.value) {
+      searchParams.set('category', value);
       setSearchParams(searchParams);
     } else {
-      console.log('im called!!');
-      console.log('sp ::: ', searchParams);
+      const search = searchParams.getAll('category');
+      searchParams.delete('category');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('category', value);
+        });
+      setSearchParams(searchParams);
     }
   };
 
