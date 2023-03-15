@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { EMAIL, LOGIN, SIGNUP, SUCCESS, MAIL_OPTION } from './AccountList';
+import { pwRegExp, telRegExp } from '../../Util/regex';
 import './Account.scss';
 
 const Account = () => {
@@ -18,10 +19,7 @@ const Account = () => {
     domain: '',
   });
 
-  const { id, pw, name, tel, check, birthday, domain } = userInfo;
-
-  const pwRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,15})/;
-  const telRegExp = /^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/; // 하이픈 포함
+  const { id, pw, name, tel, birthday, domain } = userInfo;
 
   const isNameActive = name.length > 0 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;
