@@ -9,6 +9,7 @@ import ProductList from '../src/pages/ProductList/ProductList';
 import ProductDetail from '../src/pages/ProductDetail/ProductDetail';
 import Cart from '../src/pages/Cart/Cart';
 import Order from '../src/pages/Order/Order';
+import Account from '../src/pages/Account/Account';
 
 const Router = () => {
   return (
@@ -20,7 +21,7 @@ const Router = () => {
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/order" element={<Order />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
       <Footer />
     </BrowserRouter>

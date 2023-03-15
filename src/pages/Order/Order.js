@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { emailRegExp, telRegExp } from '../../Util/regex';
 import Button from '../../components/Button/Button';
 import './Order.scss';
 
+const USER_INFO = {
+  name: '',
+  address: '',
+  detailAddress: '',
+  tel: '',
+  email: '',
+};
+
 const Order = () => {
+  const [userInfo, setUserInfo] = useState(USER_INFO);
+
+  const { name, tel, address, detailAddress, email } = userInfo;
+
+  const isEmailActive = emailRegExp.test(email) || !email;
+  const isNameActive = name.length > 3 || !name;
+  const isTelActive = telRegExp.test(tel) || !tel;
+  const isAddressActive = address.length > 10 || !address;
+  const isdDtailAddressActive = detailAddress.length > 10 || !detailAddress;
+
+  const onChangeUserInfo = e => {
+    const { name, value } = e.target;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
+
   return (
     <div className="order">
       <h3 className="orderTitle">결제하기</h3>
@@ -18,7 +42,11 @@ const Order = () => {
                 <input
                   type="text"
                   placeholder="이름"
-                  className="deliveryInput"
+                  name="name"
+                  onChange={onChangeUserInfo}
+                  className={`deliveryInput ${
+                    isNameActive ? 'noAlert' : 'alert'
+                  }`}
                   required
                 />
               </div>
@@ -27,7 +55,11 @@ const Order = () => {
                 <input
                   type="text"
                   placeholder="도로명주소"
-                  className="deliveryInput"
+                  name="address"
+                  onChange={onChangeUserInfo}
+                  className={`deliveryInput ${
+                    isAddressActive ? 'noAlert' : 'alert'
+                  }`}
                   required
                 />
               </div>
@@ -36,7 +68,11 @@ const Order = () => {
                 <input
                   type="text"
                   placeholder="상세주소"
-                  className="deliveryInput"
+                  name="detailAddress"
+                  onChange={onChangeUserInfo}
+                  className={`deliveryInput ${
+                    isdDtailAddressActive ? 'noAlert' : 'alert'
+                  }`}
                   required
                 />
               </div>
@@ -46,7 +82,11 @@ const Order = () => {
                   <input
                     type="tel"
                     placeholder="휴대폰번호"
-                    className="deliveryInput"
+                    name="tel"
+                    onChange={onChangeUserInfo}
+                    className={`deliveryInput ${
+                      isTelActive ? 'noAlert' : 'alert'
+                    }`}
                     required
                   />
                 </div>
@@ -55,7 +95,11 @@ const Order = () => {
                   <input
                     type="email"
                     placeholder="이메일"
-                    className="deliveryInput"
+                    name="email"
+                    onChange={onChangeUserInfo}
+                    className={`deliveryInput ${
+                      isEmailActive ? 'noAlert' : 'alert'
+                    }`}
                     required
                   />
                 </div>
@@ -76,7 +120,7 @@ const Order = () => {
                   name="payment"
                   className="radioInput"
                 />
-                <label for="kakaopay" className="label">
+                <label htmlFor="kakaopay" className="label">
                   카카오페이
                 </label>
               </div>
@@ -87,7 +131,7 @@ const Order = () => {
                   name="payment"
                   className="radioInput"
                 />
-                <label for="card" className="label">
+                <label htmlFor="card" className="label">
                   신용카드
                 </label>
               </div>
@@ -98,7 +142,7 @@ const Order = () => {
                   name="payment"
                   className="radioInput"
                 />
-                <label for="naverpay" className="label">
+                <label htmlFor="naverpay" className="label">
                   네이버페이
                 </label>
               </div>
@@ -109,7 +153,7 @@ const Order = () => {
                   name="payment"
                   className="radioInput"
                 />
-                <label for="payco" className="label">
+                <label htmlFor="payco" className="label">
                   페이코
                 </label>
               </div>
@@ -120,7 +164,7 @@ const Order = () => {
                   name="payment"
                   className="radioInput"
                 />
-                <label for="banking" className="label">
+                <label htmlFor="banking" className="label">
                   계좌이체
                 </label>
               </div>
@@ -141,18 +185,7 @@ const Order = () => {
               <button className="editCartButton">편집</button>
             </Link>
           </div>
-          {/* <div className="cartDetail">
-            <div className="cartDetailTitle table">
-              <span className="cartDetailText productPrice">상품 금액</span>
-              <span className="cartDetailText discountPrice">할인된 금액</span>
-              <span className="cartDetailText totalPrice">총 결제 금액</span>
-            </div>
-            <div className="cartDetailPrice table">
-              <span className="cartDetailText productPrice">472,600 원</span>
-              <span className="cartDetailText discountPrice">- 2000 원</span>
-              <span className="cartDetailText totalPrice">470,600 원</span>
-            </div>
-          </div> */}
+
           <section className="orderList">
             <dl className="originPrice">
               <dt>상품 금액</dt>
