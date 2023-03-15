@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import CartCard from '../../components/CartCard/CartCard';
 import DetailInfo from '../../components/Detailnfo/DetailInfo';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
+  const navigate = useNavigate();
+
   const [dataList, setDataList] = useState({});
   const [loading, setLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState('');
-  const optionList2 = [];
-  const [optionList, setOptionList] = useState(optionList2);
+  const [optionList, setOptionList] = useState([]);
   const [selectedOption, setSelectedOption] = useState(INIT_OPTION);
 
-  const clearSelectedOption = () => setSelectedOption({ size: '', color: '' });
+  const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
     fetch('./data/productData.json')
@@ -26,9 +28,9 @@ const ProductDetail = () => {
 
   if (loading) return <>Loading.... </>;
 
-  const option = Object.values(dataList.options);
+  const optionDataList = Object.values(dataList.options);
 
-  for (const value of option) {
+  for (const value of optionDataList) {
     if (!COLOR_CHART.includes(value.color)) {
       COLOR_CHART.push(value.color);
     }
@@ -38,21 +40,52 @@ const ProductDetail = () => {
     }
   }
 
+  const increaseQuantity = id => e => {
+    const next = optionList.map(optionDataList => {
+      if (optionDataList.id === id) {
+        return { ...optionDataList, quantity: optionDataList.quantity + 1 };
+      } else {
+        return optionDataList;
+      }
+    });
+    setOptionList(next);
+  };
+
+  const decreaseQuantity = id => e => {
+    const next = optionList.map(option => {
+      if (option.id === id) {
+        return { ...option, quantity: option.quantity - 1 };
+      } else {
+        return option;
+      }
+    });
+
+    setOptionList(next);
+  };
+
   const onClickColorPicker = color => {
     if (selectedOption.size) {
-      setOptionList([...optionList, { ...selectedOption, color }]);
-      console.log(selectedOption);
+      setOptionList([
+        ...optionList,
+        {
+          ...selectedOption,
+          color,
+          id: optionList.length + 1,
+        },
+      ]);
 
       clearSelectedOption();
     } else {
       setSelectedOption({ ...selectedOption, color });
-      console.log(optionList);
     }
   };
 
   const onClickSizeButton = size => {
     if (selectedOption.color) {
-      setOptionList([...optionList, { ...selectedOption, size }]);
+      setOptionList([
+        ...optionList,
+        { ...selectedOption, size, id: optionList.length + 1 },
+      ]);
       clearSelectedOption();
     } else {
       setSelectedOption({ ...selectedOption, size });
@@ -101,7 +134,7 @@ const ProductDetail = () => {
             return (
               <button
                 key={i}
-                onClick={color => {
+                onClick={() => {
                   onClickColorPicker(color);
                 }}
                 type="button"
@@ -119,7 +152,7 @@ const ProductDetail = () => {
             {SIZE_CHART.map((size, i) => (
               <button
                 key={`${size}${i}`}
-                onClick={size => {
+                onClick={() => {
                   onClickSizeButton(size);
                 }}
               >
@@ -127,17 +160,25 @@ const ProductDetail = () => {
               </button>
             ))}
           </div>
-          <Button text="장바구니" />
+          <div
+            onClick={() => {
+              navigate('/cart');
+            }}
+          >
+            <Button text="장바구니" />
+          </div>
         </div>
-        {optionList.map(option => (
-          <CartCard
-            key={dataList.name}
-            name={dataList.name}
-            color={selectedOption.color}
-            size={selectedOption.size}
-            price={dataList.price}
-          />
-        ))}
+        {optionList.map(option => {
+          return (
+            <CartCard
+              key={option.id}
+              {...option}
+              name={dataList.name}
+              price={dataList.price}
+              actions={{ increaseQuantity, decreaseQuantity }}
+            />
+          );
+        })}
         {PRODUCT_INFORMATION_INFO.map(info => {
           return <DetailInfo key={info.id} info={info} />;
         })}
@@ -148,7 +189,7 @@ const ProductDetail = () => {
 
 export default ProductDetail;
 
-const INIT_OPTION = { size: '', color: '' };
+const INIT_OPTION = { size: '', color: '', quantity: 1 };
 
 const COLOR_CHART = [];
 const SIZE_CHART = [];

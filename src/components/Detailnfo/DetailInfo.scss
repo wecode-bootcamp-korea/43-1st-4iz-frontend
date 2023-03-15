@@ -15,6 +15,14 @@
     i {
       font-size: 1.7rem;
     }
+
+    .fa-caret-down {
+      transition: transform 0.5s;
+    }
+
+    .fa-caret-down.rotate-180 {
+      transform: rotate(-180deg);
+    }
   }
 
   .detailInfoList {

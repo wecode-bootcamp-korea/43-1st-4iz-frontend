@@ -13,11 +13,9 @@ const DetailInfo = ({ info }) => {
     >
       <div className="detailInfoTitle">
         <h4>{info.title}</h4>
-        {isHidden ? (
-          <i className="fa-solid fa-caret-down" />
-        ) : (
-          <i className="fa-solid fa-caret-up" />
-        )}
+        <i
+          className={`fa-solid fa-caret-down ${isHidden ? 'rotate-180' : ''}`}
+        />
       </div>
       {isHidden ? (
         <p>더보기</p>
