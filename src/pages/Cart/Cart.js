@@ -128,8 +128,6 @@ const Cart = () => {
           <section className="cartContainer">
             <h3>장바구니</h3>
             {dataList.map(cart => {
-              console.log(cart.discounted_price_sum);
-
               return (
                 <div className="imgCartCard" key={cart.cart_id}>
                   <div className="imgContainer">
