@@ -13,14 +13,13 @@ import './ProductList.scss';
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
-  const url = location.search;
+  const { search } = useLocation();
 
   useEffect(() => {
-    fetch(`http://10.58.52.223:3000/products/list${url}`)
+    fetch(`http://10.58.52.223:3000/products/list${search}`)
       .then(response => response.json())
       .then(data => setProductData(data));
-  }, [url]);
+  }, [search]);
 
   const setCategory = value => e => {
     if (e.target.value) {
