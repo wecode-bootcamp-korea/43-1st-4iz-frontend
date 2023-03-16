@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import {
   SUBMENU_LIST,
   GENDER_LIST,
@@ -14,6 +14,7 @@ const ProductList = () => {
   const [productData, setProductData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const { search } = useLocation();
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   fetch(`http://10.58.52.223:3000/products/list${search}`)
@@ -166,7 +167,14 @@ const ProductList = () => {
         </div>
         <div className="productListBoard">
           <select className="productDropdown">{DROPDOWN}</select>
-          <div className="productListGrid">{productGrid}</div>
+          <div
+            className="productListGrid"
+            onClick={() => {
+              navigate('/productDetail');
+            }}
+          >
+            {productGrid}
+          </div>
         </div>
       </div>
     </div>
