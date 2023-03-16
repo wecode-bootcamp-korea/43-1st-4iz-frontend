@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { EMAIL, LOGIN, SIGNUP, SUCCESS, MAIL_OPTION } from './AccountList';
+import { pwRegExp, telRegExp } from '../../Util/regex';
 import './Account.scss';
 
 const Account = () => {
@@ -18,10 +19,7 @@ const Account = () => {
     domain: '',
   });
 
-  const { id, pw, name, tel, check, birthday, domain } = userInfo;
-
-  const pwRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,15})/;
-  const telRegExp = /^([0-9]{3})[-]([0-9]{4})[-][0-9]{4}$/; // 하이픈 포함
+  const { id, pw, name, tel, birthday, domain } = userInfo;
 
   const isNameActive = name.length > 0 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;
@@ -51,7 +49,6 @@ const Account = () => {
             ? alert('이메일을 확인해주세요')
             : setAccountDataName(SIGNUP);
         } else {
-          localStorage.setItem('token', data.accessToken);
           setAccountDataName(LOGIN);
         }
       });
@@ -71,9 +68,12 @@ const Account = () => {
     })
       .then(response => response.json())
       .then(data => {
-        isPwActive && data.accessToken
-          ? navigate('/')
-          : alert('비밀번호를 확인해주세요');
+        if (data.accessToken) {
+          localStorage.setItem('token', data.accessToken);
+          navigate('/');
+        } else {
+          alert('다시 한번 확인해주세요');
+        }
       });
   };
 
