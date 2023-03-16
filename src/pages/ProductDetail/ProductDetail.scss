@@ -81,9 +81,14 @@
       border-radius: 2rem;
 
       $colors: (
-        'black': #333,
-        'gray': #999,
-        'green': #89b850,
+        '검정색': black,
+        '노란색': #f7d757,
+        '녹색': #89b850,
+        '멀티컬러': #7762b6,
+        '빨간색': #d54637,
+        '파란색': #438ec3,
+        '회색': #808080,
+        '흰색': white,
       );
 
       @each $key, $color in $colors {

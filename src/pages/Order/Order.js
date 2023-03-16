@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { emailRegExp, telRegExp } from '../../Util/regex';
 import Button from '../../components/Button/Button';
 import './Order.scss';
@@ -24,6 +24,8 @@ const Order = () => {
   const isTelActive = telRegExp.test(tel) || !tel;
   const isAddressActive = address.length > 5 || !address;
   const isdDtailAddressActive = detailAddress.length > 5 || !detailAddress;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let token = localStorage.getItem('token');
@@ -231,7 +233,13 @@ const Order = () => {
                 </label>
               </div>
             </fieldset>
-            <div className="buttonContainer">
+            <div
+              className="buttonContainer"
+              onClick={() => {
+                alert('주문완료!');
+                navigate('/order');
+              }}
+            >
               <Button text="주문하기" />
             </div>
           </div>
