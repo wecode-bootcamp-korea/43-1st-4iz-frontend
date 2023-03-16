@@ -1,7 +1,6 @@
 @import '../../styles/variables.scss';
 
-$bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
-  white #f7d757;
+$bgColor: black #f7d757 #89b850 #7762b6 #d54637 #438ec3 #808080 white;
 
 .productList {
   width: 100%;
@@ -30,6 +29,7 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
 
       .category {
         width: 100%;
+        width: 200px;
         margin-bottom: 10px;
         font-size: 1.6rem;
         font-weight: 400;

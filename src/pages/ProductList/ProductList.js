@@ -18,15 +18,6 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://10.58.52.223:3000/products/list${search}`)
-      .then(response => response.json())
-      .then(data => setProductData(data));
-  }, [search]);
-
-  // FIXME : /data/productListData.json
-  // http://10.58.52.223:3000/products/list
-
-  useEffect(() => {
     fetch(`http://10.58.52.223:3000/products/list${search}`, {
       method: 'GET',
     })
@@ -43,7 +34,7 @@ const ProductList = () => {
 
   const setCategory = value => e => {
     if (e.target.value) {
-      searchParams.set('category', value);
+      searchParams.set('category', `"${value}"`);
       setSearchParams(searchParams);
     } else {
       const search = searchParams.getAll('category');
@@ -51,7 +42,7 @@ const ProductList = () => {
       search
         .filter(list => list !== value)
         .forEach(value => {
-          searchParams.append('category', value);
+          searchParams.append('category', `"${value}"`);
         });
       setSearchParams(searchParams);
     }
@@ -72,14 +63,28 @@ const ProductList = () => {
 
   const setCheckedQueryString = (name, value) => e => {
     if (e.target.checked) {
-      searchParams.append(name, value);
+      searchParams.append(name, `"${value}"`);
       setSearchParams(searchParams);
     } else {
       const search = searchParams.getAll(name);
       searchParams.delete(name);
       search
         .filter(list => list !== value)
-        .forEach(value => searchParams.append(name, value));
+        .forEach(value => searchParams.append(name, `"${value}"`));
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setColor = value => e => {
+    if (e.target.checked) {
+      searchParams.append('color', `"${value}"`);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('color');
+      searchParams.delete('color');
+      search
+        .filter(list => list !== value)
+        .forEach(value => searchParams.append('color', `"${value}"`));
       setSearchParams(searchParams);
     }
   };
@@ -121,7 +126,7 @@ const ProductList = () => {
           type="checkbox"
           className="colorButton"
           value={name}
-          onClick={setCheckedQueryString('name', name)}
+          onClick={setCheckedQueryString('color', name)}
         />
       </div>
     );
