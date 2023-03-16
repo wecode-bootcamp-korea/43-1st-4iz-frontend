@@ -1,0 +1,131 @@
+@import '../../styles/variables.scss';
+
+.productDetail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas: 'img img info';
+  width: 80%;
+  height: max-content;
+  margin: 13rem auto 0;
+
+  .productImageContainer {
+    grid-area: img;
+    @include displayFlex(flex-start);
+
+    .productMainImg {
+      @include displayFlex(center, center);
+      width: 85%;
+      max-height: 54rem;
+      border: 1px solid $black;
+      text-align: center;
+
+      img {
+        max-height: 50rem;
+        max-width: 90%;
+      }
+    }
+
+    .productImageGallery {
+      width: 15%;
+      height: 54rem;
+      margin-left: 1rem;
+      overflow-x: scroll;
+
+      .imageBox {
+        width: 10rem;
+        height: 10rem;
+        margin-bottom: 0.7rem;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: none;
+        cursor: pointer;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .productInfo {
+    grid-area: info;
+    width: 100%;
+    margin: 0 0 7rem 7rem;
+    border-bottom: 1px solid $black;
+
+    .productInfoTitle {
+      .subCategory {
+        margin-top: 0.8rem;
+        // font-size: 1.5rem;
+      }
+
+      .productPrice {
+        margin-top: 2rem;
+        font-size: 2.4rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .selectColor {
+    @include displayFlex(flex-start, center);
+    margin-top: 2rem;
+
+    .colorButton {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+      border: none;
+      border-radius: 2rem;
+
+      $colors: (
+        'black': #333,
+        'gray': #999,
+        'green': #89b850,
+      );
+
+      @each $key, $color in $colors {
+        &.#{$key} {
+          background-color: $color;
+        }
+      }
+    }
+  }
+
+  .selectSize {
+    max-width: 100%;
+    margin-top: 3rem;
+
+    .selectSizeTitle {
+      @include displayFlex(space-between);
+      width: 99%;
+    }
+
+    .selectSizeOption {
+      @include displayFlex(flex-start);
+      flex-wrap: wrap;
+      margin-top: 1rem;
+
+      button {
+        margin: 0 0.5rem 0.5rem 0;
+        padding: 0.8rem 0;
+        width: 15.5%;
+        border: 1px solid $black;
+        border-radius: 7px;
+        background-color: white;
+        color: $black;
+        font-weight: 500;
+        font-size: 1.5rem;
+      }
+    }
+
+    .button {
+      width: 100%;
+      margin: 2rem 0 3rem;
+      padding: 2rem 0 1.5rem;
+      font-size: 1.8rem;
+    }
+  }
+}

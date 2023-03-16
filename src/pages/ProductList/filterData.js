@@ -39,57 +39,56 @@ export const GENDER_LIST = [
 export const COLOR_LIST = [
   {
     id: 1,
-    name: '블랙',
+    name: 'black',
     color: 'black',
   },
   {
     id: 2,
-    name: '블루',
+    name: 'blue',
     color: '#438EC3',
   },
   {
     id: 3,
-    name: '브라운',
+    name: 'brown',
     color: '#7C5F45',
   },
   {
     id: 4,
-    name: '그린',
+    name: 'green',
     color: '#89B850',
   },
   {
     id: 5,
-    name: '그레이',
+    name: 'gray',
     color: '#808080',
   },
   {
     id: 6,
-    name: '오렌지',
+    name: 'orange',
     color: '#E2733B',
   },
   {
     id: 7,
-    name: '핑크',
+    name: 'pink',
     color: '#E07990',
   },
   {
     id: 8,
-    name: '퍼플',
+    name: 'purple',
     color: '#83469A',
   },
   {
     id: 9,
-    name: '레드',
-    color: '#D54637',
+    name: 'red',
   },
   {
     id: 10,
-    name: '화이트',
+    name: 'white',
     color: 'white',
   },
   {
     id: 11,
-    name: '옐로우',
+    name: 'yellow',
     color: '#F7D757',
   },
 ];
@@ -150,5 +149,24 @@ export const SIZE_LIST = [
   {
     id: 14,
     size: '310',
+  },
+];
+
+export const PRODUCT_DROPDOWN = [
+  {
+    id: 1,
+    option: '정렬 기준',
+  },
+  {
+    id: 2,
+    option: '최신순',
+  },
+  {
+    id: 3,
+    option: '낮은 가격순',
+  },
+  {
+    id: 4,
+    option: '높은 가격순',
   },
 ];

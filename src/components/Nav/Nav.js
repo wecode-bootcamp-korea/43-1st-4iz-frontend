@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NAV_DATA } from './navData';
+import { NAV_DATA, SUB_NAV_LIST } from './navData';
 
 import './Nav.scss';
 
@@ -19,16 +19,34 @@ const Nav = () => {
               </div>
             );
           })}
+          <div className="subNav">
+            <div className="subNavContainer">
+              {SUB_NAV_LIST.map(({ id, title, category }) => {
+                return (
+                  <dl key={id} className="detailCategory">
+                    <dt>{title}</dt>
+                    {category.map(({ id, list }) => {
+                      return <dd key={id}>{list}</dd>;
+                    })}
+                  </dl>
+                );
+              })}
+            </div>
+          </div>
         </div>
         <div className="iconContainer">
-          <div className="searchContainer">
-            <input className="searchInput" type="text" placeholder="검색" />
+          <div className="searchContainer focused">
             <i class="fa-solid fa-magnifying-glass" />
+            <input
+              className="searchInput focused"
+              type="text"
+              placeholder="검색"
+            />
           </div>
           <Link to="/cart">
             <i class="fa-solid fa-cart-shopping" />
           </Link>
-          <Link to="/email">
+          <Link to="/account">
             <i class="fa-solid fa-user" />
           </Link>
         </div>

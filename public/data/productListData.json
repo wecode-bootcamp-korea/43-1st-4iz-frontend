@@ -1,68 +1,67 @@
 [
   {
+    "id": 5,
+    "name": "나이키 에어 포스 1 '07",
+    "price": "60000.000",
+    "discounted_price": "30000.0000000",
+    "gender": "남성",
+    "new": "신상품",
+    "color_count": "1",
+    "discount_rate": 50,
+    "release_date": "2023-03-05",
+    "images": ["/images/shoes1.png", "url9", "url10"],
+    "categories": ["카테고리8", "카테고리9", "카테고리10"]
+  },
+  {
     "id": 1,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
+    "name": "나이키 덩크 로우 레트로",
+    "price": "10000.000",
+    "discounted_price": "",
+    "gender": "남성",
+    "new": "신상품",
+    "color_count": "1",
+    "discount_rate": 0,
+    "release_date": "2021-12-12",
+    "images": ["/images/shoes1.png", "url2"],
+    "categories": ["카테고리1", "카테고리2"]
   },
   {
     "id": 2,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 덩크 로우",
-    "price": "129,000"
-  },
-  {
-    "id": 3,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 107",
-    "price": "139,000"
+    "name": "나이키 에어맥스 97",
+    "price": "20000.000",
+    "discounted_price": "18000.0000000",
+    "gender": "여성",
+    "new": "",
+    "color_count": "2",
+    "discount_rate": 10,
+    "release_date": "2019-03-02",
+    "images": ["/images/shoes1.png"],
+    "categories": ["카테고리3"]
   },
   {
     "id": 4,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
+    "name": "나이키 ACG GORE-TEX '마운틴 플라이'",
+    "price": "30000.000",
+    "discounted_price": "28500.0000000",
+    "gender": "여성",
+    "new": "",
+    "color_count": "2",
+    "discount_rate": 5,
+    "release_date": "2015-01-14",
+    "images": ["/images/shoes1.png", "url7"],
+    "categories": ["카테고리6", "카테고리7"]
   },
   {
-    "id": 5,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
-  },
-  {
-    "id": 6,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
-  },
-  {
-    "id": 7,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
-  },
-  {
-    "id": 8,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
-  },
-  {
-    "id": 9,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
-  },
-  {
-    "id": 10,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
-  },
-  {
-    "id": 11,
-    "img_url": "/images/shoes1.png",
-    "name": "나이키 에어 포스 1 쉐도우",
-    "price": "159,000"
+    "id": 3,
+    "name": "나이키 덩크 로우 레트로 프리미엄",
+    "price": "15000.000",
+    "discounted_price": "11250.0000000",
+    "gender": "남성",
+    "new": "신상품",
+    "color_count": "1",
+    "discount_rate": 25,
+    "release_date": "0000-00-00",
+    "images": ["/images/shoes1.png", "url5"],
+    "categories": ["카테고리4", "카테고리5"]
   }
 ]

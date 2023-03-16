@@ -1,17 +1,47 @@
 $gray: #f5f5f5;
+$melange: lightgray;
+$darkGray: #808080;
 $black: #333;
 
-@mixin displayFlex($justify, $align, $direction) {
+@mixin displayFlex($justify, $align: null, $direction: null) {
   display: flex;
   justify-content: $justify;
   align-items: $align;
   flex-direction: $direction;
 }
 
-@mixin position($position, $top, $right, $bottom, $left) {
+@mixin position(
+  $position,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
   position: $position;
   top: $top;
   right: $right;
   bottom: $bottom;
   left: $left;
+}
+
+@mixin checkbox {
+  position: relative;
+  margin-right: 10px;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+
+  &:checked {
+    border: none;
+    background-color: $black;
+  }
+}
+
+@mixin checkboxIcon {
+  position: absolute;
+  margin: 6px;
+  color: white;
+  font-size: 1.1rem;
 }

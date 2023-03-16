@@ -9,10 +9,7 @@ import ProductList from '../src/pages/ProductList/ProductList';
 import ProductDetail from '../src/pages/ProductDetail/ProductDetail';
 import Cart from '../src/pages/Cart/Cart';
 import Order from '../src/pages/Order/Order';
-import Email from '../src/pages/Email/Email';
-import Login from '../src/pages/Login/Login';
-import Signup from '../src/pages/Signup/Signup';
-import Authentication from '../src/pages/Authentication/Authentication';
+import Account from '../src/pages/Account/Account';
 
 const Router = () => {
   return (
@@ -24,10 +21,7 @@ const Router = () => {
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
-        <Route path="/email" element={<Email />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/authentication" element={<Authentication />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
       <Footer />
     </BrowserRouter>

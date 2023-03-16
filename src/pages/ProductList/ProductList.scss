@@ -1,11 +1,14 @@
 @import '../../styles/variables.scss';
 
+$bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
+  white #f7d757;
+
 .productList {
   overflow: hidden;
 
   .productListContainer {
     @include displayFlex(null, null, null);
-    padding-top: 80px;
+    padding-top: 90px;
 
     .filter {
       margin: 0 60px;
@@ -30,7 +33,16 @@
         font-weight: 400;
 
         .categoryMenu {
+          @include displayFlex(null, null, column);
           margin-bottom: 10px;
+          background: transparent;
+          border: none;
+          font-size: 1.6rem;
+
+          &:hover {
+            cursor: pointer;
+            color: $darkGray;
+          }
         }
       }
 
@@ -40,47 +52,77 @@
         font-size: 1.6rem;
 
         .filterTitle {
-          margin-bottom: 10px;
+          margin-bottom: 12px;
           font-weight: 400;
         }
 
         .checkboxContainer {
+          @include displayFlex(flex-start, flex-start, null);
+
           .checkbox {
-            margin: 0 8px 10px 0;
+            @include displayFlex(center, center, null);
+            position: relative;
+            margin-right: 10px;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+
+            &:checked {
+              border: none;
+              background-color: $black;
+            }
+          }
+
+          .fa-check {
+            position: absolute;
+            margin: 6px;
+            color: white;
+            font-size: 1.1rem;
           }
 
           .checkboxText {
+            @include displayFlex(center, center, null);
             font-weight: 400;
           }
 
           &:hover {
             cursor: pointer;
-            color: gray;
+            color: $darkGray;
           }
         }
 
         .colorListContainer {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           font-size: 1.2rem;
           font-weight: 400;
 
-          .colorList {
-            @include displayFlex(null, center, column);
-            margin: 10px 10px;
+          .colorButtonContainer {
+            @include displayFlex(center, null, null);
+
+            @for $i from 1 through length($bgColor) {
+              &:nth-child(#{$i}) .colorButton {
+                background-color: nth($bgColor, $i);
+              }
+            }
 
             .colorButton {
+              position: relative;
+              margin-right: 10px;
+              appearance: none;
               width: 28px;
               height: 28px;
               border: 1px solid lightgray;
               border-radius: 50%;
               background-color: transparent;
-            }
+              cursor: pointer;
 
-            .colorName {
-              &:hover {
-                cursor: pointer;
-                color: gray;
+              &:hover,
+              &:checked {
+                transform: scale(1.1);
+                transition: all 0.2s ease-in-out;
               }
             }
           }
@@ -91,16 +133,27 @@
           grid-template-columns: repeat(3, 1fr);
 
           .sizeButton {
+            position: relative;
+            appearance: none;
             margin: 5px;
-            padding: 10px 12px;
+            padding: 14px 22px;
             border: 1px solid lightgray;
             border-radius: 5px;
-            background-color: white;
+            background-color: transparent;
             font-size: 1.5rem;
+            cursor: pointer;
 
-            &:hover {
-              border: 1px solid black;
+            &:hover,
+            &:checked {
+              border: 1px solid $darkGray;
             }
+          }
+
+          .sizeButtonText {
+            position: absolute;
+            margin-top: 6px;
+            margin-left: 16px;
+            z-index: -1;
           }
         }
       }
@@ -119,32 +172,9 @@
 
       .productListGrid {
         max-width: 1900px;
-
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-
-        .productBox {
-          height: 480px;
-
-          .productImg {
-            height: 80%;
-            background-color: #f5f5f5;
-          }
-
-          .productBoxText {
-            margin-top: 20px;
-
-            .productName {
-              margin-bottom: 10px;
-              font-weight: 400;
-            }
-
-            .productPrice {
-              font-size: 16px;
-            }
-          }
-        }
       }
     }
   }

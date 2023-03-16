@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+
+.productCard {
+  height: 480px;
+  margin-bottom: 80px;
+  font-size: 1.6rem;
+
+  .productCardImg {
+    height: 80%;
+  }
+
+  .productCardText {
+    margin-top: 20px;
+
+    .productName {
+      font-weight: 400;
+    }
+
+    .gender,
+    .colorCount {
+      color: gray;
+    }
+
+    .priceContainer {
+      margin: 10px 0;
+
+      .discountedPrice {
+        margin-right: 5px;
+        font-weight: 400;
+      }
+
+      .productPrice {
+        color: gray;
+      }
+    }
+
+    .discountRate {
+      color: #94c087;
+    }
+  }
+}
