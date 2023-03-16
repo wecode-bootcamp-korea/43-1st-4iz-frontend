@@ -6,11 +6,10 @@ import './Cart.scss';
 const Cart = () => {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [optionList, setOptionList] = useState([]);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    let token = localStorage.getItem('token');
-
+    // /data/data.json
     fetch('http://10.58.52.223:3000/carts', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -27,35 +26,37 @@ const Cart = () => {
   if (loading) return <>Loading.... </>;
 
   // TODO : Delete 이벤트 통신 시 연결 시킬 함수
-  // const deleteCartList = id => {
-  //   setItemId(prevcartList => prevcartList.filter(dataList.id !== id));
-  //   console.log(itemId);
-  //   fetch('', {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //     },
-  //     body: JSON.stringify({
-  //       id: itemId,
-  //     }),
-  //   });
-  // };
-
+  const deleteCartList = (cart_id, product_id) => {
+    fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.deleteItem) {
+          alert('삭제 되었습니다.');
+          setDataList(data.deleteItem);
+        }
+      });
+  };
   // TODO : update (quantity)
 
-  const increaseQuantity = id => e => {
-    const next = optionList.map(optionDataList => {
-      if (optionDataList.id === id) {
-        return { ...optionDataList, quantity: optionDataList.quantity + 1 };
+  const increaseQuantity = cart_id => e => {
+    const next = dataList.map(option => {
+      if (option.cart_id === cart_id) {
+        return { ...option, quantity: option.quantity + 1 };
       } else {
-        return optionDataList;
+        return option;
       }
     });
-    setOptionList(next);
+    setDataList(next);
   };
 
   const decreaseQuantity = id => e => {
-    const next = optionList.map(option => {
+    const next = dataList.map(option => {
       if (option.id === id) {
         return { ...option, quantity: option.quantity - 1 };
       } else {
@@ -63,12 +64,12 @@ const Cart = () => {
       }
     });
 
-    setOptionList(next);
+    setDataList(next);
   };
 
   const totalPrice = dataList.reduce(
-    (acc, { price_sum, discounted_price_sum, quantity }) =>
-      acc + (price_sum - discounted_price_sum) * quantity,
+    (acc, { discounted_price_sum, quantity }) =>
+      acc + discounted_price_sum * quantity,
     0
   );
 
@@ -78,8 +79,8 @@ const Cart = () => {
   );
 
   const discountPrice = dataList.reduce(
-    (acc, { discounted_price_sum, quantity }) =>
-      acc + discounted_price_sum * quantity,
+    (acc, { price_sum, discounted_price_sum, quantity }) =>
+      acc + (price_sum - discounted_price_sum) * quantity,
     0
   );
 
@@ -103,7 +104,6 @@ const Cart = () => {
           </div>
           <section className="cartContainer">
             <h3>장바구니</h3>
-            {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
             {dataList.map(cart => {
               return (
                 <div className="imgCartCard" key={cart.id}>
@@ -111,15 +111,15 @@ const Cart = () => {
                     <img src={`${cart.images[0]}`} alt={`${cart.id}`} />
                   </div>
                   <CartCard
+                    key={cart.id}
                     name={cart.name}
                     price={cart.price_sum}
-                    color={cart.color}
-                    size={cart.size}
-                    quantity={cart.quantity}
-                    itemId={cart.id}
+                    {...cart}
+                    cartId={cart.id}
                     actions={{
                       increaseQuantity,
                       decreaseQuantity,
+                      deleteCartList,
                     }}
                   />
                 </div>
