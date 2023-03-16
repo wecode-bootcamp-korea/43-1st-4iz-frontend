@@ -17,7 +17,7 @@ const ProductDetail = () => {
   const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
-    fetch('/data/productData.json')
+    fetch('http://10.58.52.223:3000/products/4')
       .then(res => res.json())
       .then(datas => {
         setDataList(datas.data[0]);
@@ -97,8 +97,12 @@ const ProductDetail = () => {
 
   const goToCart = e => {
     let token = localStorage.getItem('token');
+    const optionArray = [];
+    optionList.forEach(e =>
+      optionArray.push(`${e.color}/${e.size}/${e.quantity}`)
+    );
 
-    fetch('http://10.58.52.223:3000/carts/3', {
+    fetch('http://10.58.52.223:3000/carts/4', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -106,8 +110,7 @@ const ProductDetail = () => {
       },
       body: JSON.stringify({
         id: dataList.id,
-        color: optionList.forEach(e => e.color),
-        size: optionList.forEach(e => e.size),
+        options: optionArray,
       }),
     })
       .then(response => response.json())
@@ -115,6 +118,7 @@ const ProductDetail = () => {
         if ('message' === 'KEY_ERROR') {
           alert('옵션을 선택해주세요');
         } else {
+          alert('전송완료!');
           navigate('/cart');
         }
       });
