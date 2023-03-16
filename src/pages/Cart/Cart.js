@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import CartCard from '../../components/CartCard/CartCard';
 import './Cart.scss';
 
 const Cart = () => {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,7 +29,7 @@ const Cart = () => {
   if (loading) return <>Loading.... </>;
 
   // TODO : Delete 이벤트 통신 시 연결 시킬 함수
-  const deleteCartList = (cart_id, product_id) => {
+  const deleteCartList = (cart_id, product_id) => e => {
     const token = localStorage.getItem('token');
 
     fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
@@ -36,38 +38,14 @@ const Cart = () => {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
-    })
-      .then(response => response.json())
-      .then(data => {
-        setDataList(data.deleteItem);
-      });
+    }).then(response => {
+      response.status === 204 && alert('삭제되었습니다');
+    });
   };
 
   // TODO : update (quantity)함수
-  // const changeQuantity = (quantity, cart_id) => {
-  //   const token = localStorage.getItem('token');
 
-  //   fetch('주소', {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json;charset=utf-8',
-  //       Authorization: token,
-  //     },
-  //     body: JSON.stringify({
-  //       cart_id,
-  //       quantity,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.message === 'error') {
-  //         alert('다시 시도해주세요');
-  //       }
-  //       setDataList(data.update);
-  //     });
-  // };
-
-  const increaseQuantity = cart_id => e => {
+  const increaseQuantity = (cart_id, product_id, quantity) => e => {
     const next = dataList.map(option => {
       if (option.cart_id === cart_id) {
         return { ...option, quantity: option.quantity + 1 };
@@ -76,9 +54,13 @@ const Cart = () => {
       }
     });
     setDataList(next);
+
+    changeQuantity(cart_id, product_id, quantity);
   };
 
-  const decreaseQuantity = cart_id => e => {
+  const decreaseQuantity = (cart_id, product_id, quantity) => e => {
+    if (quantity === 1) return;
+
     const next = dataList.map(option => {
       if (option.cart_id === cart_id) {
         return { ...option, quantity: option.quantity - 1 };
@@ -88,22 +70,40 @@ const Cart = () => {
     });
 
     setDataList(next);
+
+    changeQuantity(cart_id, product_id, quantity);
   };
 
-  const totalPrice = dataList.reduce(
-    (acc, { discounted_price_sum, quantity }) =>
-      acc + discounted_price_sum * quantity,
-    0
-  );
+  const changeQuantity = (cart_id, product_id, quantity) => {
+    const token = localStorage.getItem('token');
+
+    fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        cart_id,
+        quantity,
+        product_id,
+      }),
+    }).then(response => response.json());
+  };
 
   const originPrice = dataList.reduce(
-    (acc, { price_sum, quantity }) => acc + price_sum * quantity,
+    (acc, { price_sum }) => acc + Number(price_sum),
     0
   );
 
   const discountPrice = dataList.reduce(
     (acc, { price_sum, discounted_price_sum, quantity }) =>
-      acc + (price_sum - discounted_price_sum) * quantity,
+      acc + Number(price_sum - discounted_price_sum),
+    0
+  );
+
+  const totalPrice = dataList.reduce(
+    (acc, { discounted_price_sum }) => acc + Number(discounted_price_sum),
     0
   );
 
@@ -128,23 +128,53 @@ const Cart = () => {
           <section className="cartContainer">
             <h3>장바구니</h3>
             {dataList.map(cart => {
+              console.log(cart.discounted_price_sum);
+
               return (
-                <div className="imgCartCard" key={cart.id}>
+                <div className="imgCartCard" key={cart.cart_id}>
                   <div className="imgContainer">
                     <img src={`${cart.images[0]}`} alt={`${cart.id}`} />
                   </div>
-                  <CartCard
-                    key={cart.id}
-                    name={cart.name}
-                    price={cart.price_sum}
-                    {...cart}
-                    cartId={cart.id}
-                    actions={{
-                      increaseQuantity,
-                      decreaseQuantity,
-                      deleteCartList,
-                    }}
-                  />
+                  <div className="cartCard">
+                    <div className="cartInfo">
+                      <h4>{cart.name}</h4>
+                      <p className="selectedOption">
+                        {cart.size} / {cart.color}
+                      </p>
+                    </div>
+                    <div className="addCart">
+                      <div className="count">
+                        <button
+                          type="button"
+                          onClick={decreaseQuantity(
+                            cart.cart_id,
+                            cart.product_id,
+                            cart.quantity
+                          )}
+                        >
+                          -
+                        </button>
+                        <div className="countInputText">{cart.quantity}</div>
+                        <button
+                          type="button"
+                          onClick={increaseQuantity(
+                            cart.cart_id,
+                            cart.product_id,
+                            cart.quantity
+                          )}
+                        >
+                          +
+                        </button>
+                      </div>
+                      <p className="selectedPrice">
+                        {Number(cart.discounted_price_sum).toLocaleString()}원
+                      </p>
+                      <i
+                        className="fa-solid fa-xmark"
+                        onClick={deleteCartList(cart.cart_id, cart.product_id)}
+                      />
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -164,7 +194,13 @@ const Cart = () => {
             <dt>총 결제 금액</dt>
             <dd>{totalPrice.toLocaleString()} 원</dd>
           </dl>
-          <Button text="결제하기" />
+          <div
+            onClick={() => {
+              navigate('/order');
+            }}
+          >
+            <Button text="결제하기" />
+          </div>
         </section>
       </main>
     </div>

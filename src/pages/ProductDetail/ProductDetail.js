@@ -40,51 +40,28 @@ const ProductDetail = () => {
     }
   }
 
-  const increaseQuantity = cart_id => e => {
-    const next = dataList.map(option => {
-      if (option.cart_id === cart_id) {
-        return { ...option, quantity: option.quantity + 1 };
+  const increaseQuantity = id => e => {
+    const next = optionList.map(optionDataList => {
+      if (optionDataList.id === id) {
+        return { ...optionDataList, quantity: optionDataList.quantity + 1 };
       } else {
-        return option;
+        return optionDataList;
       }
     });
-    setDataList(next);
+    setOptionList(next);
   };
 
-  const decreaseQuantity = cart_id => e => {
-    const next = dataList.map(option => {
-      if (option.cart_id === cart_id) {
+  const decreaseQuantity = id => e => {
+    const next = optionList.map(option => {
+      if (option.id === id) {
         return { ...option, quantity: option.quantity - 1 };
       } else {
         return option;
       }
     });
 
-    setDataList(next);
+    setOptionList(next);
   };
-
-  // const increaseQuantity = id => e => {
-  //   const next = optionList.map(optionDataList => {
-  //     if (optionDataList.id === id) {
-  //       return { ...optionDataList, quantity: optionDataList.quantity + 1 };
-  //     } else {
-  //       return optionDataList;
-  //     }
-  //   });
-  //   setOptionList(next);
-  // };
-
-  // const decreaseQuantity = id => e => {
-  //   const next = optionList.map(option => {
-  //     if (option.id === id) {
-  //       return { ...option, quantity: option.quantity - 1 };
-  //     } else {
-  //       return option;
-  //     }
-  //   });
-
-  //   setOptionList(next);
-  // };
 
   const onClickColorPicker = color => {
     if (selectedOption.size) {
@@ -144,22 +121,6 @@ const ProductDetail = () => {
           alert('전송완료!');
           navigate('/cart');
         }
-      });
-  };
-
-  const deleteCartList = (cart_id, product_id) => {
-    const token = localStorage.getItem('token');
-
-    fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: token,
-      },
-    })
-      .then(response => response.json())
-      .then(data => {
-        setDataList(data.deleteItem);
       });
   };
 
@@ -235,14 +196,13 @@ const ProductDetail = () => {
           return (
             <CartCard
               key={cart.id}
-              name={cart.name}
-              price={cart.price}
+              name={dataList.name}
+              price={dataList.price}
               {...cart}
               cartId={cart.id}
               actions={{
                 increaseQuantity,
                 decreaseQuantity,
-                deleteCartList,
               }}
             />
           );

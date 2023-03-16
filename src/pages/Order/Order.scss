@@ -202,9 +202,13 @@
           .productContainer {
             border: 1px solid $gray;
             width: 30%;
+            max-height: 15rem;
             margin-right: 4rem;
-            object-fit: cover;
             overflow: hidden;
+
+            img {
+              object-fit: cover;
+            }
           }
 
           .productInfo {

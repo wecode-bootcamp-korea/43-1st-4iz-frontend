@@ -74,19 +74,18 @@ const Order = () => {
   };
 
   const totalPrice = dataList.reduce(
-    (acc, { discounted_price_sum, quantity }) =>
-      acc + discounted_price_sum * quantity,
+    (acc, { discounted_price_sum }) => acc + Number(discounted_price_sum),
     0
   );
 
   const originPrice = dataList.reduce(
-    (acc, { price_sum, quantity }) => acc + price_sum * quantity,
+    (acc, { price_sum }) => acc + Number(price_sum),
     0
   );
 
   const discountPrice = dataList.reduce(
-    (acc, { price_sum, discounted_price_sum, quantity }) =>
-      acc + (price_sum - discounted_price_sum) * quantity,
+    (acc, { price_sum, discounted_price_sum }) =>
+      acc + Number(price_sum - discounted_price_sum),
     0
   );
 
@@ -262,9 +261,6 @@ const Order = () => {
               <dd>{totalPrice.toLocaleString()} 원</dd>
             </dl>
             {dataList.map(product => {
-              const discountedPrice =
-                Number(product.price_sum) -
-                Number(product.discounted_price_sum);
               return (
                 <div class="addedProduct" key={product.id}>
                   <div class="productContainer">
@@ -276,7 +272,7 @@ const Order = () => {
                       선택 옵션: {product.color}/{product.size}
                     </dd>
                     <dd>수량 : {product.quantity}</dd>
-                    <dd>{discountedPrice.toLocaleString()}원</dd>
+                    <dd>{totalPrice.toLocaleString()}원</dd>
                   </dl>
                 </div>
               );
