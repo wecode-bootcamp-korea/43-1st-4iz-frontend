@@ -33,6 +33,7 @@ const Nav = () => {
               })}
             </div>
           </div>
+          <div className="subNavBg" />
         </div>
         <div className="iconContainer">
           <div className="searchContainer focused">
@@ -46,7 +47,7 @@ const Nav = () => {
           <Link to="/cart">
             <i class="fa-solid fa-cart-shopping" />
           </Link>
-          <Link to="/email">
+          <Link to="/account">
             <i class="fa-solid fa-user" />
           </Link>
         </div>

@@ -28,6 +28,16 @@
   }
 }
 
+@keyframes subNavDelete {
+  0% {
+    filter: blur(12px);
+  }
+  100% {
+    display: none;
+    filter: blur(0px);
+    opacity: 0;
+  }
+}
 .nav {
   @include position(fixed, 0, null, null, 0);
   width: 100%;
@@ -71,7 +81,8 @@
       }
 
       &:hover {
-        .subNav {
+        .subNav,
+        .subNavBg {
           display: block;
           animation: subNavLoad 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
         }
@@ -80,9 +91,9 @@
       .subNav {
         @include position(absolute, 6.5rem, null, null, 0);
         display: none;
-        background-color: rgba(0, 0, 0, 0.7);
         width: 100vw;
-        height: 100vh;
+        height: fit-content;
+        z-index: 1;
 
         .subNavContainer {
           @include displayFlex(space-around, null, null);
@@ -114,6 +125,23 @@
                 margin-bottom: 0;
               }
             }
+          }
+        }
+      }
+
+      .subNavBg {
+        @include position(absolute, 6.5rem, null, null, 0);
+        display: none;
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100vw;
+        height: 100vh;
+
+        &:hover {
+          display: none;
+          animation: subNavDelete 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+          .subNav {
+            display: none;
+            animation: subNavDelete 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
           }
         }
       }
