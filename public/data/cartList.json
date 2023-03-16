@@ -8,18 +8,18 @@
       "quantity": 10,
       "images": ["url1", "url2"],
       "categories": ["카테고리1", "카테고리2"],
-      "color": "색깔3",
-      "size": "크기3",
+      "color": "색깔1",
+      "size": "크기1",
       "options": [
         {
-          "size": "크기3",
-          "color": "색깔3",
-          "quantity": 600
+          "size": "크기1",
+          "color": "색깔1",
+          "quantity": 100
         },
         {
-          "size": "크기5",
-          "color": "색깔4",
-          "quantity": 699
+          "size": "크기2",
+          "color": "색깔1",
+          "quantity": 200
         }
       ]
     },
@@ -91,7 +91,6 @@
           "quantity": 498
         }
       ]
-<<<<<<< HEAD
     },
     {
       "id": 4,
@@ -115,8 +114,6 @@
           "quantity": 699
         }
       ]
-=======
->>>>>>> main
     }
   ]
 }

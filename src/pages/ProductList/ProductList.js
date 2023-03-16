@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import {
   SUBMENU_LIST,
   GENDER_LIST,
@@ -12,6 +12,44 @@ import './ProductList.scss';
 
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { search } = useLocation();
+
+  useEffect(() => {
+    fetch(`http://10.58.52.223:3000/products/list${search}`)
+      .then(response => response.json())
+      .then(data => setProductData(data));
+  }, [search]);
+
+  const setCategory = value => e => {
+    if (e.target.value) {
+      searchParams.set('category', value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('category');
+      searchParams.delete('category');
+      search
+        .filter(list => list !== value)
+        .forEach(value => {
+          searchParams.append('category', value);
+        });
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setCheckedQueryString = (name, value) => e => {
+    if (e.target.checked) {
+      searchParams.append(name, value);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll(name);
+      searchParams.delete(name);
+      search
+        .filter(list => list !== value)
+        .forEach(value => searchParams.append(name, value));
+      setSearchParams(searchParams);
+    }
+  };
 
   useEffect(() => {
     fetch('/data/productListData.json', {
@@ -21,22 +59,32 @@ const ProductList = () => {
       .then(data => {
         setProductData(data);
       });
-  });
+  }, []);
 
   const SUBMENU = SUBMENU_LIST.map(({ id, title }) => {
     return (
-      <Link to="/productList" key={id}>
-        <li className="categoryMenu">{title}</li>
-      </Link>
+      <button
+        key={id}
+        className="categoryMenu"
+        value={title}
+        onClick={setCategory(title)}
+      >
+        {title}
+      </button>
     );
   });
 
   const GENDER = GENDER_LIST.map(({ id, gender }) => {
     return (
       <dd className={`checkboxContainer ${gender}`} key={id}>
-        <input id={id} className="checkbox" type="checkbox" />
+        <input
+          id={id}
+          className="checkbox"
+          type="checkbox"
+          onChange={setCheckedQueryString('gender', gender)}
+        />
         <i className="fa-solid fa-check" />
-        <label for={id} className="checkboxText">
+        <label htmlFor={id} className="checkboxText">
           {gender}
         </label>
       </dd>
@@ -46,16 +94,26 @@ const ProductList = () => {
   const COLOR = COLOR_LIST.map(({ id, name }) => {
     return (
       <div key={id} className="colorButtonContainer">
-        <button className={`colorButton ${name}`} />
+        <input
+          type="checkbox"
+          className="colorButton"
+          value={name}
+          onClick={setCheckedQueryString('name', name)}
+        />
       </div>
     );
   });
 
   const SIZE = SIZE_LIST.map(({ id, size }) => {
     return (
-      <button key={id} className="sizeButton">
-        {size}
-      </button>
+      <div
+        key={id}
+        className="sizeButtonContainer"
+        onClick={setCheckedQueryString('size', size)}
+      >
+        <input className="sizeButton" type="checkbox" value={size} />
+        <span className="sizeButtonText">{size}</span>
+      </div>
     );
   });
 

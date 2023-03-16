@@ -1,7 +1,19 @@
 import React from 'react';
 import './CartCard.scss';
 
-const CartCard = ({ name, size, color, price }) => {
+const CartCard = props => {
+  const {
+    cart_id,
+    product_id,
+    id,
+    name,
+    size,
+    color,
+    quantity,
+    price,
+    actions,
+  } = props;
+  const { increaseQuantity, decreaseQuantity, deleteCartList } = actions;
   return (
     <div className="cartCard">
       <div className="cartInfo">
@@ -12,12 +24,19 @@ const CartCard = ({ name, size, color, price }) => {
       </div>
       <div className="addCart">
         <div className="count">
-          <button type="button">-</button>
-          <div className="countInputText">1</div>
-          <button type="button">+</button>
+          <button type="button" onClick={quantity > 0 && decreaseQuantity(id)}>
+            -
+          </button>
+          <div className="countInputText">{quantity}</div>
+          <button type="button" onClick={increaseQuantity(cart_id)}>
+            +
+          </button>
         </div>
-        <p className="selectedPrice">{price}원</p>
-        <i className="fa-solid fa-xmark" />
+        <p className="selectedPrice">{(price * quantity).toLocaleString()}원</p>
+        <i
+          className="fa-solid fa-xmark"
+          onClick={deleteCartList(cart_id, product_id)}
+        />
       </div>
     </div>
   );
