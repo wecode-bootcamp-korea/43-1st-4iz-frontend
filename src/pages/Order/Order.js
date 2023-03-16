@@ -20,13 +20,19 @@ const Order = () => {
   const { name, tel, address, detailAddress, email } = userInfo;
 
   const isEmailActive = emailRegExp.test(email) || !email;
-  const isNameActive = name.length > 3 || !name;
+  const isNameActive = name.length > 1 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;
   const isAddressActive = address.length > 5 || !address;
   const isdDtailAddressActive = detailAddress.length > 5 || !detailAddress;
+  let token = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('./data/data.json')
+    fetch('http://10.58.52.223:3000/carts', {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
       .then(res => res.json())
       .then(datas => {
         setDataList(datas.data);
@@ -43,23 +49,26 @@ const Order = () => {
 
   const checkUserInfo = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.223:3000/users/duplicate', {
+    fetch('http://10.58.52.223:3000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
       },
       body: JSON.stringify({
-        name: name,
-        address: address,
-        detailAddress: detailAddress,
-        tel: tel,
-        email: email,
+        name: userInfo.name,
+        street: userInfo.address,
+        address: userInfo.detailAddress,
+        phoneNumber: userInfo.tel,
+        email: userInfo.email,
       }),
     })
       .then(response => response.json())
       .then(data => {
         if (isNameActive && isTelActive && name && tel && telRegExp.test(tel)) {
-          alert('주문 완료!');
+          alert('저장되었습니다!');
+        } else {
+          alert('옵션을 모두 입력해주세요.');
         }
       });
   };
@@ -141,7 +150,7 @@ const Order = () => {
                 </div>
               </div>
             </fieldset>
-            <div className="buttonContainer">
+            <div className="buttonContainer" onClick={checkUserInfo}>
               <Button text="계속" />
               <Button text="취소" className="cancel" />
             </div>
@@ -235,9 +244,6 @@ const Order = () => {
               <dt>총 결제 금액</dt>
               <dd>470,600 원</dd>
             </dl>
-            <div onClick={checkUserInfo}>
-              <Button text="결제하기" />
-            </div>
             {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
             {dataList.map(product => {
               const discountedPrice =

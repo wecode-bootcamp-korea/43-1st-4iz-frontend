@@ -196,8 +196,8 @@
 
         .addedProduct {
           @include displayFlex(flex-start);
-          width: 90%;
-          margin: 0 auto 1rem;
+          width: 100%;
+          margin: 4rem auto 0;
 
           .productContainer {
             border: 1px solid $gray;
