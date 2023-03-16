@@ -9,7 +9,14 @@ const Cart = () => {
   const [optionList, setOptionList] = useState([]);
 
   useEffect(() => {
-    fetch('./data/productData.json')
+    let token = localStorage.getItem('token');
+
+    fetch('http://10.58.52.223:3000/carts', {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
       .then(res => res.json())
       .then(datas => {
         setDataList(datas.data);
@@ -33,6 +40,8 @@ const Cart = () => {
   //     }),
   //   });
   // };
+
+  // TODO : update (quantity)
 
   const increaseQuantity = id => e => {
     const next = optionList.map(optionDataList => {

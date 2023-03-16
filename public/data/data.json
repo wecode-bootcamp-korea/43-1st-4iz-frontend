@@ -1,0 +1,106 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "제품1",
+      "price_sum": "100000.000",
+      "discounted_price_sum": "",
+      "quantity": 10,
+      "images": ["url1", "url2"],
+      "categories": ["카테고리1", "카테고리2"],
+      "options": ["색깔1/크기1", "색깔1/크기1", "색깔1/크기1"]
+    },
+    {
+      "id": 4,
+      "name": "제품4",
+      "price_sum": "300000.000",
+      "discounted_price_sum": "285000.0000000",
+      "quantity": 10,
+      "images": ["url6", "url7"],
+      "categories": ["카테고리6", "카테고리7"],
+      "color": "색깔3",
+      "size": "크기3",
+      "options": [
+        {
+          "size": "크기3",
+          "color": "색깔3",
+          "quantity": 600
+        },
+        {
+          "size": "크기5",
+          "color": "색깔4",
+          "quantity": 699
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "제품5",
+      "price_sum": "60000.000",
+      "discounted_price_sum": "30000.0000000",
+      "quantity": 1,
+      "images": ["url8", "url9", "url10"],
+      "categories": ["카테고리8", "카테고리9", "카테고리10"],
+      "color": "색깔5",
+      "size": "크기10",
+      "options": [
+        {
+          "size": "크기2",
+          "color": "색깔5",
+          "quantity": 800
+        },
+        {
+          "size": "크기1",
+          "color": "색깔5",
+          "quantity": 899
+        },
+        {
+          "size": "크기10",
+          "color": "색깔5",
+          "quantity": 999
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "제품3",
+      "price_sum": "75000.000",
+      "discounted_price_sum": "56250.0000000",
+      "quantity": 5,
+      "images": ["url4", "url5"],
+      "categories": ["카테고리4", "카테고리5"],
+      "color": "색깔3",
+      "size": "크기4",
+      "options": [
+        {
+          "size": "크기4",
+          "color": "색깔3",
+          "quantity": 498
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "제품4",
+      "price_sum": "600000.000",
+      "discounted_price_sum": "570000.0000000",
+      "quantity": 20,
+      "images": ["url6", "url7"],
+      "categories": ["카테고리6", "카테고리7"],
+      "color": "색깔3",
+      "size": "크기3",
+      "options": [
+        {
+          "size": "크기3",
+          "color": "색깔3",
+          "quantity": 600
+        },
+        {
+          "size": "크기5",
+          "color": "색깔4",
+          "quantity": 699
+        }
+      ]
+    }
+  ]
+}
