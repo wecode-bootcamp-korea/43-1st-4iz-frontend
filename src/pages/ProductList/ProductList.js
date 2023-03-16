@@ -16,12 +16,11 @@ const ProductList = () => {
   const location = useLocation();
   const url = location.search;
 
-  // TODO: filter 백엔드 통신 코드입니다.
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.223:3000/products/list${url}`)
-  //     .then(response => response.json())
-  //     .then(data => setProductData(data));
-  // }, [url]);
+  useEffect(() => {
+    fetch(`http://10.58.52.223:3000/products/list${url}`)
+      .then(response => response.json())
+      .then(data => setProductData(data));
+  }, [url]);
 
   const setCategory = value => e => {
     if (e.target.value) {
