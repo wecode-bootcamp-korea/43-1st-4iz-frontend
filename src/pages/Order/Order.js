@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { emailRegExp, telRegExp } from '../../Util/regex';
 import Button from '../../components/Button/Button';
@@ -14,18 +14,54 @@ const USER_INFO = {
 
 const Order = () => {
   const [userInfo, setUserInfo] = useState(USER_INFO);
+  const [dataList, setDataList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { name, tel, address, detailAddress, email } = userInfo;
 
   const isEmailActive = emailRegExp.test(email) || !email;
   const isNameActive = name.length > 3 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;
-  const isAddressActive = address.length > 10 || !address;
-  const isdDtailAddressActive = detailAddress.length > 10 || !detailAddress;
+  const isAddressActive = address.length > 5 || !address;
+  const isdDtailAddressActive = detailAddress.length > 5 || !detailAddress;
+
+  useEffect(() => {
+    fetch('./data/data.json')
+      .then(res => res.json())
+      .then(datas => {
+        setDataList(datas.data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <>Loading.... </>;
 
   const onChangeUserInfo = e => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
+  };
+
+  const checkUserInfo = e => {
+    // e.preventDefault();
+    fetch('http://10.58.52.223:3000/users/duplicate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        name: name,
+        address: address,
+        detailAddress: detailAddress,
+        tel: tel,
+        email: email,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (isNameActive && isTelActive && name && tel && telRegExp.test(tel)) {
+          alert('주문 완료!');
+        }
+      });
   };
 
   return (
@@ -199,8 +235,30 @@ const Order = () => {
               <dt>총 결제 금액</dt>
               <dd>470,600 원</dd>
             </dl>
-            <Button text="결제하기" />
+            <div onClick={checkUserInfo}>
+              <Button text="결제하기" />
+            </div>
             {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
+            {dataList.map(product => {
+              const discountedPrice =
+                Number(product.price_sum) -
+                Number(product.discounted_price_sum);
+              return (
+                <div class="addedProduct" key={product.id}>
+                  <div class="productContainer">
+                    <img src={`${product.images[0]}`} alt={`${product.name}`} />
+                  </div>
+                  <dl className="productInfo">
+                    <dt>{product.name}</dt>
+                    <dd>
+                      선택 옵션: {product.color}/{product.size}
+                    </dd>
+                    <dd>수량 : {product.quantity}</dd>
+                    <dd>{discountedPrice.toLocaleString()}원</dd>
+                  </dl>
+                </div>
+              );
+            })}
           </section>
         </div>
       </div>

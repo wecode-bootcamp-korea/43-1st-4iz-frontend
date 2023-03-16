@@ -190,8 +190,31 @@
 
         .button {
           width: 100%;
-          margin-top: 3rem;
+          margin: 3rem 0;
           font-size: 1.8rem;
+        }
+
+        .addedProduct {
+          @include displayFlex(flex-start);
+          width: 90%;
+          margin: 0 auto 1rem;
+
+          .productContainer {
+            border: 1px solid $gray;
+            width: 30%;
+            margin-right: 4rem;
+            object-fit: cover;
+            overflow: hidden;
+          }
+
+          .productInfo {
+            margin: 1rem 0;
+            dt {
+              margin-bottom: 3rem;
+              font-size: 1.7rem;
+              font-weight: 400;
+            }
+          }
         }
       }
     }
