@@ -4,6 +4,7 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
   white #f7d757;
 
 .productList {
+  width: 100%;
   overflow: hidden;
 
   .productListContainer {
@@ -12,6 +13,7 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
 
     .filter {
       margin: 0 60px;
+      width: 20%;
 
       .menu {
         margin-bottom: 30px;
@@ -161,6 +163,7 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
     }
 
     .productListBoard {
+      width: 80%;
       @include displayFlex(null, flex-end, column);
       margin: 30px 50px 100px 0;
 
@@ -172,6 +175,7 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
       }
 
       .productListGrid {
+        width: 100%;
         max-width: 1900px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);

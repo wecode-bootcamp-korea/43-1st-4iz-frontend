@@ -12,15 +12,34 @@ import './ProductList.scss';
 
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const { search } = useLocation();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.223:3000/products/list${search}`)
-  //     .then(response => response.json())
-  //     .then(data => setProductData(data));
-  // }, [search]);
+  useEffect(() => {
+    fetch(`http://10.58.52.223:3000/products/list${search}`)
+      .then(response => response.json())
+      .then(data => setProductData(data));
+  }, [search]);
+
+  // FIXME : /data/productListData.json
+  // http://10.58.52.223:3000/products/list
+
+  useEffect(() => {
+    fetch(`http://10.58.52.223:3000/products/list${search}`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(datas => {
+        setLoading(false);
+        setProductData(datas.data);
+      });
+  }, [search]);
+
+  if (loading) {
+    return <h1>Loading....</h1>;
+  }
 
   const setCategory = value => e => {
     if (e.target.value) {
@@ -38,6 +57,19 @@ const ProductList = () => {
     }
   };
 
+  const setSort = e => {
+    const { value } = e.target;
+
+    const selectedOption = PRODUCT_DROPDOWN.find(
+      ({ option }) => option === value
+    );
+
+    if (selectedOption) {
+      searchParams.set('sort', selectedOption.option);
+      setSearchParams(searchParams);
+    }
+  };
+
   const setCheckedQueryString = (name, value) => e => {
     if (e.target.checked) {
       searchParams.append(name, value);
@@ -51,16 +83,6 @@ const ProductList = () => {
       setSearchParams(searchParams);
     }
   };
-
-  useEffect(() => {
-    fetch('/data/productListData.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setProductData(data);
-      });
-  }, []);
 
   const SUBMENU = SUBMENU_LIST.map(({ id, title }) => {
     return (
@@ -119,7 +141,11 @@ const ProductList = () => {
   });
 
   const DROPDOWN = PRODUCT_DROPDOWN.map(({ id, option }) => {
-    return <option key={id}>{option}</option>;
+    return (
+      <option key={id} value={option}>
+        {option}
+      </option>
+    );
   });
 
   const productGrid = productData.map(
@@ -166,7 +192,14 @@ const ProductList = () => {
           </dl>
         </div>
         <div className="productListBoard">
-          <select className="productDropdown">{DROPDOWN}</select>
+          <select
+            className="productDropdown"
+            onChange={setSort}
+            value={searchParams.get('sort') || ''}
+          >
+            <option value="">Sort By</option>
+            {DROPDOWN}
+          </select>
           <div
             className="productListGrid"
             onClick={() => {

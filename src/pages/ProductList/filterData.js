@@ -155,18 +155,14 @@ export const SIZE_LIST = [
 export const PRODUCT_DROPDOWN = [
   {
     id: 1,
-    option: '정렬 기준',
+    option: 'date',
   },
   {
     id: 2,
-    option: '최신순',
+    option: 'low',
   },
   {
     id: 3,
-    option: '낮은 가격순',
-  },
-  {
-    id: 4,
-    option: '높은 가격순',
+    option: 'high',
   },
 ];
