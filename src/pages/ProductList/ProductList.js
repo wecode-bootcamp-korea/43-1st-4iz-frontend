@@ -15,11 +15,11 @@ const ProductList = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { search } = useLocation();
 
-  useEffect(() => {
-    fetch(`http://10.58.52.223:3000/products/list${search}`)
-      .then(response => response.json())
-      .then(data => setProductData(data));
-  }, [search]);
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.223:3000/products/list${search}`)
+  //     .then(response => response.json())
+  //     .then(data => setProductData(data));
+  // }, [search]);
 
   const setCategory = value => e => {
     if (e.target.value) {

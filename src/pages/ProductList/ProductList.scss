@@ -48,6 +48,7 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
 
       .filterContainer {
         @include displayFlex(null, null, column);
+        width: 200px;
         margin-bottom: 10px;
         font-size: 1.6rem;
 
