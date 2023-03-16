@@ -8,7 +8,7 @@ import './ProductDetail.scss';
 const ProductDetail = () => {
   const navigate = useNavigate();
 
-  const [dataList, setDataList] = useState({});
+  const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState('');
   const [optionList, setOptionList] = useState([]);
@@ -17,12 +17,12 @@ const ProductDetail = () => {
   const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
-    fetch('./data/productData.json')
+    fetch('http://10.58.52.223:3000/products/4')
       .then(res => res.json())
-      .then(data => {
-        setDataList(data);
+      .then(datas => {
+        setDataList(datas.data[0]);
         setLoading(false);
-        setImageSrc(`${data.images[0]}`);
+        setImageSrc(`${datas.data[0].images[0]}`);
       });
   }, []);
 
@@ -73,7 +73,6 @@ const ProductDetail = () => {
           id: optionList.length + 1,
         },
       ]);
-
       clearSelectedOption();
     } else {
       setSelectedOption({ ...selectedOption, color });
@@ -94,6 +93,35 @@ const ProductDetail = () => {
 
   const handleImageSrc = e => {
     setImageSrc(e.target.value);
+  };
+
+  const goToCart = e => {
+    let token = localStorage.getItem('token');
+    const optionArray = [];
+    optionList.forEach(e =>
+      optionArray.push(`${e.color}/${e.size}/${e.quantity}`)
+    );
+
+    fetch(`http://10.58.52.223:3000/carts/products/${dataList.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        id: dataList.id,
+        options: optionArray,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if ('message' === 'KEY_ERROR') {
+          alert('옵션을 선택해주세요');
+        } else {
+          alert('전송완료!');
+          navigate('/cart');
+        }
+      });
   };
 
   return (
@@ -160,11 +188,7 @@ const ProductDetail = () => {
               </button>
             ))}
           </div>
-          <div
-            onClick={() => {
-              navigate('/cart');
-            }}
-          >
+          <div onClick={goToCart}>
             <Button text="장바구니" />
           </div>
         </div>
@@ -173,6 +197,7 @@ const ProductDetail = () => {
             <CartCard
               key={option.id}
               {...option}
+              person
               name={dataList.name}
               price={dataList.price}
               actions={{ increaseQuantity, decreaseQuantity }}
@@ -189,7 +214,7 @@ const ProductDetail = () => {
 
 export default ProductDetail;
 
-const INIT_OPTION = { size: '', color: '', quantity: 1 };
+const INIT_OPTION = { quantity: 1, color: '', size: '' };
 
 const COLOR_CHART = [];
 const SIZE_CHART = [];
