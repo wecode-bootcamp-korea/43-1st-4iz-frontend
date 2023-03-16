@@ -102,7 +102,7 @@ const ProductDetail = () => {
       optionArray.push(`${e.color}/${e.size}/${e.quantity}`)
     );
 
-    fetch('http://10.58.52.223:3000/carts/4', {
+    fetch(`http://10.58.52.223:3000/carts/products/${dataList.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
