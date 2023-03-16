@@ -73,6 +73,23 @@ const Order = () => {
       });
   };
 
+  const totalPrice = dataList.reduce(
+    (acc, { discounted_price_sum, quantity }) =>
+      acc + discounted_price_sum * quantity,
+    0
+  );
+
+  const originPrice = dataList.reduce(
+    (acc, { price_sum, quantity }) => acc + price_sum * quantity,
+    0
+  );
+
+  const discountPrice = dataList.reduce(
+    (acc, { price_sum, discounted_price_sum, quantity }) =>
+      acc + (price_sum - discounted_price_sum) * quantity,
+    0
+  );
+
   return (
     <div className="order">
       <h3 className="orderTitle">결제하기</h3>
@@ -234,17 +251,16 @@ const Order = () => {
           <section className="orderList">
             <dl className="originPrice">
               <dt>상품 금액</dt>
-              <dd>472,600 원</dd>
+              <dd>{originPrice.toLocaleString()} 원</dd>
             </dl>
             <dl className="discountPrice">
               <dt>할인 금액</dt>
-              <dd>- 2000 원</dd>
+              <dd>-{discountPrice.toLocaleString()} 원</dd>
             </dl>
             <dl className="totalPrice">
               <dt>총 결제 금액</dt>
-              <dd>470,600 원</dd>
+              <dd>{totalPrice.toLocaleString()} 원</dd>
             </dl>
-            {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
             {dataList.map(product => {
               const discountedPrice =
                 Number(product.price_sum) -

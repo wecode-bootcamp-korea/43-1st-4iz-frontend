@@ -17,7 +17,7 @@ const ProductDetail = () => {
   const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
-    fetch('http://10.58.52.223:3000/products/4')
+    fetch('http://10.58.52.223:3000/products/1')
       .then(res => res.json())
       .then(datas => {
         setDataList(datas.data[0]);
@@ -40,28 +40,51 @@ const ProductDetail = () => {
     }
   }
 
-  const increaseQuantity = id => e => {
-    const next = optionList.map(optionDataList => {
-      if (optionDataList.id === id) {
-        return { ...optionDataList, quantity: optionDataList.quantity + 1 };
+  const increaseQuantity = cart_id => e => {
+    const next = dataList.map(option => {
+      if (option.cart_id === cart_id) {
+        return { ...option, quantity: option.quantity + 1 };
       } else {
-        return optionDataList;
+        return option;
       }
     });
-    setOptionList(next);
+    setDataList(next);
   };
 
-  const decreaseQuantity = id => e => {
-    const next = optionList.map(option => {
-      if (option.id === id) {
+  const decreaseQuantity = cart_id => e => {
+    const next = dataList.map(option => {
+      if (option.cart_id === cart_id) {
         return { ...option, quantity: option.quantity - 1 };
       } else {
         return option;
       }
     });
 
-    setOptionList(next);
+    setDataList(next);
   };
+
+  // const increaseQuantity = id => e => {
+  //   const next = optionList.map(optionDataList => {
+  //     if (optionDataList.id === id) {
+  //       return { ...optionDataList, quantity: optionDataList.quantity + 1 };
+  //     } else {
+  //       return optionDataList;
+  //     }
+  //   });
+  //   setOptionList(next);
+  // };
+
+  // const decreaseQuantity = id => e => {
+  //   const next = optionList.map(option => {
+  //     if (option.id === id) {
+  //       return { ...option, quantity: option.quantity - 1 };
+  //     } else {
+  //       return option;
+  //     }
+  //   });
+
+  //   setOptionList(next);
+  // };
 
   const onClickColorPicker = color => {
     if (selectedOption.size) {
@@ -115,12 +138,28 @@ const ProductDetail = () => {
     })
       .then(response => response.json())
       .then(data => {
-        if ('message' === 'KEY_ERROR') {
+        if (optionArray === null) {
           alert('옵션을 선택해주세요');
         } else {
           alert('전송완료!');
           navigate('/cart');
         }
+      });
+  };
+
+  const deleteCartList = (cart_id, product_id) => {
+    const token = localStorage.getItem('token');
+
+    fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setDataList(data.deleteItem);
       });
   };
 
@@ -192,15 +231,19 @@ const ProductDetail = () => {
             <Button text="장바구니" />
           </div>
         </div>
-        {optionList.map(option => {
+        {optionList.map(cart => {
           return (
             <CartCard
-              key={option.id}
-              {...option}
-              person
-              name={dataList.name}
-              price={dataList.price}
-              actions={{ increaseQuantity, decreaseQuantity }}
+              key={cart.id}
+              name={cart.name}
+              price={cart.price}
+              {...cart}
+              cartId={cart.id}
+              actions={{
+                increaseQuantity,
+                decreaseQuantity,
+                deleteCartList,
+              }}
             />
           );
         })}

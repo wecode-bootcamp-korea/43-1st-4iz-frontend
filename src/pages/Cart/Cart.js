@@ -6,9 +6,10 @@ import './Cart.scss';
 const Cart = () => {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+
     // /data/data.json
     fetch('http://10.58.52.223:3000/carts', {
       headers: {
@@ -27,6 +28,8 @@ const Cart = () => {
 
   // TODO : Delete 이벤트 통신 시 연결 시킬 함수
   const deleteCartList = (cart_id, product_id) => {
+    const token = localStorage.getItem('token');
+
     fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
       method: 'DELETE',
       headers: {
@@ -39,7 +42,30 @@ const Cart = () => {
         setDataList(data.deleteItem);
       });
   };
-  // TODO : update (quantity)
+
+  // TODO : update (quantity)함수
+  // const changeQuantity = (quantity, cart_id) => {
+  //   const token = localStorage.getItem('token');
+
+  //   fetch('주소', {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json;charset=utf-8',
+  //       Authorization: token,
+  //     },
+  //     body: JSON.stringify({
+  //       cart_id,
+  //       quantity,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data.message === 'error') {
+  //         alert('다시 시도해주세요');
+  //       }
+  //       setDataList(data.update);
+  //     });
+  // };
 
   const increaseQuantity = cart_id => e => {
     const next = dataList.map(option => {
@@ -52,9 +78,9 @@ const Cart = () => {
     setDataList(next);
   };
 
-  const decreaseQuantity = id => e => {
+  const decreaseQuantity = cart_id => e => {
     const next = dataList.map(option => {
-      if (option.id === id) {
+      if (option.cart_id === cart_id) {
         return { ...option, quantity: option.quantity - 1 };
       } else {
         return option;
