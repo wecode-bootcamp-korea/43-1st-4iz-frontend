@@ -39,50 +39,16 @@ const ProductList = () => {
     }
   };
 
-  const setGender = value => e => {
+  const setCheckedQueryString = (name, value) => e => {
     if (e.target.checked) {
-      searchParams.append('gender', value);
+      searchParams.append(name, value);
       setSearchParams(searchParams);
     } else {
-      const search = searchParams.getAll('gender');
-      searchParams.delete('gender');
+      const search = searchParams.getAll(name);
+      searchParams.delete(name);
       search
         .filter(list => list !== value)
-        .forEach(value => {
-          searchParams.append('gender', value);
-        });
-      setSearchParams(searchParams);
-    }
-  };
-
-  const setColor = value => e => {
-    if (e.target.checked) {
-      searchParams.append('color', value);
-      setSearchParams(searchParams);
-    } else {
-      const search = searchParams.getAll('color');
-      searchParams.delete('color');
-      search
-        .filter(list => list !== value)
-        .forEach(value => {
-          searchParams.append('color', value);
-        });
-      setSearchParams(searchParams);
-    }
-  };
-
-  const setSize = value => e => {
-    if (e.target.checked) {
-      searchParams.append('size', value);
-      setSearchParams(searchParams);
-    } else {
-      const search = searchParams.getAll('size');
-      searchParams.delete('size');
-      search
-        .filter(list => list !== value)
-        .forEach(value => {
-          searchParams.append('size', value);
-        });
+        .forEach(value => searchParams.append(name, value));
       setSearchParams(searchParams);
     }
   };
@@ -117,7 +83,7 @@ const ProductList = () => {
           id={id}
           className="checkbox"
           type="checkbox"
-          onChange={setGender(gender)}
+          onChange={setCheckedQueryString('gender', gender)}
         />
         <i className="fa-solid fa-check" />
         <label htmlFor={id} className="checkboxText">
@@ -134,7 +100,7 @@ const ProductList = () => {
           type="checkbox"
           className="colorButton"
           value={name}
-          onClick={setColor(name)}
+          onClick={setCheckedQueryString('name', name)}
         />
       </div>
     );
@@ -142,7 +108,11 @@ const ProductList = () => {
 
   const SIZE = SIZE_LIST.map(({ id, size }) => {
     return (
-      <div key={id} className="sizeButtonContainer" onClick={setSize(size)}>
+      <div
+        key={id}
+        className="sizeButtonContainer"
+        onClick={setCheckedQueryString('size', size)}
+      >
         <input className="sizeButton" type="checkbox" value={size} />
         <span className="sizeButtonText">{size}</span>
       </div>
