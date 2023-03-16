@@ -6,15 +6,32 @@ import Button from '../../components/Button/Button';
 import './Main.scss';
 
 const Main = () => {
-  const video = useRef(null);
+  // const video = useRef(null);
 
-  const handleVideoFaster = () => {
-    video.current.playbackRate = 1.2;
+  // const handleVideoFaster = () => {
+  //   video.current.playbackRate = 1.2;
+  // };
+
+  const main = useRef(null);
+  const mainShoeImg = useRef(null);
+
+  const scrollEvent = () => {
+    //test
   };
 
   return (
-    <div className="main">
-      <img src="/images/mainbg1.png" className="mainBg" />
+    <div className="main" ref={main} onScroll={scrollEvent}>
+      <img
+        src="/images/mainBgWhite.png"
+        className="mainBgImg"
+        alt="mainBgImg"
+      />
+      <img
+        src="/images/mainShoeImg.png"
+        className="mainShoeImg"
+        alt="mainShoeImg"
+        ref={mainShoeImg}
+      />
       <div className="mainBox">
         {/* <video
           src="/videos/mainVid.mp4"
@@ -60,6 +77,32 @@ const Main = () => {
             </Link>
           </div>
         </div> */}
+      </div>
+
+      <div className="animationTest">
+        <div className="card">
+          <div className="circle" />
+          <div className="content">
+            <h2>Nike</h2>
+            <h4>Lupinek Flyknit</h4>
+            <br />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.{' '}
+            </p>
+            <br />
+            <Link to="">Buy Now</Link>
+            <br />
+            <br />
+            <p>_man_mohan_25</p>
+          </div>
+          <img
+            src="/images/mainShoeImg.png"
+            className="mainShoeImg"
+            alt="mainShoeImg"
+            ref={mainShoeImg}
+          />
+        </div>
       </div>
     </div>
   );
