@@ -33,7 +33,11 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
         font-weight: 400;
 
         .categoryMenu {
+          @include displayFlex(null, null, column);
           margin-bottom: 10px;
+          background: transparent;
+          border: none;
+          font-size: 1.6rem;
 
           &:hover {
             cursor: pointer;
@@ -105,12 +109,21 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
             }
 
             .colorButton {
+              position: relative;
+              margin-right: 10px;
+              appearance: none;
               width: 28px;
               height: 28px;
-              margin-bottom: 8px;
               border: 1px solid lightgray;
               border-radius: 50%;
               background-color: transparent;
+              cursor: pointer;
+
+              &:hover,
+              &:checked {
+                transform: scale(1.1);
+                transition: all 0.2s ease-in-out;
+              }
             }
           }
         }
@@ -120,16 +133,27 @@ $bgColor: black #438ec3 #7c5f45 #89b850 #808080 #e2733b #e07990 #83469a #d54637
           grid-template-columns: repeat(3, 1fr);
 
           .sizeButton {
+            position: relative;
+            appearance: none;
             margin: 5px;
-            padding: 10px 12px;
+            padding: 14px 22px;
             border: 1px solid lightgray;
             border-radius: 5px;
-            background-color: white;
+            background-color: transparent;
             font-size: 1.5rem;
+            cursor: pointer;
 
-            &:hover {
-              border: 1px solid black;
+            &:hover,
+            &:checked {
+              border: 1px solid $darkGray;
             }
+          }
+
+          .sizeButtonText {
+            position: absolute;
+            margin-top: 6px;
+            margin-left: 16px;
+            z-index: -1;
           }
         }
       }
