@@ -36,10 +36,7 @@ const Cart = () => {
     })
       .then(response => response.json())
       .then(data => {
-        if (data.deleteItem) {
-          alert('삭제 되었습니다.');
-          setDataList(data.deleteItem);
-        }
+        setDataList(data.deleteItem);
       });
   };
   // TODO : update (quantity)
