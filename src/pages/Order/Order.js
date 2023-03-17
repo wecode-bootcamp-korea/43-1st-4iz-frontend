@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { emailRegExp, telRegExp } from '../../Util/regex';
 import Button from '../../components/Button/Button';
 import './Order.scss';
@@ -14,19 +14,83 @@ const USER_INFO = {
 
 const Order = () => {
   const [userInfo, setUserInfo] = useState(USER_INFO);
+  const [dataList, setDataList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { name, tel, address, detailAddress, email } = userInfo;
 
   const isEmailActive = emailRegExp.test(email) || !email;
-  const isNameActive = name.length > 3 || !name;
+  const isNameActive = name.length > 1 || !name;
   const isTelActive = telRegExp.test(tel) || !tel;
-  const isAddressActive = address.length > 10 || !address;
-  const isdDtailAddressActive = detailAddress.length > 10 || !detailAddress;
+  const isAddressActive = address.length > 5 || !address;
+  const isdDtailAddressActive = detailAddress.length > 5 || !detailAddress;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    fetch('http://10.58.52.236:3000/carts', {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+    })
+      .then(res => res.json())
+      .then(datas => {
+        setDataList(datas.data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <>Loading.... </>;
 
   const onChangeUserInfo = e => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
+
+  const checkUserInfo = e => {
+    let token = localStorage.getItem('token');
+    // e.preventDefault();
+    fetch('http://10.58.52.236:3000/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        name: userInfo.name,
+        street: userInfo.address,
+        address: userInfo.detailAddress,
+        phoneNumber: userInfo.tel,
+        email: userInfo.email,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (isNameActive && isTelActive && name && tel && telRegExp.test(tel)) {
+          alert('저장되었습니다!');
+        } else {
+          alert('배송옵션을 확인해주세요.');
+        }
+      });
+  };
+
+  const totalPrice = dataList.reduce(
+    (acc, { discounted_price_sum }) => acc + Number(discounted_price_sum),
+    0
+  );
+
+  const originPrice = dataList.reduce(
+    (acc, { price_sum }) => acc + Number(price_sum),
+    0
+  );
+
+  const discountPrice = dataList.reduce(
+    (acc, { price_sum, discounted_price_sum }) =>
+      acc + Number(price_sum - discounted_price_sum),
+    0
+  );
 
   return (
     <div className="order">
@@ -106,8 +170,17 @@ const Order = () => {
               </div>
             </fieldset>
             <div className="buttonContainer">
-              <Button text="계속" />
-              <Button text="취소" className="cancel" />
+              <div className="more" onClick={checkUserInfo}>
+                <Button text="계속" />
+              </div>
+              <div
+                className="cancel"
+                onClick={() => {
+                  navigate('/cart');
+                }}
+              >
+                <Button text="취소" />
+              </div>
             </div>
           </div>
           <div className="payment">
@@ -169,12 +242,15 @@ const Order = () => {
                 </label>
               </div>
             </fieldset>
-            <div className="buttonContainer">
+            <div
+              className="buttonContainer oderButton"
+              onClick={() => {
+                alert('주문완료!');
+                navigate('/');
+              }}
+            >
               <Button text="주문하기" />
             </div>
-          </div>
-          <div className="complete">
-            <h3 className="completeTitle">주문 완료</h3>
           </div>
         </div>
 
@@ -189,18 +265,33 @@ const Order = () => {
           <section className="orderList">
             <dl className="originPrice">
               <dt>상품 금액</dt>
-              <dd>472,600 원</dd>
+              <dd>{originPrice.toLocaleString()} 원</dd>
             </dl>
             <dl className="discountPrice">
               <dt>할인 금액</dt>
-              <dd>- 2000 원</dd>
+              <dd>-{discountPrice.toLocaleString()} 원</dd>
             </dl>
             <dl className="totalPrice">
               <dt>총 결제 금액</dt>
-              <dd>470,600 원</dd>
+              <dd>{totalPrice.toLocaleString()} 원</dd>
             </dl>
-            <Button text="결제하기" />
-            {/* TODO: CartCard 컴포넌트가 들어갈 자리입니다 */}
+            {dataList.map(product => {
+              return (
+                <div class="addedProduct" key={product.id}>
+                  <div class="productContainer">
+                    <img src={`${product.images[0]}`} alt={`${product.name}`} />
+                  </div>
+                  <dl className="productInfo">
+                    <dt>{product.name}</dt>
+                    <dd>
+                      선택 옵션: {product.color}/{product.size}
+                    </dd>
+                    <dd>수량 : {product.quantity}</dd>
+                    <dd>{totalPrice.toLocaleString()}원</dd>
+                  </dl>
+                </div>
+              );
+            })}
           </section>
         </div>
       </div>
