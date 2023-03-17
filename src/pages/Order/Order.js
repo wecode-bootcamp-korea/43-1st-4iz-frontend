@@ -29,7 +29,7 @@ const Order = () => {
 
   useEffect(() => {
     let token = localStorage.getItem('token');
-    fetch('http://10.58.52.223:3000/carts', {
+    fetch('http://10.58.52.236:3000/carts', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
@@ -52,7 +52,7 @@ const Order = () => {
   const checkUserInfo = e => {
     let token = localStorage.getItem('token');
     // e.preventDefault();
-    fetch('http://10.58.52.223:3000/orders', {
+    fetch('http://10.58.52.236:3000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -71,7 +71,7 @@ const Order = () => {
         if (isNameActive && isTelActive && name && tel && telRegExp.test(tel)) {
           alert('저장되었습니다!');
         } else {
-          alert('옵션을 모두 입력해주세요.');
+          alert('배송옵션을 확인해주세요.');
         }
       });
   };
@@ -169,9 +169,18 @@ const Order = () => {
                 </div>
               </div>
             </fieldset>
-            <div className="buttonContainer" onClick={checkUserInfo}>
-              <Button text="계속" />
-              <Button text="취소" className="cancel" />
+            <div className="buttonContainer">
+              <div className="more" onClick={checkUserInfo}>
+                <Button text="계속" />
+              </div>
+              <div
+                className="cancel"
+                onClick={() => {
+                  navigate('/cart');
+                }}
+              >
+                <Button text="취소" />
+              </div>
             </div>
           </div>
           <div className="payment">
@@ -234,17 +243,14 @@ const Order = () => {
               </div>
             </fieldset>
             <div
-              className="buttonContainer"
+              className="buttonContainer oderButton"
               onClick={() => {
                 alert('주문완료!');
-                navigate('/order');
+                navigate('/');
               }}
             >
               <Button text="주문하기" />
             </div>
-          </div>
-          <div className="complete">
-            <h3 className="completeTitle">주문 완료</h3>
           </div>
         </div>
 

@@ -13,7 +13,7 @@ const Cart = () => {
     const token = localStorage.getItem('token');
 
     // /data/data.json
-    fetch('http://10.58.52.223:3000/carts', {
+    fetch('http://10.58.52.236:3000/carts', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
@@ -32,14 +32,18 @@ const Cart = () => {
   const deleteCartList = (cart_id, product_id) => e => {
     const token = localStorage.getItem('token');
 
-    fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
+    fetch(`http://10.58.52.236:3000/carts/${cart_id}/products/${product_id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: token,
       },
-    }).then(response => {
-      response.status === 204 && alert('삭제되었습니다');
+    }).then(({ ok }) => {
+      if (!ok) return;
+
+      const next = dataList.filter(({ cart_id: cartId }) => cart_id === cartId);
+      setDataList(next);
+      alert('삭제되었습니다');
     });
   };
 
@@ -77,7 +81,7 @@ const Cart = () => {
   const changeQuantity = (cart_id, product_id, quantity) => {
     const token = localStorage.getItem('token');
 
-    fetch(`http://10.58.52.223:3000/carts/${cart_id}/products/${product_id}`, {
+    fetch(`http://10.58.52.236:3000/carts/${cart_id}/products/${product_id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -97,13 +101,13 @@ const Cart = () => {
   );
 
   const discountPrice = dataList.reduce(
-    (acc, { price_sum, discounted_price_sum, quantity }) =>
+    (acc, { price_sum, discounted_price_sum }) =>
       acc + Number(price_sum - discounted_price_sum),
     0
   );
 
   const totalPrice = dataList.reduce(
-    (acc, { discounted_price_sum }) => acc + Number(discounted_price_sum),
+    (acc, { quantity, price }) => acc + Number(quantity * price),
     0
   );
 
@@ -165,7 +169,7 @@ const Cart = () => {
                         </button>
                       </div>
                       <p className="selectedPrice">
-                        {Number(cart.discounted_price_sum).toLocaleString()}원
+                        {Number(cart.quantity * cart.price).toLocaleString()}원
                       </p>
                       <i
                         className="fa-solid fa-xmark"
@@ -194,7 +198,9 @@ const Cart = () => {
           </dl>
           <div
             onClick={() => {
-              navigate('/order');
+              dataList.length === 0
+                ? alert('장바구니가 비어있습니다.')
+                : navigate('/order');
             }}
           >
             <Button text="결제하기" />
