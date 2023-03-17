@@ -2,7 +2,6 @@
 
 .main {
   overflow: hidden;
-  height: 1800px;
 
   .mainBgImg {
     position: relative;
@@ -129,7 +128,7 @@
   }
 
   .mainContainer {
-    @include position(absolute, 600px, 0, 0, 0);
+    @include position(absolute, 460px, 0, 0, 0);
     @include displayFlex(null, center, column);
 
     video {
@@ -139,7 +138,7 @@
 
     .mainDescription {
       @include displayFlex(null, center, column);
-      margin: 60px 0;
+      margin: 160px 0;
 
       .descriptionSubtitle {
         font-size: 1.8rem;
@@ -163,10 +162,34 @@
     }
   }
 
-  .mainDragSection {
-    margin-top: 100px;
-    height: 100vh;
-    background-color: $black;
-    color: white;
+  .mainImg {
+    margin: 200px auto 100px;
+    text-align: center;
+    width: 70%;
+  }
+
+  .mainVidDescription {
+    @include displayFlex(null, center, column);
+    margin: 60px 0;
+
+    .descriptionSubtitle {
+      font-size: 1.8rem;
+    }
+
+    .descriptionTitle {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .descriptionText {
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
+
+    .button {
+      margin: 30px 4px;
+      padding: 10px 20px;
+      font-size: 1.5rem;
+    }
   }
 }
