@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
 import {
   SUBMENU_LIST,
   GENDER_LIST,
@@ -12,18 +12,29 @@ import './ProductList.scss';
 
 const ProductList = () => {
   const [productData, setProductData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const { search } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://10.58.52.223:3000/products/list${search}`)
-      .then(response => response.json())
-      .then(data => setProductData(data));
+    fetch(`http://10.58.52.236:3000/products/list${search}`, {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(datas => {
+        setLoading(false);
+        setProductData(datas.data);
+      });
   }, [search]);
+
+  if (loading) {
+    return <h1>Loading....</h1>;
+  }
 
   const setCategory = value => e => {
     if (e.target.value) {
-      searchParams.set('category', value);
+      searchParams.set('category', `"${value}"`);
       setSearchParams(searchParams);
     } else {
       const search = searchParams.getAll('category');
@@ -31,35 +42,52 @@ const ProductList = () => {
       search
         .filter(list => list !== value)
         .forEach(value => {
-          searchParams.append('category', value);
+          searchParams.append('category', `"${value}"`);
         });
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setSort = e => {
+    const { value } = e.target;
+
+    const selectedOption = PRODUCT_DROPDOWN.find(
+      ({ option }) => option === value
+    );
+
+    if (selectedOption) {
+      searchParams.set('sort', selectedOption.option);
       setSearchParams(searchParams);
     }
   };
 
   const setCheckedQueryString = (name, value) => e => {
     if (e.target.checked) {
-      searchParams.append(name, value);
+      searchParams.append(name, `"${value}"`);
       setSearchParams(searchParams);
     } else {
       const search = searchParams.getAll(name);
       searchParams.delete(name);
       search
         .filter(list => list !== value)
-        .forEach(value => searchParams.append(name, value));
+        .forEach(value => searchParams.append(name, `"${value}"`));
       setSearchParams(searchParams);
     }
   };
 
-  useEffect(() => {
-    fetch('/data/productListData.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setProductData(data);
-      });
-  }, []);
+  const setColor = value => e => {
+    if (e.target.checked) {
+      searchParams.append('color', `"${value}"`);
+      setSearchParams(searchParams);
+    } else {
+      const search = searchParams.getAll('color');
+      searchParams.delete('color');
+      search
+        .filter(list => list !== value)
+        .forEach(value => searchParams.append('color', `"${value}"`));
+      setSearchParams(searchParams);
+    }
+  };
 
   const SUBMENU = SUBMENU_LIST.map(({ id, title }) => {
     return (
@@ -98,7 +126,7 @@ const ProductList = () => {
           type="checkbox"
           className="colorButton"
           value={name}
-          onClick={setCheckedQueryString('name', name)}
+          onClick={setCheckedQueryString('color', name)}
         />
       </div>
     );
@@ -118,7 +146,11 @@ const ProductList = () => {
   });
 
   const DROPDOWN = PRODUCT_DROPDOWN.map(({ id, option }) => {
-    return <option key={id}>{option}</option>;
+    return (
+      <option key={id} value={option}>
+        {option}
+      </option>
+    );
   });
 
   const productGrid = productData.map(
@@ -165,8 +197,22 @@ const ProductList = () => {
           </dl>
         </div>
         <div className="productListBoard">
-          <select className="productDropdown">{DROPDOWN}</select>
-          <div className="productListGrid">{productGrid}</div>
+          <select
+            className="productDropdown"
+            onChange={setSort}
+            value={searchParams.get('sort') || ''}
+          >
+            <option value="">Sort By</option>
+            {DROPDOWN}
+          </select>
+          <div
+            className="productListGrid"
+            onClick={() => {
+              navigate('/productDetail');
+            }}
+          >
+            {productGrid}
+          </div>
         </div>
       </div>
     </div>

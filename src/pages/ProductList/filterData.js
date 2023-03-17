@@ -39,57 +39,43 @@ export const GENDER_LIST = [
 export const COLOR_LIST = [
   {
     id: 1,
-    name: 'black',
+    name: '검정색',
     color: 'black',
   },
   {
     id: 2,
-    name: 'blue',
-    color: '#438EC3',
+    name: '노란색',
+    color: '#F7D757',
   },
   {
     id: 3,
-    name: 'brown',
-    color: '#7C5F45',
+    name: '녹색',
+    color: '#89b850',
   },
   {
     id: 4,
-    name: 'green',
-    color: '#89B850',
+    name: '멀티컬러',
+    color: '#7762b6',
   },
   {
     id: 5,
-    name: 'gray',
-    color: '#808080',
+    name: '빨간색',
+    color: '#d54637',
   },
   {
     id: 6,
-    name: 'orange',
-    color: '#E2733B',
+    name: '파란색',
+    color: '#438ec3',
   },
   {
     id: 7,
-    name: 'pink',
-    color: '#E07990',
+    name: '회색',
+    color: '#808080',
   },
   {
     id: 8,
-    name: 'purple',
-    color: '#83469A',
-  },
-  {
-    id: 9,
-    name: 'red',
-  },
-  {
-    id: 10,
-    name: 'white',
+    name: '흰색',
     color: 'white',
-  },
-  {
-    id: 11,
-    name: 'yellow',
-    color: '#F7D757',
   },
 ];
 
@@ -155,18 +141,14 @@ export const SIZE_LIST = [
 export const PRODUCT_DROPDOWN = [
   {
     id: 1,
-    option: '정렬 기준',
+    option: 'date',
   },
   {
     id: 2,
-    option: '최신순',
+    option: 'low',
   },
   {
     id: 3,
-    option: '낮은 가격순',
-  },
-  {
-    id: 4,
-    option: '높은 가격순',
+    option: 'high',
   },
 ];

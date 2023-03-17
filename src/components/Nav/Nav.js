@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { NAV_DATA, SUB_NAV_LIST } from './navData';
-
 import './Nav.scss';
-
 const Nav = () => {
   return (
     <div className="nav">
@@ -33,6 +31,7 @@ const Nav = () => {
               })}
             </div>
           </div>
+          <div className="subNavBg" />
         </div>
         <div className="iconContainer">
           <div className="searchContainer focused">
@@ -54,5 +53,4 @@ const Nav = () => {
     </div>
   );
 };
-
 export default Nav;
