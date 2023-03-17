@@ -32,7 +32,7 @@ const Account = () => {
 
   const checkDuplicate = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.223:3000/users/duplicate', {
+    fetch('http://10.58.52.236:3000/users/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -56,7 +56,7 @@ const Account = () => {
 
   const checkSignIn = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.223:3000/users/signin', {
+    fetch('http://10.58.52.236:3000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -83,7 +83,7 @@ const Account = () => {
 
   const checkSignUp = e => {
     // e.preventDefault();
-    fetch('http://10.58.52.223:3000/users/signup', {
+    fetch('http://10.58.52.236:3000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -128,7 +128,7 @@ const Account = () => {
   return (
     <div className="account">
       <form className="accountForm">
-        <img src="images/nike.png" alt="logo" className="logoImage" />
+        <img src="images/4izLogo.png" alt="logo" className="logoImage" />
         <legend className="formTitle">{accountDataName[0].title}</legend>
         {accountDataName[0].name === 'email' && (
           <div className="emailContainer">

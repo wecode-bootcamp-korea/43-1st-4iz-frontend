@@ -18,7 +18,7 @@ const ProductList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://10.58.52.223:3000/products/list${search}`, {
+    fetch(`http://10.58.52.236:3000/products/list${search}`, {
       method: 'GET',
     })
       .then(res => res.json())
