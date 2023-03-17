@@ -186,7 +186,7 @@ const Cart = () => {
           <h3>주문 내역</h3>
           <dl className="originPrice">
             <dt>상품 금액</dt>
-            <dd>{originPrice.toLocaleString()} 원</dd>
+            <dd>{totalPrice.toLocaleString()} 원</dd>
           </dl>
           <dl className="discountPrice">
             <dt>할인 금액</dt>
