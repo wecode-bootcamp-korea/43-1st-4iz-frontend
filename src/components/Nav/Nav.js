@@ -8,8 +8,8 @@ const Nav = () => {
   return (
     <div className="nav">
       <div className="navContainer">
-        <Link className="nikeLogo" to="/">
-          <img alt="nikeLogo" src="/images/nike.png" />
+        <Link className="logo" to="/">
+          <img alt="logo" src="/images/4izLogo.png" />
         </Link>
         <div className="navText">
           {NAV_DATA.map(({ id, url, menu }) => {

@@ -17,7 +17,7 @@ const ProductDetail = () => {
   const clearSelectedOption = () => setSelectedOption(INIT_OPTION);
 
   useEffect(() => {
-    fetch('http://10.58.52.223:3000/products/4')
+    fetch('http://10.58.52.236:3000/products/1')
       .then(res => res.json())
       .then(datas => {
         setDataList(datas.data[0]);
@@ -102,7 +102,7 @@ const ProductDetail = () => {
       optionArray.push(`${e.color}/${e.size}/${e.quantity}`)
     );
 
-    fetch(`http://10.58.52.223:3000/carts/products/${dataList.id}`, {
+    fetch(`http://10.58.52.236:3000/carts/products/${dataList.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -115,7 +115,7 @@ const ProductDetail = () => {
     })
       .then(response => response.json())
       .then(data => {
-        if ('message' === 'KEY_ERROR') {
+        if (optionArray === null) {
           alert('옵션을 선택해주세요');
         } else {
           alert('전송완료!');
@@ -192,15 +192,18 @@ const ProductDetail = () => {
             <Button text="장바구니" />
           </div>
         </div>
-        {optionList.map(option => {
+        {optionList.map(cart => {
           return (
             <CartCard
-              key={option.id}
-              {...option}
-              person
+              key={cart.id}
               name={dataList.name}
               price={dataList.price}
-              actions={{ increaseQuantity, decreaseQuantity }}
+              {...cart}
+              cartId={cart.id}
+              actions={{
+                increaseQuantity,
+                decreaseQuantity,
+              }}
             />
           );
         })}
