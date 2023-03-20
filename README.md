@@ -37,6 +37,7 @@
 - 4iz는 스포츠 의류를 판매하는 웹서비스예요. 
 - 인터렉티브한 UX와 직관적인 UI 구성이 장점이예요.
 - 10~20대 한국인 사용자에게 보다 최적화된 쇼핑몰 서비스예요.
+- 서비스 미리보기: [피그마 링크](https://www.figma.com/file/0FwPO0VWitX1UWcWrHfxaO/Nike-Clone?node-id=0-1&t=OL4s7cBEv5cO2QWY-0)
 
 <img src="https://user-images.githubusercontent.com/71865277/226177671-4ac87d13-5fe5-45bb-a08b-d2981196267c.gif" width=800 text-align="center" />
 
