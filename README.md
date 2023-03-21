@@ -3,6 +3,9 @@
 ![4iz main thumbnail](https://user-images.githubusercontent.com/71865277/226162194-bf7488c8-9f9a-4ead-be54-6e8c8a0a0485.png)
 
 > 본 프로젝트는 2023년 3월 위코드에서 진행한 1차 팀 프로젝트 결과물입니다.
+<br />
+
+[프로젝트 바로가기](http://4iz-frontend.s3-website.ap-northeast-2.amazonaws.com/)
 
 <br /><br />
 
